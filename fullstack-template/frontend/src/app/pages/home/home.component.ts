@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 
 @Component({
   selector: 'ami-fullstack-home',
@@ -10,5 +10,6 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }
+
 
 }

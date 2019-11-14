@@ -1,0 +1,67 @@
+.container{
+    height: 1079px;
+    width: 100%;
+    background-image: url("C:/Users/strsi/Desktop/WhiteImage/graphics.png");
+}
+html, body {
+    min-height: 100%;
+    min-width: 100%;
+    margin: 0;
+  }
+
+.img1{
+    width: 206px;
+    height: 206px;
+    z-index: 1;
+    position: absolute;
+    left: 44.58%;
+    top: 1.67%;
+    bottom: 78.75%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.img2{
+    width: 100.02px;
+    height: 100.02px;
+    z-index: 1;
+    position: absolute;
+    left: 52.07%;
+    right: 42.72%;
+    top: 11.76%;
+    bottom: 78.98%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.vote{
+    position: absolute;
+    left: 42.19%;
+    top: 46.3%;
+    bottom: 46.3%;
+
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 72px;
+    line-height: 84px;
+    text-align: center;
+
+    color: #F2C94C;
+}
+
+.butt{
+    position: absolute;
+    left: 36.19%;
+    top: 43.7%;
+    opacity: 0.5;
+    transform: rotate(-180deg);
+}
+
+.butt2{
+    position: absolute;
+    left: 59.81%;
+    top: 43.7%;
+    opacity: 0.5;
+    transform: rotate(-180deg);
+}
