@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ami-fullstack-table',
+  selector: 'team13-Table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
