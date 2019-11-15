@@ -1,10 +1,26 @@
 import { Component } from '@angular/core';
 import { SocketsService } from './global/services';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'ami-fullstack-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  /*animations: [ 
+    trigger,
+    state,
+    style,
+    animate,
+    transition,
+    // animation triggers go here
+  ]*/
 })
 export class AppComponent {
 

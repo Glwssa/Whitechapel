@@ -1,10 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
+
 
 @Component({
   selector: 'ami-fullstack-tv',
+ /* animations: [
+    trigger('transition', [
+      // ...
+      state('start'),
+      state('finish'),
+      transition('start => finish', [
+        animate('1s')
+      ]),
+      transition('finish => start', [
+        animate('1s')
+      ]),
+    ]),
+  ],*/
   templateUrl: './tv.component.html',
-  styleUrls: ['./tv.component.scss'],
-
+  styleUrls: ['./tv.component.scss']
 })
 export class TvComponent implements OnInit {
   image: string;
