@@ -1,4 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
+import { NumberValueAccessor } from '@angular/forms';
+import { style } from '@angular/animations';
+import { DirectiveNormalizer } from '@angular/compiler';
 
 
 @Component({
@@ -22,10 +25,16 @@ import { Component, OnInit, } from '@angular/core';
 export class TvComponent implements OnInit {
   image: string;
   round: number;
+  flag: boolean;
+  norm: string;
+  grey: string;
 
   constructor() {
     this.image = 'https://www.w3schools.com/images/w3schools_green.jpg';
     this.round = 1;
+    this.flag = false;
+    this.norm = 'saturate(1)';
+    this.grey = 'saturate(0)';
    }
 
 
@@ -37,6 +46,10 @@ export class TvComponent implements OnInit {
   }
   deincrement() {
     --this.round;
+  }
+
+  satur() {
+    this.flag = true;
   }
 }
 

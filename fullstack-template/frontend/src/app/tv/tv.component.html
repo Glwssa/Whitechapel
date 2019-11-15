@@ -16,7 +16,8 @@
             <p class="vote">VOTING {{round}}</p>
             <input type="image" (click)="deincrement()" class="butt" src="{{image}}" />
             <input type="image" (click)="increment()" class="butt2" src="{{image}}" />
-
+            <input type="image" (click)="satur()" src="{{image}}" [ngStyle]="{'filter': flag ? grey : norm}" />
+           
 
     </body>
 </html>
