@@ -5,11 +5,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { TableComponent } from './table/table.component';
+import { TvComponent } from './tv/tv.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TableComponent
+    TableComponent,
+    TvComponent
   ],
   imports: [
     BrowserModule,
