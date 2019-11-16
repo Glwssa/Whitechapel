@@ -1,8 +1,10 @@
 .image{
     height: 1080px;
     width: 1920px;
-    background-image: url('C:/Users/anpat/Dropbox/HY469/Phase B/Whitechapel/fullstack-template/frontend/src/assets/table-background.png');
+    background-image: url('C:/Users/anpat/Dropbox/HY469/Phase B/Whitechapel/fullstack-template/frontend/src/assets/table_background_day.png');
+    //object-fit: cover;
     background-position:50% 50%;
+    z-index: 0;
   }
 
    .blood-1{

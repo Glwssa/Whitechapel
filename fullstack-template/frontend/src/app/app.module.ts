@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { TableComponent } from './table/table.component';
 import { TvComponent } from './tv/tv.component';
+import { TablePlayerComponent } from './table-player/table-player.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
-    TvComponent
+    TvComponent,
+    TablePlayerComponent
   ],
   imports: [
     BrowserModule,
