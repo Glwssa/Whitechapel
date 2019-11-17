@@ -1,7 +1,7 @@
 .container{
     height: 1079px;
     width: 100%;
-    background-image: url("C:/Users/strsi/Desktop/WhiteImage/graphics.png");
+    background-image: url("https://previews.dropbox.com/p/thumb/AAlMj45wUbPiYXdd4sX5C6aIbsl13hw_upZOgFMp1p1gSZGci0-wzQhlgWWmwb2vHc0blZ-nCTsOm5ih92XUiQyzRjYBrDjWT4Lg0ikZ3mstFW11W6BYjGOno-Ry2Kg58g-jpHmY9OZGiDPoI2GJFxtk2OVZ2_WjzweaLu4-I0rHexI3wCQBfethkwuJZAQI8-deT5cUxlA_UA7-h0UIfySPbFAXTa0pC8qwSnk5rLJUnXaSdcBm80ODrQQF4LTtC2ObHzGxl4Hsncem3JZ10ZWG2_54WXjAtWnQErIPEjA9Ts68rCXOZMW1N-OH2Wb8992ztXYeGwdX_8VRw39wiaSATKYx_ivy6n-v2mPNWuNGPQ/p.png?fv_content=true&size_mode=5");
 }
 html, body {
     min-height: 100%;
@@ -52,16 +52,28 @@ html, body {
 
 .butt{
     position: absolute;
-    left: 36.19%;
-    top: 43.7%;
-    opacity: 0.5;
+    left: 37.0%;
+    top: 47.7%;
+    opacity: 0.8;
     transform: rotate(-180deg);
 }
 
 .butt2{
     position: absolute;
-    left: 59.81%;
-    top: 43.7%;
-    opacity: 0.5;
-    transform: rotate(-180deg);
+    left: 62%;
+    top: 47.7%;
+    opacity: 0.8;
+
+}
+
+.names{
+    position: absolute;
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+
+    color: rgba(242, 201, 76, 0.9);
 }
