@@ -8,13 +8,15 @@ import { AppRoutingModule } from './app.routing';
 import { TableComponent } from './table/table.component';
 import { TvComponent } from './tv/tv.component';
 import { TablePlayerComponent } from './table-player/table-player.component';
+import { MobileComponent } from './mobile/mobile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
     TvComponent,
-    TablePlayerComponent
+    TablePlayerComponent,
+    MobileComponent
   ],
   imports: [
     BrowserModule,

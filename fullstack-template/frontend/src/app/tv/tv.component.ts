@@ -33,9 +33,7 @@ export class TvComponent implements OnInit {
   name: string;
 
   constructor() {
-    // tslint:disable-next-line: max-line-length
     this.image = 'https://i.imgur.com/TIk7nCa.png';
-    // tslint:disable-next-line: max-line-length
     this.arrow = 'https://i.imgur.com/LxivwLt.png';
     this.round = 1;
     this.flag = false;
