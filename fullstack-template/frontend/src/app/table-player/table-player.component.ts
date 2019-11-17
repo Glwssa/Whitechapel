@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablePlayerComponent implements OnInit {
   player_image: string;
+  player_dead: string;
   gibbet: string;
   player_name: string;
+  pldead: boolean;
   gibvis1: boolean;
   gibvis2: boolean;
   gibvis3: boolean;
@@ -27,7 +29,9 @@ export class TablePlayerComponent implements OnInit {
     this.gibvis5 = true;
     this.gibvis6 = true;
     this.gibvis7 = true;
-   }
+    this.player_dead = "https://i.imgur.com/vpqSnVP.png"
+    this.pldead = false;
+  }
 
   ngOnInit() {
   }
@@ -36,7 +40,17 @@ export class TablePlayerComponent implements OnInit {
 
   }
 
+  set_dead(){
+    this.pldead = true;
+  }
+
   reset_giblet(){
     this.gibvis1 = false;
+    this.gibvis2 = false;
+    this.gibvis3 = false;
+    this.gibvis4 = false;
+    this.gibvis5 = false;
+    this.gibvis6 = false;
+    this.gibvis7 = false;
   }
 }

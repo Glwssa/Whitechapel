@@ -11,6 +11,17 @@
     border-radius: 50%;
 }
 
+.player_dead{
+    width: 200px;
+    height: 221.2px;
+    position: absolute;
+    left: 44.58%;
+    //right: 44.69%;
+    top: 1.67%;
+    //bottom: 79.26%;
+    z-index: 2;
+}
+
 .gibbet{
     height: 110px;
     width: 70px;
