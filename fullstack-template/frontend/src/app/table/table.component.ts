@@ -10,7 +10,7 @@ export class TableComponent implements OnInit {
   Background: string;
 
   constructor() { 
-    this.Background = 'C:/Users/anpat/Dropbox/HY469/Phase B/Whitechapel/fullstack-template/frontend/src/assets/table_background_night.png';
+    this.Background = 'https://i.imgur.com/UwNfp80.png';
   }
 
   ngOnInit() {
@@ -18,11 +18,11 @@ export class TableComponent implements OnInit {
   }
 
   change_background_day(){
-    this.Background = 'C:/Users/anpat/Dropbox/HY469/Phase B/Whitechapel/fullstack-template/frontend/src/assets/table_background_day.png';
+    this.Background = 'https://i.imgur.com/UwNfp80.png';
   }
 
   chang_background_night(){
-    this.Background = 'C:/Users/anpat/Dropbox/HY469/Phase B/Whitechapel/fullstack-template/frontend/src/assets/table_background_night.png';
+    this.Background = 'https://i.imgur.com/fKYhJzQ.png';
   }
 
 }
