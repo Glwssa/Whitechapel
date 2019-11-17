@@ -1,3 +1,4 @@
 <img class="player_image" src={{player_image}}>
-<img class="gibbet" src={{gibbet}}>
+<img id="gib1" class="gibbet" src={{gibbet}} [ngStyle]="{'left' : '51.1%', 'top': '-0.16%' }" [style.transform]="'rotate(' + '40.25' + 'deg)'" [style.visibility]= "gibvis1 ? 'visible' : 'hidden'">
+<img id="gib2" class="gibbet" src={{gibbet}} [ngStyle]="{'left' : '51.9%', 'top': '1.5%' }" [style.transform]="'rotate(' + '45' + 'deg)'" [style.visibility]= "gibvis2 ? 'visible' : 'hidden'">
 <p class="player_name">{{player_name}}</p>
