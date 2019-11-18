@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TablePlayerComponent } from '../table-player';
 
+let TablePlayerComponentObject = new TablePlayerComponent();
 
 @Component({
   selector: 'team13-Table',
@@ -21,6 +22,7 @@ export class TableComponent implements OnInit {
     this.titlevis = false;
     this.game_title_vis = true;
     this.player1 = true;
+    
     //this.change_title("ABILITY USE")
     //this.chang_background_night();
     //this.setup_table();
