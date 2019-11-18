@@ -1,0 +1,39 @@
+.container{
+    height: 100%;
+    width: 100%;
+    background-color: black;
+}
+
+html, body {
+    min-height: 100%;
+    min-width: 100%;
+    margin: 0;
+}
+
+.charName{
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 28.8955px;
+    line-height: 34px;
+    text-align: center;
+
+    color: yellow;
+}
+
+.infoText {
+    position: absolute;
+    min-width: 90%;
+    top: 40%;
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 21px;
+    line-height: 21px;
+    color: yellow;
+}
+
+.avatar{
+    width: 151px;
+    height: 151px;
+}

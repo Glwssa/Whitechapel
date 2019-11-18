@@ -1,3 +1,4 @@
+import { Globals } from './global/globl';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -9,6 +10,7 @@ import { TableComponent } from './table/table.component';
 import { TvComponent } from './tv/tv.component';
 import { TablePlayerComponent } from './table-player/table-player.component';
 import { MobileComponent } from './mobile/mobile.component';
+import { RoleInfoComponent } from './role-info/role-info.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { MobileComponent } from './mobile/mobile.component';
     TableComponent,
     TvComponent,
     TablePlayerComponent,
-    MobileComponent
+    MobileComponent,
+    RoleInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,7 @@ import { MobileComponent } from './mobile/mobile.component';
     AppRoutingModule,
    // BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ Globals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

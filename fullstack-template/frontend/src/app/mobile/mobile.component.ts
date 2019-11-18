@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Globals } from './../global/globl';
+import { Component, OnInit, HostBinding, Output } from '@angular/core';
 
 @Component({
   selector: 'ami-fullstack-mobile',
   templateUrl: './mobile.component.html',
-  styleUrls: ['./mobile.component.scss']
+  styleUrls: ['./mobile.component.scss'],
 })
 export class MobileComponent implements OnInit {
 
@@ -11,13 +12,17 @@ export class MobileComponent implements OnInit {
   names = ['Stratos', 'Kostas', 'Natasa', 'Andreas', 'Panos', 'Giannis', 'Ete'];
   player: string;
   roles = ['JACK THE REAPER', 'CONSTABLE', 'PHYSICIAN' , 'MEDIUM', 'JOKER', 'VIGILANTE', 'MAYOR'];
+  role: string;
+  currentRole: string;
 
-  constructor() {
+  constructor(public globals: Globals) {
     this.prevRow = '';
     this.player = this.names[2];
+    this.role = this.roles[0];
    }
 
   ngOnInit() {
+    document.getElementById('mySidebar').style.display = 'none';
   }
 
   openSidebar() {
@@ -45,8 +50,14 @@ export class MobileComponent implements OnInit {
     }
 
   }
-  
+
   closeSidebar() {
     document.getElementById('mySidebar').style.display = 'none';
+  }
+
+  setCurrentRole(role: string) {
+    this.currentRole = role;
+    console.log('current role :' + this.currentRole);
+    this.globals.role = this.currentRole;
   }
 }

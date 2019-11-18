@@ -1,3 +1,4 @@
+import { RoleInfoComponent } from './role-info/role-info.component';
 import { MobileComponent } from './mobile/mobile.component';
 import { TvComponent } from './tv/tv.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'table-player', component: TablePlayerComponent },
   { path: 'tv', component: TvComponent },
   { path: 'mobile', component: MobileComponent},
+  { path: 'role-info', component: RoleInfoComponent},
   { path: 'socket-events', loadChildren: () => import('./pages/socket-events/socket-events.module').then(m => m.SocketEventsModule) },
   { path: 'tasks', loadChildren: () => import('./pages/tasks/tasks.module').then(m => m.TasksModule) },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
