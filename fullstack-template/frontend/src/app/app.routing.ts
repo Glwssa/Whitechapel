@@ -5,6 +5,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TableComponent } from './table/table.component';
 import { TablePlayerComponent } from './table-player/table-player.component';
+import { TablePlayer2Component } from './table-player2/table-player2.component';
+import { TablePlayer3Component } from './table-player3/table-player3.component';
+import { TablePlayer4Component } from './table-player4/table-player4.component';
+import { TablePlayer5Component } from './table-player5/table-player5.component';
+import { TablePlayer6Component } from './table-player6/table-player6.component';
+import { TablePlayer7Component } from './table-player7/table-player7.component';
 
 const routes: Routes = [
   { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },

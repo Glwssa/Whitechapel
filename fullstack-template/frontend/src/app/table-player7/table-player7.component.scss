@@ -1,0 +1,54 @@
+.player_image{
+    height: 206px;
+    width: 206px;
+    position: absolute;
+    left: 27.34%;
+    //right: 61.93%;
+    top: 15.19%;
+    //bottom: 65.74%;
+    z-index: 1;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.player_dead{
+    width: 200px;
+    height: 221.2px;
+    position: absolute;
+    left: 27.34%;
+    //right: 61.93%;
+    top: 15.19%;
+    //bottom: 65.74%;
+    z-index: 2;
+}
+
+.gibbet{
+    height: 110px;
+    width: 70px;
+    position: absolute;
+    //left: 51.1%;
+    //right: 43.83%;
+    //top: -0.16%;
+    //bottom: 91.82%;
+    //transform: rotate(40.25deg);
+    z-index: 2;
+}
+
+.player_name{
+    height: 43px;
+    width: 265px;
+    position: absolute;
+    left: 25.83%;
+    //right: 43.12%;
+    top: 37.02%;
+    //bottom: 70.56%;
+
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+
+    color: rgba(242, 201, 76, 0.9);
+}

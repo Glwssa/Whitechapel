@@ -1,0 +1,1 @@
+export * from './table-player6.component';

@@ -14,6 +14,10 @@ import { RoleInfoComponent } from './role-info/role-info.component';
 import { TablePlayer2Component } from './table-player2/table-player2.component';
 import { TablePlayer3Component } from './table-player3/table-player3.component';
 import { TablePlayer4Component } from './table-player4/table-player4.component';
+import { TablePlayer5Component } from './table-player5/table-player5.component';
+import { TablePlayer6Component } from './table-player6/table-player6.component';
+import { TablePlayer7Component } from './table-player7/table-player7.component';
+import { EventEmitterService } from './event-emitter.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +30,9 @@ import { TablePlayer4Component } from './table-player4/table-player4.component';
     TablePlayer2Component,
     TablePlayer3Component,
     TablePlayer4Component,
+    TablePlayer5Component,
+    TablePlayer6Component,
+    TablePlayer7Component,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +40,7 @@ import { TablePlayer4Component } from './table-player4/table-player4.component';
     AppRoutingModule,
    // BrowserAnimationsModule
   ],
-  providers: [ Globals],
+  providers: [ Globals,EventEmitterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
