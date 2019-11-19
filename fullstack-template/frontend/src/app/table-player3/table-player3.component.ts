@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'team13-table-player',
-  templateUrl: './table-player.component.html',
-  styleUrls: ['./table-player.component.scss']
+  selector: 'team13-table-player3',
+  templateUrl: './table-player3.component.html',
+  styleUrls: ['./table-player3.component.scss']
 })
-export class TablePlayerComponent implements OnInit {
+export class TablePlayer3Component implements OnInit {
   player_image: string;
   player_dead: string;
   gibbet: string;
@@ -43,7 +43,7 @@ export class TablePlayerComponent implements OnInit {
     this.upvote();
     this.upvote();
     
-  }
+   }
 
   ngOnInit() {
   }

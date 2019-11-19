@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { TablePlayerComponent } from '../table-player';
+import { TablePlayer2Component } from '../table-player2';
+import { TablePlayer3Component } from '../table-player3';
+import { TablePlayer4Component } from '../table-player4';
 
 let TablePlayerComponentObject = new TablePlayerComponent();
+let TablePlayer2ComponentObject = new TablePlayer2Component();
+let TablePlayer3ComponentObject = new TablePlayer3Component();
+let TablePlayer4ComponentObject = new TablePlayer4Component();
 
 @Component({
   selector: 'team13-Table',
-  providers:[TablePlayerComponent],
+  providers:[TablePlayerComponent,TablePlayer2Component,TablePlayer3Component,TablePlayer4Component],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
@@ -19,8 +25,8 @@ export class TableComponent implements OnInit {
   constructor() { 
     this.Background = 'https://i.imgur.com/UwNfp80.png';
     this.title = "DEBATE"
-    this.titlevis = false;
-    this.game_title_vis = true;
+    this.titlevis = true;
+    this.game_title_vis = false;
     this.player1 = true;
     
     //this.change_title("ABILITY USE")
