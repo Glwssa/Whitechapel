@@ -1,7 +1,7 @@
 .container{
     height: 1079px;
     width: 100%;
-    background-image: url("C:/Users/strsi/Desktop/WhiteImage/graphics.png");
+    background-image: url("https://i.imgur.com/q57Jw5r.png");
 }
 html, body {
     min-height: 100%;
@@ -52,16 +52,27 @@ html, body {
 
 .butt{
     position: absolute;
-    left: 36.19%;
-    top: 43.7%;
-    opacity: 0.5;
+    left: 37.0%;
+    top: 47.7%;
     transform: rotate(-180deg);
+    height: 60px;
 }
 
 .butt2{
     position: absolute;
-    left: 59.81%;
-    top: 43.7%;
-    opacity: 0.5;
-    transform: rotate(-180deg);
+    left: 62%;
+    top: 47.7%;
+    height: 60px;
+}
+
+.names{
+    position: absolute;
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+
+    color: rgba(242, 201, 76, 0.9);
 }

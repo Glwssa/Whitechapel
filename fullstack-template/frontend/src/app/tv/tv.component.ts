@@ -28,14 +28,22 @@ export class TvComponent implements OnInit {
   flag: boolean;
   norm: string;
   grey: string;
+  arrow: string;
+  dead: boolean;
+  name: string;
 
   constructor() {
-    this.image = 'https://www.w3schools.com/images/w3schools_green.jpg';
+    this.image = 'https://i.imgur.com/TIk7nCa.png';
+    this.arrow = 'https://i.imgur.com/LxivwLt.png';
     this.round = 1;
     this.flag = false;
     this.norm = 'saturate(1)';
     this.grey = 'saturate(0)';
+    this.dead = true;
+    this.name = 'Strataras';
    }
+
+
 
 
   ngOnInit() {
@@ -50,7 +58,9 @@ export class TvComponent implements OnInit {
 
   satur() {
     this.flag = true;
+    this.dead = false;
   }
+
 }
 
 
