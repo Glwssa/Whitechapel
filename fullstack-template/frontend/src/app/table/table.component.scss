@@ -1,0 +1,73 @@
+.image{
+    height: 1080px;
+    width: 1920px;
+    //background-image: url('https://i.imgur.com/UwNfp80.png');
+    //object-fit: cover;
+    background-position:50% 50%;
+    z-index: 0;
+  }
+
+  .game_title_1{
+    position: absolute;
+    left: 32.86%;
+    right: 32.86%;
+    top: 40.56%;
+    bottom: 47.78%;
+    z-index: 1;
+
+    font-family: SimSun;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 118.44px;
+    line-height: 135px;
+    text-align: center;
+
+    color: #FFFFFF;
+  }
+
+  .game_title_2{
+    position: absolute;
+    left: 32.86%;
+    right: 32.81%;
+    top: 52.22%;
+    bottom: 44.54%;
+    z-index: 1;
+    
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 28px;
+    line-height: 50px;
+    text-align: center;
+    
+    color: #828282;
+
+  }
+
+  .title{
+    position: absolute;
+    left: 40.83%;
+    right: 40.89%;
+    top: 45.46%;
+    bottom: 45.46%;
+    z-index: 1;
+    
+    font-family: SimSun;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 96px;
+    line-height: 109px;
+    text-align: center;
+    
+    color: #FFFFFF;
+  }
+
+   .player1{
+    position: absolute;
+     top: 500px;
+     left: 100px;
+     
+   }
+
+   
+   
