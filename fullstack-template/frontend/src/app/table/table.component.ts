@@ -34,7 +34,7 @@ export class TableComponent implements OnInit {
     this.titlevis = true;
     this.game_title_vis = false;
     this.players = true;
-    
+    TablePlayerComponentObject.pldead = true;
     //this.change_title("ABILITY USE")
     //this.chang_background_night();
     //this.setup_table();
