@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventEmitterService } from '../event-emitter.service';  
 
 @Component({
   selector: 'team13-table-player',
@@ -19,7 +20,7 @@ export class TablePlayerComponent implements OnInit {
   gibvis5: boolean;
   gibvis6: boolean;
   gibvis7: boolean;
-  constructor() {
+  constructor(private eventEmitterService: EventEmitterService) {
     this.player_image = "https://cdn2.iconfinder.com/data/icons/business-management-52/96/Artboard_20-512.png";
     this.gibbet = "https://www.svgrepo.com/show/585/gibbet.svg";
     this.player_name = "Andreas";
@@ -46,6 +47,22 @@ export class TablePlayerComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.eventEmitterService.TablesubsVarpl1==undefined){
+      this.eventEmitterService.TablesubsVarpl1 = this.eventEmitterService.    
+      invokeTable_functions_player1.subscribe(({function_name,parameter}) => {
+        if(function_name == "set_dead"){
+          this.set_dead();
+        }else if(function_name == "reset_giblet"){
+          this.reset_giblet();
+        }else if(function_name == "upvote"){
+          this.upvote();
+        }else if(function_name == "change_player_name"){
+          this.change_player_name(parameter);
+        }else if(function_name == "change_player_image"){
+          this.change_player_image(parameter);
+        }
+      });
+    }
   }
 
   set_visible_giblet(){
