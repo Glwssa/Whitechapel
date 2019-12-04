@@ -1,24 +1,11 @@
+import { TVService } from './../tv.service';
+import { SocketsService } from 'src/app/global/services';
+import { TasksService } from 'src/app/global/services';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, } from '@angular/core';
-import { NumberValueAccessor } from '@angular/forms';
-import { style } from '@angular/animations';
-import { DirectiveNormalizer } from '@angular/compiler';
-
 
 @Component({
   selector: 'ami-fullstack-tv',
- /* animations: [
-    trigger('transition', [
-      // ...
-      state('start'),
-      state('finish'),
-      transition('start => finish', [
-        animate('1s')
-      ]),
-      transition('finish => start', [
-        animate('1s')
-      ]),
-    ]),
-  ],*/
   templateUrl: './tv.component.html',
   styleUrls: ['./tv.component.scss']
 })
@@ -31,8 +18,14 @@ export class TvComponent implements OnInit {
   arrow: string;
   dead: boolean;
   name: string;
+  public myUserID;
+  public userIDToTreat;
+  public msg;
+  public socketEvents: {event: string, message: any}[];
 
-  constructor() {
+
+  constructor(private tvService: TVService, private socketService: SocketsService) {
+    this.socketEvents = [];
     this.image = 'https://i.imgur.com/TIk7nCa.png';
     this.arrow = 'https://i.imgur.com/LxivwLt.png';
     this.round = 1;
@@ -47,6 +40,12 @@ export class TvComponent implements OnInit {
 
 
   ngOnInit() {
+    this.myUserID = 'me';
+    this.userIDToTreat = 'userToTreat';
+    this.msg = 'whats up';
+    this.socketService.syncMessages('screaming').subscribe(msg => {
+      this.socketEvents.push(this.msg);
+    });
   }
 
   increment() {
@@ -59,6 +58,11 @@ export class TvComponent implements OnInit {
   satur() {
     this.flag = true;
     this.dead = false;
+    this.exmpl();
+  }
+
+  public exmpl() {
+    this.tvService.sendMessageToClients(this.msg, this.userIDToTreat).subscribe();
   }
 
 }

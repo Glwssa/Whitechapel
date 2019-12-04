@@ -1,32 +1,32 @@
 <html>
     <body class="container">
-            <img class="img1" src={{image}}>
-            <p class="names" style="left: 46.5%; top: 21.94%;">{{name}}1</p>
-            <img class="img1" style="left: 27.34%; top: 15.19%;" src="{{image}}">
-            <p class="names"style="left: 28.5%; top: 35.65%;">{{name}}2</p>
-            <img class="img1" style="left: 21.75%; top: 44.63%;" src="{{image}}">
-            <p class="names"style="left: 23.5%; top: 65%;">{{name}}3</p>
-            <img class="img1" style="left: 32.81%; top: 71.85%;" src="{{image}}">
-            <p class="names"style="left: 34.5%; top: 92%;">{{name}}4</p>
-            <img class="img1" style="left: 56.67%; top: 71.85%;" src="{{image}}">
-            <p class="names"style="left: 58.5%; top: 92%;">{{name}}5</p>
-            <img class="img1" style="left: 67.68%; top: 44.63%;" src="{{image}}" [ngStyle]="{'filter': flag ? grey : norm}">
-            <p class="names"style="left: 69.5%; top: 65%;" [ngStyle]="{'filter': flag ? grey : norm}">{{name}}6</p>
-            <img class="img1" style="left: 62.19%; top: 15.19%;" src="{{image}}">
-            <p class="names"style="left: 67.5%; top: 35%;">{{name}}7</p>
-            <img class="img2" src="{{image}}">
-            <img class="img2" style="left: 34.3%; top: 25.95%;" src="{{image}}">
-            <img class="img2" style="left: 29.22%; top: 55.39%;" src="{{image}}">
-            <img class="img2" style="left: 40.19%; top: 82.69%;" src="{{image}}">
-            <img class="img2" style="left: 64.14%; top: 82.34%;" src="{{image}}">
-            <img *ngIf="dead"  class="img2" style="left: 75.14%; top: 55.39%;" src="{{image}}">
-            <img class="img2" style="left: 69.14%; top: 25.95%;" src="{{image}}">
-            <p class="vote">VOTING {{round}}</p>
-            <input type="image" (click)="deincrement()" class="butt" src="{{arrow}}" />
-            <input type="image" (click)="increment()" class="butt2" src="{{arrow}}" />
-            <input type="image" (click)="satur()" src="{{image}}" [ngStyle]="{'filter': flag ? grey : norm}" />
-           
-
+        <img class="img1" src={{image}}>
+        <p class="names" style="left: 46.5%; top: 21.94%;">{{name}}1</p>
+        <img class="img1" style="left: 27.34%; top: 15.19%;" src="{{image}}">
+        <p class="names"style="left: 28.5%; top: 35.65%;">{{name}}2</p>
+        <img class="img1" style="left: 21.75%; top: 44.63%;" src="{{image}}">
+        <p class="names"style="left: 23.5%; top: 65%;">{{name}}3</p>
+        <img class="img1" style="left: 32.81%; top: 71.85%;" src="{{image}}">
+        <p class="names"style="left: 34.5%; top: 92%;">{{name}}4</p>
+        <img class="img1" style="left: 56.67%; top: 71.85%;" src="{{image}}">
+        <p class="names"style="left: 58.5%; top: 92%;">{{name}}5</p>
+        <img class="img1" style="left: 67.68%; top: 44.63%;" src="{{image}}" [ngStyle]="{'filter': flag ? grey : norm}">
+        <p class="names"style="left: 69.5%; top: 65%;" [ngStyle]="{'filter': flag ? grey : norm}">{{name}}6</p>
+        <img class="img1" style="left: 62.19%; top: 15.19%;" src="{{image}}">
+        <p class="names"style="left: 67.5%; top: 35%;">{{name}}7</p>
+        <img class="img2" src="{{image}}">
+        <img class="img2" style="left: 34.3%; top: 25.95%;" src="{{image}}">
+        <img class="img2" style="left: 29.22%; top: 55.39%;" src="{{image}}">
+        <img class="img2" style="left: 40.19%; top: 82.69%;" src="{{image}}">
+        <img class="img2" style="left: 64.14%; top: 82.34%;" src="{{image}}">
+        <img *ngIf="dead"  class="img2" style="left: 75.14%; top: 55.39%;" src="{{image}}">
+        <img class="img2" style="left: 69.14%; top: 25.95%;" src="{{image}}">
+        <p class="vote">VOTING {{round}}</p>
+        <input type="image" (click)="deincrement()" class="butt" src="{{arrow}}" />
+        <input type="image" (click)="increment()" class="butt2" src="{{arrow}}" />
+        <input type="image" (click)="satur()" src="{{image}}" [ngStyle]="{'filter': flag ? grey : norm}" />
     </body>
+        <h1>{{socketEvents | json}}</h1>
+
 </html>
 

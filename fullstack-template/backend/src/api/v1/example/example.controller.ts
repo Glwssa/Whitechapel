@@ -40,6 +40,8 @@ export class ExampleController {
         const socketService = DIContainer.get(SocketsService);
         socketService.broadcast(event, message);
 
+        logger.info('keftes');
+
         res.json({ message: 'ok' });
 
     }
