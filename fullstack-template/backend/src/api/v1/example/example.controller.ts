@@ -33,14 +33,14 @@ export class ExampleController {
      * Broadcasts a received message to all connected clients
      */
     public sendMessageToClients(req: Request, res: Response) {
-        const message: string = req.body.message;
-        const event: string = req.body.event;
+        const message: any = req.body.message;
+        const event: any = req.body.event;
 
         logger.info(message.scream);
 
         logger.info(message.userID);
 
-        //Sending a broadcast message to all clients
+        // Sending a broadcast message to all clients
         const socketService = DIContainer.get(SocketsService);
         socketService.broadcast(event, message);
 

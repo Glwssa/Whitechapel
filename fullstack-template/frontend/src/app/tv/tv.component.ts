@@ -22,7 +22,8 @@ export class TvComponent implements OnInit {
   public userIDToTreat;
   public msg;
   public socketEvents: {event: string, message: any}[];
-
+  public playerStateURL;
+  response: any;
 
   constructor(private tvService: TVService, private socketService: SocketsService) {
     this.socketEvents = [];
@@ -64,6 +65,7 @@ export class TvComponent implements OnInit {
   public exmpl() {
     this.tvService.sendMessageToClients(this.msg, this.userIDToTreat).subscribe();
   }
+
 
 }
 
