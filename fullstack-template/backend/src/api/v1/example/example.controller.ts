@@ -36,12 +36,15 @@ export class ExampleController {
         const message: string = req.body.message;
         const event: string = req.body.event;
 
+        logger.info(message.scream);
+
+        logger.info(message.userID);
+
         //Sending a broadcast message to all clients
         const socketService = DIContainer.get(SocketsService);
         socketService.broadcast(event, message);
 
         logger.info('keftes');
-
         res.json({ message: 'ok' });
 
     }

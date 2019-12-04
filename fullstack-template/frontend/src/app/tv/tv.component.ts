@@ -41,7 +41,7 @@ export class TvComponent implements OnInit {
 
   ngOnInit() {
     this.myUserID = 'me';
-    this.userIDToTreat = 'userToTreat';
+    this.userIDToTreat = 'Stratos';
     this.msg = 'whats up';
     this.socketService.syncMessages('screaming').subscribe(msg => {
       this.socketEvents.push(this.msg);
