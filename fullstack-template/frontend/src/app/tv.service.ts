@@ -17,7 +17,9 @@ constructor(private http: HttpClient) {
 }
 
 public sendMessageToClients(msg , toUserID) {
-  return this.http.post(`${this.hostURl}/api/example/sendMessageToClients`,
+  //  return this.http.post(`${this.hostURl}/api/example/sendMessageToClients`,
+
+  return this.http.post(`http://192.168.99.100:8080/api/example/getMessage`,
   {
     message: {
       scream: msg,
