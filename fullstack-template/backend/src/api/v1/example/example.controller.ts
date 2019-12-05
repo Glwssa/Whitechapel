@@ -2,8 +2,12 @@ import { Request, Response, NextFunction, Router } from 'express';
 import { NotFound, BadRequest } from 'http-errors';
 import { DIContainer, MinioService, SocketsService } from '@app/services';
 import { logger } from '../../../utils/logger';
+//import * as  fs from 'fs';
 
 export class ExampleController {
+
+    names =['Stratos','Panos'];
+   // stant: any;
 
     /**
      * Apply all routes for example
@@ -14,12 +18,28 @@ export class ExampleController {
         const router = Router();
 
         router
-            .post('/sendMessageToClients', this.sendMessageToClients)
+            .post('/sendMessageToClients',(req: Request, res: Response)=>{ this.sendMessageToClients(req,res)})
             .get('/getMessage', this.getMessage);
 
         return router;
     }
+    /*
+    public fileReader(){
+    fs.open('fullstack-template/backend/src/api/v1/example/playerStatus.json', 'r', (err, fd) => {
+        if (err) throw err;
+        fs.fstat(fd, (err, stat) => {
+          if (err) throw err;
+          // use stat
+            this.stant= stat;
+          // always close the file descriptor!
+          fs.close(fd, (err) => {
+            if (err) throw err;
+          });
+        });
+      });
+    }
 
+*/
     /**
      * Sens a message back as a response
      */
@@ -35,7 +55,6 @@ export class ExampleController {
     public sendMessageToClients(req: Request, res: Response) {
         const message: any = req.body.message;
         const event: any = req.body.event;
-
         logger.info(message.scream);
 
         logger.info(message.userID);
@@ -45,7 +64,7 @@ export class ExampleController {
         socketService.broadcast(event, message);
 
         logger.info('keftes');
-        res.json({ message: 'ok' });
+        res.json({ message: this.names });
 
     }
 

@@ -14,18 +14,20 @@ private hostURl: string;
 
 constructor(private http: HttpClient) {
   this.hostURl = environment.host;
+
+  
 }
 
 public sendMessageToClients(msg , toUserID) {
   //  return this.http.post(`${this.hostURl}/api/example/sendMessageToClients`,
 
-  return this.http.post(`http://192.168.99.100:8080/api/example/getMessage`,
+  return this.http.post(`http://192.168.99.100:8080/api/example/sendMessageToClients`,
   {
     message: {
       scream: msg,
       userID: toUserID
     }
-    , event: 'screaming'
+    , event: 'eventName'
           }
       );
   }
