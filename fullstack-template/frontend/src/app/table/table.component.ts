@@ -28,7 +28,9 @@ export class TableComponent implements OnInit {
   players: boolean;
   title: string;
   titlevis: boolean;
+  player_active: number;
 
+  
   constructor(private eventEmitterService: EventEmitterService ) { 
     
     this.Background = 'https://i.imgur.com/UwNfp80.png';
@@ -36,20 +38,45 @@ export class TableComponent implements OnInit {
     this.titlevis = true;
     this.game_title_vis = false;
     this.players = true;
-    //TablePlayerComponentObject.pldead = true;
+    this.player_active = 0;
+    
     //this.change_title("ABILITY USE")
     //this.chang_background_night();
     //this.setup_table();
-    this.reset_giblets();
+    //this.reset_giblets();
     
   }
 
   ngOnInit() {
-    
+    //function strings for players:
+    //set_dead no parameter
+    //reset_giblet no parameter
+    //upvote no parameter
+    //change_player_name with parameter
+    //change_player_image with parameter
   }
 
+
   child_event_function_player1(function_name: string, parameter: string){    
-    this.eventEmitterService.Table_functions_player1({function_name,parameter});    
+    this.eventEmitterService.Table_functions_player1({function_name:function_name,parameter:parameter});    
+  } 
+  child_event_function_player2(function_name: string, parameter: string){    
+    this.eventEmitterService.Table_functions_player2({function_name:function_name,parameter:parameter});    
+  } 
+  child_event_function_player3(function_name: string, parameter: string){    
+    this.eventEmitterService.Table_functions_player3({function_name:function_name,parameter:parameter});    
+  } 
+  child_event_function_player4(function_name: string, parameter: string){    
+    this.eventEmitterService.Table_functions_player4({function_name:function_name,parameter:parameter});    
+  } 
+  child_event_function_player5(function_name: string, parameter: string){    
+    this.eventEmitterService.Table_functions_player5({function_name:function_name,parameter:parameter});    
+  } 
+  child_event_function_player6(function_name: string, parameter: string){    
+    this.eventEmitterService.Table_functions_player6({function_name:function_name,parameter:parameter});    
+  } 
+  child_event_function_player7(function_name: string, parameter: string){    
+    this.eventEmitterService.Table_functions_player7({function_name:function_name,parameter:parameter});    
   } 
 
 
@@ -77,31 +104,124 @@ export class TableComponent implements OnInit {
     this.title = "ABILITY USE";
   }
   
+  set_start_table(){
+    this.chang_background_night();
+    this.titlevis = false;
+    this.game_title_vis= true;
+    this.players = false;
+    this.reset_giblets();
+  }
+  
+  set_debate_table(){
+    this.reset_giblets();
+    this.change_background_day();
+    this.change_title_debate();
+  }
+
+  set_vote_table(){
+    this.reset_giblets();
+    this.change_background_day();
+    this.change_title_vote();
+  }
+
+  set_ability_table(){
+    this.reset_giblets();
+    this.chang_background_night();
+    this.change_title_ability();
+  }
+
+  set_player_dead(){
+    //need to pul player number from jason
+    if(this.player_active == 1){
+      this.child_event_function_player1("reset_giblet", "");
+      this.child_event_function_player1("set_dead", "");
+      //needs to pull player character image from jason
+      //this.child_event_function_player1("change_player_image", "");
+    }else if(this.player_active == 2){
+      this.child_event_function_player2("reset_giblet", "");
+      this.child_event_function_player2("set_dead", "");
+      //needs to pull player character image from jason
+      //this.child_event_function_player2("change_player_image", "");
+    }else if(this.player_active == 3){
+      this.child_event_function_player3("reset_giblet", "");
+      this.child_event_function_player3("set_dead", "");
+      //needs to pull player character image from jason
+      //this.child_event_function_player3("change_player_image", "");
+    }else if(this.player_active == 4){
+      this.child_event_function_player4("reset_giblet", "");
+      this.child_event_function_player4("set_dead", "");
+      //needs to pull player character image from jason
+      //this.child_event_function_player4("change_player_image", "");
+    }else if(this.player_active == 5){
+      this.child_event_function_player5("reset_giblet", "");
+      this.child_event_function_player5("set_dead", "");
+      //needs to pull player character image from jason
+      //this.child_event_function_player5("change_player_image", "");
+    }else if(this.player_active == 6){
+      this.child_event_function_player6("reset_giblet", "");
+      this.child_event_function_player6("set_dead", "");
+      //needs to pull player character image from jason
+      //this.child_event_function_player6("change_player_image", "");
+    }else if(this.player_active == 7){
+      this.child_event_function_player7("reset_giblet", "");
+      this.child_event_function_player7("set_dead", "");
+      //needs to pull player character image from jason
+      //this.child_event_function_player7("change_player_image", "");
+    }
+  }
+
+  upvote_player(){
+    //need to pull player number from jason
+    if(this.player_active == 1){
+      this.child_event_function_player1("upvote", "");
+    }else if(this.player_active == 2){
+      this.child_event_function_player2("upvote", "");
+    }else if(this.player_active == 3){
+      this.child_event_function_player3("upvote", "");
+    }else if(this.player_active == 4){
+      this.child_event_function_player4("upvote", "");
+    }else if(this.player_active == 5){
+      this.child_event_function_player5("upvote", "");
+    }else if(this.player_active == 6){
+      this.child_event_function_player6("upvote", "");
+    }else if(this.player_active == 7){
+      this.child_event_function_player7("upvote", "");
+    }
+  }
+
   setup_table(){
     this.titlevis = true;
     this.game_title_vis = false;
     this.players = true;
     this.change_background_day();
-    //TablePlayerComponentObject.change_player_name("Ανδρεας");
-    //TablePlayer2ComponentObject.change_player_name("Σπυρος");
-    //TablePlayer3ComponentObject.change_player_name("Νατασα");
-    //TablePlayer4ComponentObject.change_player_name("Πανος");
-    //TablePlayer5ComponentObject.change_player_name("Ελενη");
-    //TablePlayer6ComponentObject.change_player_name("Στρατος");
-    //TablePlayer7ComponentObject.change_player_name("Νικι");
+    //needs to put data from jason to change names
+    this.child_event_function_player1("change_player_name", "Ανδρεας");
+    this.child_event_function_player2("change_player_name", "Σπυρος");
+    this.child_event_function_player3("change_player_name", "Νατασα");
+    this.child_event_function_player4("change_player_name", "Πανος");
+    this.child_event_function_player5("change_player_name", "Ελενη");
+    this.child_event_function_player6("change_player_name", "Στρατος");
+    this.child_event_function_player7("change_player_name", "Νικι");
+    //need to pull data from jason to change images
+    //this.child_event_function_player1("change_player_image", "");
+    //this.child_event_function_player2("change_player_image", "");
+    //this.child_event_function_player3("change_player_image", "");
+    //this.child_event_function_player4("change_player_image", "");
+    //this.child_event_function_player5("change_player_image", "");
+    //this.child_event_function_player6("change_player_image", "");
+    //this.child_event_function_player7("change_player_image", "");
     this.reset_giblets();
     this.change_title_debate();
   }
 
   reset_giblets(){
     this.child_event_function_player1("reset_giblet", "");
-    //TablePlayerComponentObject.reset_giblet();
-    //TablePlayer2ComponentObject.reset_giblet();
-    //TablePlayer3ComponentObject.reset_giblet();
-    //TablePlayer4ComponentObject.reset_giblet();
-    //TablePlayer5ComponentObject.reset_giblet();
-    //TablePlayer6ComponentObject.reset_giblet();
-    //TablePlayer7ComponentObject.reset_giblet();
+    this.child_event_function_player2("reset_giblet", "");
+    this.child_event_function_player3("reset_giblet", "");
+    this.child_event_function_player4("reset_giblet", "");
+    this.child_event_function_player5("reset_giblet", "");
+    this.child_event_function_player6("reset_giblet", "");
+    this.child_event_function_player7("reset_giblet", "");
   }
 
 }

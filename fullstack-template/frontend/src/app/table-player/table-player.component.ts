@@ -49,17 +49,17 @@ export class TablePlayerComponent implements OnInit {
   ngOnInit() {
     if (this.eventEmitterService.TablesubsVarpl1==undefined){
       this.eventEmitterService.TablesubsVarpl1 = this.eventEmitterService.    
-      invokeTable_functions_player1.subscribe(({function_name,parameter}) => {
-        if(function_name == "set_dead"){
+      invokeTable_functions_player1.subscribe((data) => {
+        if(data.function_name == "set_dead"){
           this.set_dead();
-        }else if(function_name == "reset_giblet"){
+        }else if(data.function_name == "reset_giblet"){
           this.reset_giblet();
-        }else if(function_name == "upvote"){
+        }else if(data.function_name == "upvote"){
           this.upvote();
-        }else if(function_name == "change_player_name"){
-          this.change_player_name(parameter);
-        }else if(function_name == "change_player_image"){
-          this.change_player_image(parameter);
+        }else if(data.function_name == "change_player_name"){
+          this.change_player_name(data.parameter);
+        }else if(data.function_name == "change_player_image"){
+          this.change_player_image(data.parameter);
         }
       });
     }
@@ -91,6 +91,8 @@ export class TablePlayerComponent implements OnInit {
   change_player_image(image: string){
     this.player_image = image;
   }
+
+  
   
   upvote(){
     this.num_vote++;
