@@ -1,0 +1,94 @@
+body{
+
+	max-height: 1920px;
+	color: white;
+	
+
+	background-attachment: fixed;
+  
+  	background-repeat: no-repeat;
+	background-image: url("https://i.imgur.com/DpTwcFZ.jpg");
+	background-position: -800px -125px;
+
+
+}
+
+
+header{
+
+	background-color: black;
+}
+
+
+button{
+
+	background-color: Transparent;
+    border: none;
+
+}
+
+
+
+hr{
+	 border-top: 1px solid #F2C94C;
+}
+
+
+
+
+
+#title{
+
+	align-items: center;
+
+
+}
+
+
+
+
+#cont{
+
+
+	padding: 5%;
+	background-color: rgba(94, 94, 94, 0.67);
+
+
+}
+
+
+
+#cont h3{
+
+	padding-top: 10%;
+
+
+}
+
+#mainContainer{
+
+	margin: 5%;
+	padding: 5%;
+	background-color: rgba(0,0,0,.5);
+
+}
+
+.letters{
+    font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30.4655px;
+    line-height: 36px;
+
+    color: #F2C94C;
+}
+
+.yellowLetters {
+	font-family: Roboto Condensed;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 22px;
+	line-height: 20px;
+
+	color: #F2C94C;
+}

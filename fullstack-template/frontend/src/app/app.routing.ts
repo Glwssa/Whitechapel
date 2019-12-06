@@ -1,5 +1,6 @@
 import { RoleInfoComponent } from './role-info/role-info.component';
 import { MobileComponent } from './mobile/mobile.component';
+import { MobileLoginComponent } from './mobilelogin/mobile-login.component';
 import { TvComponent } from './tv/tv.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -12,12 +13,13 @@ import { TablePlayer5Component } from './table-player5/table-player5.component';
 import { TablePlayer6Component } from './table-player6/table-player6.component';
 import { TablePlayer7Component } from './table-player7/table-player7.component';
 
+
 const routes: Routes = [
   { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
   { path: 'table', component: TableComponent },
   { path: 'table-player', component: TablePlayerComponent },
   { path: 'tv', component: TvComponent },
-  { path: 'mobile', component: MobileComponent},
+  { path: 'mobile', component: MobileLoginComponent},
   { path: 'role-info', component: RoleInfoComponent},
   { path: 'socket-events', loadChildren: () => import('./pages/socket-events/socket-events.module').then(m => m.SocketEventsModule) },
   { path: 'tasks', loadChildren: () => import('./pages/tasks/tasks.module').then(m => m.TasksModule) },

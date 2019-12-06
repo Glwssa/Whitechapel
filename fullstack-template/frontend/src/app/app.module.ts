@@ -18,6 +18,7 @@ import { TablePlayer5Component } from './table-player5/table-player5.component';
 import { TablePlayer6Component } from './table-player6/table-player6.component';
 import { TablePlayer7Component } from './table-player7/table-player7.component';
 import { EventEmitterService } from './event-emitter.service';
+import { MobileLoginComponent } from './mobilelogin/mobile-login.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { EventEmitterService } from './event-emitter.service';
     TablePlayer5Component,
     TablePlayer6Component,
     TablePlayer7Component,
+    MobileLoginComponent,
   ],
   imports: [
     BrowserModule,
