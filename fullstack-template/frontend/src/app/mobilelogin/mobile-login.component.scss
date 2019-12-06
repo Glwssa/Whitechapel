@@ -9,7 +9,7 @@ body{
   	background-repeat: no-repeat;
 	background-image: url("https://i.imgur.com/DpTwcFZ.jpg");
 	background-position: -800px -125px;
-
+	
 
 }
 
@@ -48,10 +48,29 @@ hr{
 #newPlayerIcon{
 
 	position: absolute;
-	left: 35%;
-	right: 30%;
+	left: 35.5%;
+	
 	top: 10.25%;
 	bottom: 50.66%;
+
+	background: rgba(255, 255, 255, 0.11);
+}
+
+#playerInputBox{
+	position: absolute;
+	left: 34%;
+	right: 23.89%;
+	margin-top: 50%;
+	padding-bottom: 2%;
+
+	background: #FFFFFF;
+	border-radius: 10px;
+}
+
+#playerInputBox:focus{
+
+	outline:none;
+
 }
 
 #loginbutton{
@@ -63,11 +82,25 @@ hr{
 	position: absolute;
 
 
-	left: 39.9%;
+	left: 40.9%;
 	right: 29%;
-	top: 110%;
-	bottom: 6.15%;
+	margin-top: 90%;
+	
 
+}
+
+#loginbutton:focus{
+
+	outline:none;
+}
+
+#playerNameText{
+	position: absolute;
+	left: 41.5%;
+	font-size: medium;
+	margin-top: 44%;
+	text-align: center;
+	
 }
 
 

@@ -7,9 +7,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MobileLoginComponent implements OnInit {
 
-  constructor() { }
+  playerAvatar: string;
+  playerName: string;
+
+
+
+  constructor() { 
+
+    this.playerAvatar = "https://i.imgur.com/7Vown38.jpg";
+    this.playerName = "Player Unknown";
+
+
+  }
 
   ngOnInit() {
+
+    
+
+
+
   }
+
+
+
+  changePlayerAvatar(){
+
+    this.playerAvatar = "https://i.imgur.com/7Vown38.jpg";
+  }
+
+
+
 
 }
