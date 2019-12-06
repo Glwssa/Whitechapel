@@ -3,7 +3,7 @@ body{
 	max-height: 1920px;
 	color: white;
 	
-
+	font-family: 'Roboto Condensed', sans-serif;
 	background-attachment: fixed;
   
   	background-repeat: no-repeat;
@@ -45,7 +45,45 @@ hr{
 }
 
 
+#newPlayerIcon{
 
+	position: absolute;
+	left: 35%;
+	right: 30%;
+	top: 10.25%;
+	bottom: 50.66%;
+}
+
+#loginbutton{
+
+	background: url("https://i.imgur.com/7Vown38.jpg");
+	border-radius: 50%;
+	width: 20%;
+	
+	position: absolute;
+
+
+	left: 39.9%;
+	right: 29%;
+	top: 110%;
+	bottom: 6.15%;
+
+}
+
+
+#formContainer{
+
+
+	position: absolute;
+	width: 483px;
+	height: 318px;
+	left: -61px;
+	top: 123px;
+
+	background: rgba(0, 0, 0, 0.82);
+
+
+}
 
 #cont{
 
@@ -92,3 +130,5 @@ hr{
 
 	color: #F2C94C;
 }
+
+

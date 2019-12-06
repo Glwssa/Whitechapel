@@ -3,7 +3,7 @@ body{
 	max-height: 1920px;
 	color: white;
 	
-
+	font-family: 'Roboto Condensed', sans-serif;
 	background-attachment: fixed;
   
   	background-repeat: no-repeat;
@@ -91,4 +91,18 @@ hr{
 	line-height: 20px;
 
 	color: #F2C94C;
+}
+
+
+
+.fab{
+
+
+	border-radius: 50%;
+	position:fixed;
+	width: 25%;
+	bottom:38px;
+	left: 250px;
+
+
 }

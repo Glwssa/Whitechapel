@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'table-player', component: TablePlayerComponent },
   { path: 'tv', component: TvComponent },
   { path: 'mobile', component: MobileLoginComponent},
+  { path: 'mobileMain', component: MobileComponent},
   { path: 'role-info', component: RoleInfoComponent},
   { path: 'socket-events', loadChildren: () => import('./pages/socket-events/socket-events.module').then(m => m.SocketEventsModule) },
   { path: 'tasks', loadChildren: () => import('./pages/tasks/tasks.module').then(m => m.TasksModule) },
