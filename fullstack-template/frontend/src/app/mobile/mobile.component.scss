@@ -1,6 +1,6 @@
 body{
 
-	max-height: 1920px;
+	
 	color: white;
 	
 	font-family: 'Roboto Condensed', sans-serif;
@@ -9,6 +9,8 @@ body{
   	background-repeat: no-repeat;
 	background-image: url("https://i.imgur.com/DpTwcFZ.jpg");
 	background-position: -800px -125px;
+
+
 
 
 }
@@ -65,6 +67,32 @@ hr{
 
 }
 
+
+#popupSmall{
+
+	text-align: center;
+	position: absolute;
+
+	padding-top:10%;
+	padding-bottom:10%;
+	margin-top: 40.04%;
+	width: 375px;
+
+	background: rgba(0, 0, 0, 0.82);
+	z-index: 90;
+	visibility: visible;
+
+}
+
+
+
+
+
+
+
+
+
+
 #mainContainer{
 
 	margin: 5%;
@@ -84,25 +112,43 @@ hr{
 }
 
 .yellowLetters {
-	font-family: Roboto Condensed;
-	font-style: normal;
-	font-weight: normal;
-	font-size: 22px;
+	
+	font-size: 20px;
 	line-height: 20px;
 
-	color: #F2C94C;
+	 color: #F2C94C;
 }
 
+
+.yellowLettersNormalSize {
+	
+
+	 color: #F2C94C;
+}
 
 
 .fab{
 
 
 	border-radius: 50%;
-	position:fixed;
+	position:absolute;
 	width: 25%;
-	bottom:38px;
+	margin-top: -70%;
 	left: 250px;
+	z-index: 50;
+
+}
 
 
+
+.blur {
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
+	-webkit-filter: url(#blur-filter);
+	filter: url(#blur-filter);
+	-webkit-filter: blur(3px);
+	filter: blur(3px);
+	
+}
+.blur-svg {
+	display: none;
 }

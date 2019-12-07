@@ -22,6 +22,8 @@ const routes: Routes = [
   { path: 'mobile', component: MobileLoginComponent},
   { path: 'mobileMain', component: MobileComponent},
   { path: 'role-info', component: RoleInfoComponent},
+  { path: 'backToRoleInfoList', component: RoleInfoComponent},
+  
   { path: 'socket-events', loadChildren: () => import('./pages/socket-events/socket-events.module').then(m => m.SocketEventsModule) },
   { path: 'tasks', loadChildren: () => import('./pages/tasks/tasks.module').then(m => m.TasksModule) },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },

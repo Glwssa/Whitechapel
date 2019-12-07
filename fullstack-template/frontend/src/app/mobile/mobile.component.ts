@@ -15,6 +15,8 @@ export class MobileComponent implements OnInit {
   role: string;
   currentRole: string;
 
+  
+
   constructor(public globals: Globals) {
     this.prevRow = '';
     this.player = this.names[2];
@@ -60,4 +62,13 @@ export class MobileComponent implements OnInit {
     console.log('current role :' + this.currentRole);
     this.globals.role = this.currentRole;
   }
+
+
+  
+
+
+
+
+
+
 }

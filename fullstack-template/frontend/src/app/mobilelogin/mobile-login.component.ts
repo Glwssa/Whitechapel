@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ami-fullstack-mobile-login',
+  selector: 'mobilelogin',
   templateUrl: './mobile-login.component.html',
   styleUrls: ['./mobile-login.component.scss']
 })
