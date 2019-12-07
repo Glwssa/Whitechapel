@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from '../event-emitter.service';  
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'team13-table-player',
@@ -8,6 +9,7 @@ import { EventEmitterService } from '../event-emitter.service';
 })
 export class TablePlayerComponent implements OnInit {
   player_image: string;
+  player_mayor: string;
   player_dead: string;
   gibbet: string;
   player_name: string;
@@ -20,8 +22,10 @@ export class TablePlayerComponent implements OnInit {
   gibvis5: boolean;
   gibvis6: boolean;
   gibvis7: boolean;
+  plm: boolean;
   constructor(private eventEmitterService: EventEmitterService) {
     this.player_image = "https://cdn2.iconfinder.com/data/icons/business-management-52/96/Artboard_20-512.png";
+    this.player_mayor = "https://i.imgur.com/OxNrceZ.png";
     this.gibbet = "https://www.svgrepo.com/show/585/gibbet.svg";
     this.player_name = "Andreas";
     this.num_vote = 0;
@@ -32,6 +36,7 @@ export class TablePlayerComponent implements OnInit {
     this.gibvis5 = false;
     this.gibvis6 = false;
     this.gibvis7 = false;
+    this.plm = true;
     //this.reset_giblet();
     
     this.player_dead = "https://i.imgur.com/vpqSnVP.png"
@@ -71,6 +76,14 @@ export class TablePlayerComponent implements OnInit {
 
   set_dead(){
     this.pldead = true;
+  }
+
+  set_mayor(){
+    this.plm = true;
+  }
+
+  reset_mayor(){
+    this.plm = false;
   }
 
   reset_giblet(){
