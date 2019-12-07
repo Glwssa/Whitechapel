@@ -66,9 +66,8 @@ export class TvComponent implements OnInit {
   public exmpl() {
     this.tvService.sendMessageToClients(this.msg, this.userIDToTreat).subscribe((data)=>{
       console.log(data);
-      //this.x=data.message;
+      this.x = data.message;
     });
-    
   }
 
 

@@ -2,11 +2,16 @@ import { Request, Response, NextFunction, Router } from 'express';
 import { NotFound, BadRequest } from 'http-errors';
 import { DIContainer, MinioService, SocketsService } from '@app/services';
 import { logger } from '../../../utils/logger';
-//import * as  fs from 'fs';
+import * as  fs from 'fs';
+import * as path from 'path';
 
 export class ExampleController {
 
-    names =['Stratos','Panos'];
+    public names = ['Stratos', 'Panos'];
+    public data: any;
+    public retData: string[];
+    public final: string[];
+
    // stant: any;
 
     /**
@@ -23,23 +28,27 @@ export class ExampleController {
 
         return router;
     }
-    /*
-    public fileReader(){
-    fs.open('fullstack-template/backend/src/api/v1/example/playerStatus.json', 'r', (err, fd) => {
-        if (err) throw err;
-        fs.fstat(fd, (err, stat) => {
-          if (err) throw err;
-          // use stat
-            this.stant= stat;
-          // always close the file descriptor!
-          fs.close(fd, (err) => {
-            if (err) throw err;
-          });
-        });
+
+    public fileReader() {
+
+      logger.info('FS');
+      fs.readFile(path.join(__dirname, '../example/test.txt'),'utf8', (error, data) => {
+        this.data = data;
       });
+
+      this.retData = this.data.split(/\n/g);
+      const i = 0;
+      for (let row of this.retData) {
+        const value = row.split(' ');
+        if ( this.final === undefined || this.final.length === 0) {
+            this.final = value;
+            continue;
+        }
+        this.final.push(value[0]);
+        this.final.push(value[1]);
+      }
     }
 
-*/
     /**
      * Sens a message back as a response
      */
@@ -63,8 +72,10 @@ export class ExampleController {
         const socketService = DIContainer.get(SocketsService);
         socketService.broadcast(event, message);
 
-        logger.info('keftes');
-        res.json({ message: this.names });
+        this.fileReader();
+
+        logger.info(this.final.length);
+        res.json({ message: this.final});
 
     }
 
