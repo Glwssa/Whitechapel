@@ -3,6 +3,7 @@ import { SocketsService } from 'src/app/global/services';
 import { TasksService } from 'src/app/global/services';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, } from '@angular/core';
+import{LeapService, Gestures} from 'src/app/leap.service';
 
 @Component({
   selector: 'ami-fullstack-tv',
@@ -26,7 +27,7 @@ export class TvComponent implements OnInit {
   response: any;
   x: any;
 
-  constructor(private tvService: TVService, private socketService: SocketsService) {
+  constructor(private tvService: TVService, private socketService: SocketsService, private _leapservice: LeapService) {
     this.socketEvents = [];
     this.image = 'https://i.imgur.com/TIk7nCa.png';
     this.arrow = 'https://i.imgur.com/LxivwLt.png';
@@ -48,6 +49,16 @@ export class TvComponent implements OnInit {
     this.socketService.syncMessages('screaming').subscribe(msg => {
       this.socketEvents.push(this.msg);
     });
+
+    //leap motion gesture contoller
+    this._leapservice.gestureRecognizer().subscribe((gesture) => {
+
+      if(gesture == Gestures.SWIPE_LEFT){
+        console.log("Swipe left in tv compoment");
+      }else if (gesture == Gestures.SWIPE_RIGHT){
+        console.log("Swipe right in tv compoment");
+      }
+    })
   }
 
   increment() {
