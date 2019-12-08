@@ -109,6 +109,7 @@ export class TableComponent implements OnInit {
     this.titlevis = false;
     this.game_title_vis= true;
     this.players = false;
+    this.reset_mayor();
     this.reset_giblets();
   }
   
@@ -128,6 +129,35 @@ export class TableComponent implements OnInit {
     this.reset_giblets();
     this.chang_background_night();
     this.change_title_ability();
+  }
+
+  set_player_mayor(){
+    //need to pul player number from jason
+    if(this.player_active == 1){
+      this.child_event_function_player1("set_mayor","");
+    }else if(this.player_active == 2){
+      this.child_event_function_player2("set_mayor","");
+    }else if(this.player_active == 3){
+      this.child_event_function_player3("set_mayor","");
+    }else if(this.player_active == 4){
+      this.child_event_function_player4("set_mayor","");
+    }else if(this.player_active == 5){
+      this.child_event_function_player5("set_mayor","");
+    }else if(this.player_active == 6){
+      this.child_event_function_player6("set_mayor","");
+    }else if(this.player_active == 7){
+      this.child_event_function_player7("set_mayor","");
+    }
+  }
+
+  reset_mayor(){
+    this.child_event_function_player1("reset_mayor","");
+    this.child_event_function_player2("reset_mayor","");
+    this.child_event_function_player3("reset_mayor","");
+    this.child_event_function_player4("reset_mayor","");
+    this.child_event_function_player5("reset_mayor","");
+    this.child_event_function_player6("reset_mayor","");
+    this.child_event_function_player7("reset_mayor","");
   }
 
   set_player_dead(){

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { EventEmitterService } from '../event-emitter.service';  
-import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'team13-table-player',
@@ -65,6 +64,10 @@ export class TablePlayerComponent implements OnInit {
           this.change_player_name(data.parameter);
         }else if(data.function_name == "change_player_image"){
           this.change_player_image(data.parameter);
+        }else if(data.function_name == "set_mayor"){
+          this.set_mayor();
+        }else if(data.function_name == "reset_mayor"){
+          this.reset_mayor();
         }
       });
     }

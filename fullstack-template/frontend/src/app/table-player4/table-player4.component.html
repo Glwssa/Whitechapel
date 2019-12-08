@@ -1,5 +1,6 @@
 <div>
     <img class="player_image" src={{player_image}}>
+    <img class= "player_mayor" src={{player_mayor}} [style.visibility]= "plm ? 'visible' : 'hidden'">
     <img class="player_dead" src={{player_dead}} [style.visibility]= "pldead ? 'visible' : 'hidden'">
     <img id="gib1" class="gibbet" src={{gibbet}} [ngStyle]="{'left' : '63.19%', 'top': '70.02%' }" [style.transform]="'rotate(' + '40.25' + 'deg)'" [style.visibility]= "gibvis1 ? 'visible' : 'hidden'">
     <img id="gib2" class="gibbet" src={{gibbet}} [ngStyle]="{'left' : '63.99%', 'top': '71.68%' }" [style.transform]="'rotate(' + '50' + 'deg)'" [style.visibility]= "gibvis2 ? 'visible' : 'hidden'">

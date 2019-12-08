@@ -1,6 +1,7 @@
 <div>
     <img class="player_image" src={{player_image}}>
     <img class="player_dead" src={{player_dead}} [style.visibility]= "pldead ? 'visible' : 'hidden'">
+    <img class= "player_mayor" src={{player_mayor}} [style.visibility]= "plm ? 'visible' : 'hidden'">
     <img id="gib1" class="gibbet" src={{gibbet}} [ngStyle]="{'left' : '68.71%', 'top': '13.36%' }" [style.transform]="'rotate(' + '40.25' + 'deg)'" [style.visibility]= "gibvis1 ? 'visible' : 'hidden'">
     <img id="gib2" class="gibbet" src={{gibbet}} [ngStyle]="{'left' : '69.51%', 'top': '15.02%' }" [style.transform]="'rotate(' + '50' + 'deg)'" [style.visibility]= "gibvis2 ? 'visible' : 'hidden'">
     <img id="gib3" class="gibbet" src={{gibbet}} [ngStyle]="{'left' : '70.11%', 'top': '16.92%' }" [style.transform]="'rotate(' + '60' + 'deg)'" [style.visibility]= "gibvis3 ? 'visible' : 'hidden'">
