@@ -12,6 +12,15 @@ export class ExampleController {
     public retData: string[];
     public final: string[];
     public calls: number;
+    //public setuppedplayers: number;
+
+    //setup (){
+     // kane this.setup. bale name bale image
+      //setupppedplayers++;
+      //if(settuppedplayers==7){
+      //  res.json({ message: 'allready' });
+     // }
+    //}
    // stant: any;
 
     /**
