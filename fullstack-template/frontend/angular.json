@@ -33,7 +33,7 @@
             ],
             "scripts": [
                 "./node_modules/jquery/dist/jquery.min.js",
-                "./node_modules/jquery-nearest.src.jquery.nearest.js"
+                "./node_modules/jquery-nearest/src/jquery.nearest.js"
             ]
           },
           "configurations": {
