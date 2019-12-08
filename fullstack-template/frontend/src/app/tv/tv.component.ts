@@ -26,6 +26,7 @@ export class TvComponent implements OnInit {
   public playerStateURL;
   response: any;
   x: any;
+  playerState: string[];
 
   constructor(private tvService: TVService, private socketService: SocketsService, private _leapservice: LeapService) {
     this.socketEvents = [];
@@ -48,7 +49,11 @@ export class TvComponent implements OnInit {
     this.msg = 'whats up';
     this.socketService.syncMessages('screaming').subscribe(msg => {
       this.socketEvents.push(this.msg);
+
     });
+
+    this.exmpl();
+    this.exmpl();
 
     //leap motion gesture contoller
     this._leapservice.gestureRecognizer().subscribe((gesture) => {
@@ -58,14 +63,17 @@ export class TvComponent implements OnInit {
       }else if (gesture == Gestures.SWIPE_RIGHT){
         console.log("Swipe right in tv compoment");
       }
-    })
+    });
+
   }
 
   increment() {
     ++this.round;
+    this.sendRound();
   }
   deincrement() {
     --this.round;
+    this.sendRound();
   }
 
   satur() {
@@ -74,13 +82,24 @@ export class TvComponent implements OnInit {
     this.exmpl();
   }
 
-  public exmpl() {
+   exmpl() {
     this.tvService.sendMessageToClients(this.msg, this.userIDToTreat).subscribe((data)=>{
       console.log(data);
       this.x = data.message;
+      this.playerState = data.message;
     });
   }
 
+  public convertInt( str: string) {
+    return parseInt(str);
+  }
+
+  public sendRound() {
+    this.msg = this.round.toString();
+    this.tvService.sendMessageToClients(this.msg, this.userIDToTreat).subscribe((data)=>{
+      this.playerState = data.message;
+    });
+  }
 
 }
 

@@ -1,0 +1,7 @@
+stratos 1
+panos 1
+giannis 0
+kostas 0
+nikos 1
+elena 1
+natasa 0

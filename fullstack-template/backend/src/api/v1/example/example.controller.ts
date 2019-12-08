@@ -11,7 +11,7 @@ export class ExampleController {
     public data: any;
     public retData: string[];
     public final: string[];
-
+    public calls: number;
    // stant: any;
 
     /**
@@ -29,16 +29,20 @@ export class ExampleController {
         return router;
     }
 
-    public fileReader() {
+
+    public fileReader(round: string) {
+      if ( this.final === undefined || this.final.length < 15) {
+        this.final = [];
+      }
 
       logger.info('FS');
-      fs.readFile(path.join(__dirname, '../example/test.txt'),'utf8', (error, data) => {
+      fs.readFile(path.join(__dirname, '../example/test' + round + '.txt'), 'utf8', (error, data) => {
         this.data = data;
       });
 
       this.retData = this.data.split(/\n/g);
       const i = 0;
-      for (let row of this.retData) {
+      for (const  row of this.retData) {
         const value = row.split(' ');
         if ( this.final === undefined || this.final.length === 0) {
             this.final = value;
@@ -72,9 +76,8 @@ export class ExampleController {
         const socketService = DIContainer.get(SocketsService);
         socketService.broadcast(event, message);
 
-        this.fileReader();
+        this.fileReader(message.scream);
 
-        logger.info(this.final.length);
         res.json({ message: this.final});
 
     }

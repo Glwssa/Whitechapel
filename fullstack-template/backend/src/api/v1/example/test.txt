@@ -1,3 +1,0 @@
-stratos 1
-panos 1
-giannis 0
