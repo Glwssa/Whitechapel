@@ -54,16 +54,19 @@ export class TvComponent implements OnInit {
 
     });
 
+    //this._leapservice.cursorRecognizer().subscribe(cursor=>{
+    //  console.log(cursor)
+    //})
 
     //leap motion gesture contoller
-    //this._leapservice.gestureRecognizer().subscribe((gesture) => {
-    //
-    //  if(gesture == Gestures.SWIPE_LEFT){
-    //    console.log("Swipe left in tv compoment");
-    //  }else if (gesture == Gestures.SWIPE_RIGHT){
-    //    console.log("Swipe right in tv compoment");
-     // }
-    //});
+    /*this._leapservice.gestureRecognizer().subscribe((gesture) => {
+      console.log(gesture)
+      if(gesture == Gestures.SWIPE_LEFT){
+        console.log("Swipe left in tv compoment");
+      }else if (gesture == Gestures.SWIPE_RIGHT){
+        console.log("Swipe right in tv compoment");
+      }
+    });*/
 
   }
 
@@ -86,7 +89,7 @@ export class TvComponent implements OnInit {
     this.tvService.sendMessageToClients(this.msg, this.userIDToTreat).subscribe((data)=>{
       console.log(data);
       this.x = data["message"];
-      this.playerState = data.message;
+      this.playerState = data["message"];
     });
   }
 
@@ -97,7 +100,7 @@ export class TvComponent implements OnInit {
   public sendRound() {
     this.msg = this.round.toString();
     this.tvService.sendMessageToClients(this.msg, this.userIDToTreat).subscribe((data)=>{
-      this.playerState = data.message;
+      this.playerState = data["message"];
     });
   }
 
