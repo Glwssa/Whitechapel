@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {TableService} from './../table.service';
+import { SocketsService } from 'src/app/global/services';
 import { EventEmitterService } from '../event-emitter.service'; 
 import { TablePlayerComponent } from '../table-player/table-player.component';
 import { TablePlayer2Component } from '../table-player2/table-player2.component';
@@ -29,16 +31,21 @@ export class TableComponent implements OnInit {
   title: string;
   titlevis: boolean;
   player_active: number;
+  msg: any;
+  TablePlayerNames: string[];
+  public socketEvents: {event: string, message: any}[];
 
   
-  constructor(private eventEmitterService: EventEmitterService ) { 
-    
+  constructor(private tableService: TableService, private socketService: SocketsService, private eventEmitterService: EventEmitterService ) { 
+    this.socketEvents = [];
     this.Background = 'https://i.imgur.com/UwNfp80.png';
     this.title = "DEBATE"
     this.titlevis = true;
     this.game_title_vis = false;
     this.players = true;
     this.player_active = 0;
+    this.TablePlayerNames = [];
+
     
     //this.change_title("ABILITY USE")
     //this.chang_background_night();
@@ -48,12 +55,25 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+    this.socketService.syncMessages('screaming').subscribe(msg => {
+      this.socketEvents.push(this.msg);
+
+    });
+
+
     //function strings for players:
     //set_dead no parameter
     //reset_giblet no parameter
     //upvote no parameter
     //change_player_name with parameter
     //change_player_image with parameter
+  }
+
+  exmp(){
+    this.tableService.Table_functions(this.msg, "").subscribe((data)=>{
+      console.log(data);
+    });
   }
 
 

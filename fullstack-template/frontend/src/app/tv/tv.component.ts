@@ -56,14 +56,14 @@ export class TvComponent implements OnInit {
 
 
     //leap motion gesture contoller
-    this._leapservice.gestureRecognizer().subscribe((gesture) => {
-
-      if(gesture == Gestures.SWIPE_LEFT){
-        console.log("Swipe left in tv compoment");
-      }else if (gesture == Gestures.SWIPE_RIGHT){
-        console.log("Swipe right in tv compoment");
-      }
-    });
+    //this._leapservice.gestureRecognizer().subscribe((gesture) => {
+    //
+    //  if(gesture == Gestures.SWIPE_LEFT){
+    //    console.log("Swipe left in tv compoment");
+    //  }else if (gesture == Gestures.SWIPE_RIGHT){
+    //    console.log("Swipe right in tv compoment");
+     // }
+    //});
 
   }
 
@@ -85,7 +85,7 @@ export class TvComponent implements OnInit {
    exmpl() {
     this.tvService.sendMessageToClients(this.msg, this.userIDToTreat).subscribe((data)=>{
       console.log(data);
-      this.x = data.message;
+      this.x = data["message"];
       this.playerState = data.message;
     });
   }
