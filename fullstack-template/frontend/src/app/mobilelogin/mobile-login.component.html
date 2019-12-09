@@ -26,10 +26,10 @@
                 <div><img id = "newPlayerIcon" class="w3-circle " src="https://cdn2.iconfinder.com/data/icons/business-management-52/96/Artboard_20-512.png" style="width:30%"> </div>
                 <!--<ami-fullstack-mobile-login id="cameraButton" (click) = "changePlayerAvatar()"></ami-fullstack-mobile-login>-->
                 
-                <div><input routerLink="/mobileMain" id = "loginbutton" type="image" src="https://i.imgur.com/7Vown38.jpg"  ></div>
+                <div><input (click)="localName()" routerLink="/mobileMain" id = "loginbutton" type="image" src="https://i.imgur.com/7Vown38.jpg"  ></div>
                 
                 <div><p id = "playerNameText" class="yellowLetters">PLAYER NAME</p></div>
-                <div><input type="text" id="playerInputBox" value=""></div>
+                <form><input type="text" id="playerInputBox" value=""></form>
         </div>
 
        

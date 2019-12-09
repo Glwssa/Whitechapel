@@ -33,11 +33,28 @@ export class ExampleController {
 
         router
             .post('/sendMessageToClients',(req: Request, res: Response)=>{ this.sendMessageToClients(req,res)})
+            .post('/getNames',(req: Request, res: Response)=>{ this.getNames(req,res)})
             .get('/getMessage', this.getMessage);
 
         return router;
     }
 
+    public getNames(req: Request, res: Response) {
+      const message: any = req.body.message;
+      const event: any = req.body.event;
+
+      const socketService = DIContainer.get(SocketsService);
+      socketService.broadcast(event, message);
+
+      res.json({ message: 'lala'});
+
+    }
+
+    public writeNames(name: String) {
+      fs.writeFile('/example/PlayerNames.txt', name+' 1\n', function (err: any) {
+        if (err) throw err;
+      }); 
+    }
 
     public fileReader(round: string) {
       if ( this.final === undefined || this.final.length < 15) {

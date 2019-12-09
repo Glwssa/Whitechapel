@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SocketsService } from 'src/app/global/services';
+import { GetNamesService } from './../get-names.service';
 
 @Component({
   selector: 'mobilelogin',
@@ -9,10 +11,15 @@ export class MobileLoginComponent implements OnInit {
 
   playerAvatar: string;
   playerName: string;
+  public myUserID;
+  public userIDToTreat;
+  public msg;
+  public socketEvents: {event: string, message: any}[];
+  public playerStateURL;
+  response: any;
 
 
-
-  constructor() { 
+  constructor(private GetNamesService: GetNamesService, private socketService: SocketsService) { 
 
     this.playerAvatar = "https://i.imgur.com/7Vown38.jpg";
     this.playerName = "Player Unknown";
@@ -22,7 +29,10 @@ export class MobileLoginComponent implements OnInit {
 
   ngOnInit() {
 
-    
+    this.socketService.syncMessages('screaming').subscribe(msg => {
+      this.socketEvents.push(this.msg); //hmmm?
+
+    });
 
 
 
@@ -35,7 +45,15 @@ export class MobileLoginComponent implements OnInit {
     this.playerAvatar = "https://i.imgur.com/7Vown38.jpg";
   }
 
+  setNames() {
+    this.GetNamesService.getNames(this.playerName, this.userIDToTreat).subscribe((data)=>{
+      console.log(data);
 
+    });
+  }
 
-
+  localName(){
+    this.playerName = document.getElementById('playerInputBox').nodeValue;
+    console.log("Welcome: "+this.playerName);
+  }
 }
