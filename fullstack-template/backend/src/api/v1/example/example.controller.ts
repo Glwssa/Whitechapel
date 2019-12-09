@@ -9,8 +9,11 @@ export class ExampleController {
 
     public names = ['Stratos', 'Panos'];
     public data: any;
+    public Tabledata: any;
     public retData: string[];
+    public retDataTable: string[];
     public final: string[];
+    public TableNamesfinal: string[];
     public calls: number;
     //public setuppedplayers: number;
 
@@ -34,7 +37,8 @@ export class ExampleController {
         router
             .post('/sendMessageToClients',(req: Request, res: Response)=>{ this.sendMessageToClients(req,res)})
             .post('/getNames',(req: Request, res: Response)=>{ this.getNames(req,res)})
-            .get('/getMessage', this.getMessage);
+            .get('/getMessage', this.getMessage)
+            .get('/getTableNames', (req: Request, res: Response)=>{ this.getTableNames(req,res)});
 
         return router;
     }
@@ -79,14 +83,44 @@ export class ExampleController {
       }
     }
 
+    public TablefileReader() {
+      if ( this.TableNamesfinal === undefined || this.TableNamesfinal.length < 15) {
+        this.TableNamesfinal = [];
+      }
+
+      logger.info('FS');
+      fs.readFile(path.join(__dirname, '../example/test1.txt'), 'utf8', (error, Tabledata) => {
+        this.Tabledata = Tabledata;
+      });
+
+      this.retDataTable = this.Tabledata.split(/\n/g);
+      const i = 0;
+      for (const  row of this.retDataTable) {
+        const value = row.split(' ');
+        if ( this.TableNamesfinal === undefined || this.TableNamesfinal.length === 0) {
+            this.TableNamesfinal = value;
+            continue;
+        }
+        this.TableNamesfinal.push(value[0]);
+        this.TableNamesfinal.push(value[1]);
+      }
+    }
+
     /**
-     * Sens a message back as a response
+     * Sents a message back as a response
      */
     public getMessage(req: Request, res: Response) {
         logger.info('e getMessage request print message');
 
         res.json({ message: 'hello' });
     }
+
+    //get table names fro setup
+    public getTableNames(req: Request, res: Response) {
+      logger.info('e getTableNames request print message');
+      //this.TablefileReader();
+      res.json({ message: this.TableNamesfinal });
+  }
 
     /**
      * Broadcasts a received message to all connected clients

@@ -21,7 +21,7 @@
     "@angular/router": "~8.2.4",
     "angular": "^1.7.9",
     "bootstrap": "^4.3.1",
-    "jquery": "^1.11.3",
+    "jquery": "^3.4.1",
     "jquery-nearest": "^1.4.0",
     "leapjs": "^0.6.4",
     "lodash": "^4.17.15",
