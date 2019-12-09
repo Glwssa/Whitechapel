@@ -11,20 +11,23 @@ export class MobileComponent implements OnInit {
   prevRow: string;
   names = ['Stratos', 'Kostas', 'Natasa', 'Andreas', 'Panos', 'Giannis', 'Ete'];
   player: string;
-  roles = ['JACK THE REAPER', 'CONSTABLE', 'PHYSICIAN' , 'MEDIUM', 'JOKER', 'VIGILANTE', 'MAYOR'];
+  roles = ['JACK THE REAPER', 'CONSTABLE', 'PHYSICIAN', 'MEDIUM', 'JOKER', 'VIGILANTE', 'MAYOR'];
   role: string;
   currentRole: string;
 
-  
+
 
   constructor(public globals: Globals) {
     this.prevRow = '';
     this.player = this.names[2];
     this.role = this.roles[0];
-   }
+  }
 
   ngOnInit() {
     document.getElementById('mySidebar').style.display = 'none';
+    var retrievedObject = localStorage.getItem('user');
+    console.log('retrievedObject: ', JSON.parse(retrievedObject));
+
   }
 
   openSidebar() {
@@ -39,7 +42,7 @@ export class MobileComponent implements OnInit {
     if (this.prevRow !== row) {
       console.log('row: ' + row);
       console.log('prevRow: ' + this.prevRow);
-      if ( !this.prevRow) {
+      if (!this.prevRow) {
         this.prevRow = row;
         document.getElementById(row).style.backgroundColor = 'black';
       } else {
@@ -64,7 +67,7 @@ export class MobileComponent implements OnInit {
   }
 
 
-  
+
 
 
 

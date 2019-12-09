@@ -47,9 +47,10 @@ export class MobileLoginComponent implements OnInit {
   }
 
   setNames() {
+    
     this.GetNamesService.getNames(this.playerName, this.userIDToTreat).subscribe((data)=>{
       console.log(data);
-
+      localStorage.setItem("user", JSON.stringify(data))
     });
   }
 
@@ -57,6 +58,10 @@ export class MobileLoginComponent implements OnInit {
 
 
   localName(){
+    this.GetNamesService.getNames(this.playerName, this.userIDToTreat).subscribe((data)=>{
+      console.log(data);
+      localStorage.setItem("user", JSON.stringify(data))
+    });
     //this.playerName = document.getElementById('playerInputBox').value;
     this.playerName = (<HTMLInputElement>document.getElementById('playerInputBox')).value;
     

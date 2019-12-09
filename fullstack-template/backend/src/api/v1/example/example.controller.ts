@@ -56,7 +56,7 @@ export class ExampleController {
       }); 
     }
 
-    public fileReader(round: string) {
+    public async fileReader(round: string) {
       if ( this.final === undefined || this.final.length < 15) {
         this.final = [];
       }
@@ -91,7 +91,7 @@ export class ExampleController {
     /**
      * Broadcasts a received message to all connected clients
      */
-    public sendMessageToClients(req: Request, res: Response) {
+    public async sendMessageToClients(req: Request, res: Response) {
         const message: any = req.body.message;
         const event: any = req.body.event;
         logger.info(message.scream);
@@ -102,7 +102,7 @@ export class ExampleController {
         const socketService = DIContainer.get(SocketsService);
         socketService.broadcast(event, message);
 
-        this.fileReader(message.scream);
+        await this.fileReader(message.scream);
 
         res.json({ message: this.final});
 

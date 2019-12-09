@@ -2,8 +2,9 @@ import { TVService } from './../tv.service';
 import { SocketsService } from 'src/app/global/services';
 import { TasksService } from 'src/app/global/services';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, } from '@angular/core';
-import{LeapService, Gestures} from 'src/app/leap.service';
+import { Component, OnInit } from '@angular/core';
+import { LeapService, Gestures } from 'src/app/leap.service';
+//import Artyom from '../smart-speaker.service';
 
 @Component({
   selector: 'ami-fullstack-tv',
@@ -44,6 +45,7 @@ export class TvComponent implements OnInit {
 
 
   ngOnInit() {
+    this.sendRound();
     this.myUserID = 'me';
     this.userIDToTreat = 'Stratos';
     this.msg = 'whats up';
@@ -52,8 +54,6 @@ export class TvComponent implements OnInit {
 
     });
 
-    this.exmpl();
-    this.exmpl();
 
     //leap motion gesture contoller
     this._leapservice.gestureRecognizer().subscribe((gesture) => {
