@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketsService } from 'src/app/global/services';
 import { GetNamesService } from './../get-names.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mobilelogin',
@@ -19,7 +20,7 @@ export class MobileLoginComponent implements OnInit {
   response: any;
 
 
-  constructor(private GetNamesService: GetNamesService, private socketService: SocketsService) { 
+  constructor(private router: Router, private GetNamesService: GetNamesService, private socketService: SocketsService) { 
 
     this.playerAvatar = "https://i.imgur.com/7Vown38.jpg";
     this.playerName = "Player Unknown";
@@ -52,8 +53,14 @@ export class MobileLoginComponent implements OnInit {
     });
   }
 
+
+
+
   localName(){
-    this.playerName = document.getElementById('playerInputBox').nodeValue;
+    //this.playerName = document.getElementById('playerInputBox').value;
+    this.playerName = (<HTMLInputElement>document.getElementById('playerInputBox')).value;
+    
     console.log("Welcome: "+this.playerName);
+    this.router.navigate(['mobileMain'])
   }
 }
