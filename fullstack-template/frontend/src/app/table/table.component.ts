@@ -32,19 +32,25 @@ export class TableComponent implements OnInit {
   titlevis: boolean;
   player_active: number;
   msg: any;
-  TablePlayerNames: string[];
+  TablePlayerNamesAndImages: string[];
   public socketEvents: {event: string, message: any}[];
+  startSetup: boolean;
 
   
   constructor(private tableService: TableService, private socketService: SocketsService, private eventEmitterService: EventEmitterService ) { 
     this.socketEvents = [];
+    
     this.Background = 'https://i.imgur.com/UwNfp80.png';
     this.title = "DEBATE"
-    this.titlevis = true;
-    this.game_title_vis = false;
-    this.players = true;
+    this.titlevis = false;
+    this.game_title_vis = true;
+    this.players = false;
     this.player_active = 0;
-    this.TablePlayerNames = [];
+    this.TablePlayerNamesAndImages = [];
+    this.chang_background_night();
+    //this.reset_giblets();
+    //this.reset_mayor();
+    //this.set_start_table();
 
     
     //this.change_title("ABILITY USE")
@@ -60,6 +66,17 @@ export class TableComponent implements OnInit {
       this.socketEvents.push(this.msg);
 
     });
+    var _this = this
+    setInterval(function(){ 
+      console.log("Interval");
+      //this.getTableStartBool();
+
+    }, 3000);
+    setTimeout(function(){ 
+      //this.getTableStartBool();
+     }, 3000);
+
+    
 
 
     //function strings for players:
@@ -70,8 +87,19 @@ export class TableComponent implements OnInit {
     //change_player_image with parameter
   }
 
-  exmp(){
-    this.tableService.Table_functions(this.msg, "").subscribe((data)=>{
+
+  getDataforSetup(){
+    this.tableService.getTableNames(this.msg, "").subscribe((data)=>{
+      //console.log(data["message"]);
+      this.TablePlayerNamesAndImages = data["message"];
+      this.setup_table();
+      //this.set_start_table();
+    });
+  }
+
+  getTableStartBool(){
+    this.tableService.getTableStartBool().subscribe((data)=>{
+      //this.startSetup = data.message;
       console.log(data);
     });
   }
@@ -245,22 +273,23 @@ export class TableComponent implements OnInit {
     this.players = true;
     this.change_background_day();
     //needs to put data from jason to change names
-    this.child_event_function_player1("change_player_name", "Ανδρεας");
-    this.child_event_function_player2("change_player_name", "Σπυρος");
-    this.child_event_function_player3("change_player_name", "Νατασα");
-    this.child_event_function_player4("change_player_name", "Πανος");
-    this.child_event_function_player5("change_player_name", "Ελενη");
-    this.child_event_function_player6("change_player_name", "Στρατος");
-    this.child_event_function_player7("change_player_name", "Νικι");
+    this.child_event_function_player1("change_player_name", this.TablePlayerNamesAndImages[0]);
+    this.child_event_function_player2("change_player_name", this.TablePlayerNamesAndImages[2]);
+    this.child_event_function_player3("change_player_name", this.TablePlayerNamesAndImages[4]);
+    this.child_event_function_player4("change_player_name", this.TablePlayerNamesAndImages[6]);
+    this.child_event_function_player5("change_player_name", this.TablePlayerNamesAndImages[8]);
+    this.child_event_function_player6("change_player_name", this.TablePlayerNamesAndImages[10]);
+    this.child_event_function_player7("change_player_name", this.TablePlayerNamesAndImages[12]);
     //need to pull data from jason to change images
-    //this.child_event_function_player1("change_player_image", "");
-    //this.child_event_function_player2("change_player_image", "");
-    //this.child_event_function_player3("change_player_image", "");
-    //this.child_event_function_player4("change_player_image", "");
-    //this.child_event_function_player5("change_player_image", "");
-    //this.child_event_function_player6("change_player_image", "");
-    //this.child_event_function_player7("change_player_image", "");
+    this.child_event_function_player1("change_player_image", this.TablePlayerNamesAndImages[1]);
+    this.child_event_function_player2("change_player_image", this.TablePlayerNamesAndImages[3]);
+    this.child_event_function_player3("change_player_image", this.TablePlayerNamesAndImages[5]);
+    this.child_event_function_player4("change_player_image", this.TablePlayerNamesAndImages[7]);
+    this.child_event_function_player5("change_player_image", this.TablePlayerNamesAndImages[9]);
+    this.child_event_function_player6("change_player_image", this.TablePlayerNamesAndImages[11]);
+    this.child_event_function_player7("change_player_image", this.TablePlayerNamesAndImages[13]);
     this.reset_giblets();
+    this.reset_mayor();
     this.change_title_debate();
   }
 

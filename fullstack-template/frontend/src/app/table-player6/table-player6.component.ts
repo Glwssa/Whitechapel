@@ -35,18 +35,18 @@ export class TablePlayer6Component implements OnInit {
     this.gibvis5 = false;
     this.gibvis6 = false;
     this.gibvis7 = false;
-    this.plm = true;
+    this.plm = false;
     //this.reset_giblet();
     
     this.player_dead = "https://i.imgur.com/vpqSnVP.png"
     this.pldead = false;
-    this.upvote();
-    this.upvote();
-    this.upvote();
-    this.upvote();
-    this.upvote();
-    this.upvote();
-    this.upvote();
+    //this.upvote();
+    //this.upvote();
+    //this.upvote();
+    //this.upvote();
+    //this.upvote();
+    //this.upvote();
+    //this.upvote();
     
    }
 
@@ -64,6 +64,10 @@ export class TablePlayer6Component implements OnInit {
           this.change_player_name(data.parameter);
         }else if(data.function_name == "change_player_image"){
           this.change_player_image(data.parameter);
+        }else if(data.function_name == "set_mayor"){
+          this.set_mayor();
+        }else if(data.function_name == "reset_mayor"){
+          this.reset_mayor();
         }
       });
     }

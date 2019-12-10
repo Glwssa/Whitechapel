@@ -59,7 +59,7 @@ export class TvComponent implements OnInit {
     //})
 
     //leap motion gesture contoller
-    this._leapservice.gestureRecognizer().subscribe((gesture) => {
+    /*this._leapservice.gestureRecognizer().subscribe((gesture) => {
       console.log(gesture)
       if(gesture == Gestures.SWIPE_LEFT){
         console.log("Swipe left in tv compoment");
@@ -67,6 +67,7 @@ export class TvComponent implements OnInit {
         console.log("Swipe right in tv compoment");
       }
     });
+    */
 
   }
 
