@@ -35,18 +35,18 @@ export class TablePlayerComponent implements OnInit {
     this.gibvis5 = false;
     this.gibvis6 = false;
     this.gibvis7 = false;
-    this.plm = true;
+    this.plm = false;
     //this.reset_giblet();
     
     this.player_dead = "https://i.imgur.com/vpqSnVP.png"
     this.pldead = false;
-    this.upvote();
-    this.upvote();
-    this.upvote();
-    this.upvote();
-    this.upvote();
-    this.upvote();
-    this.upvote();
+    //this.upvote();
+    //this.upvote();
+    //this.upvote();
+    //this.upvote();
+    //this.upvote();
+    //this.upvote();
+    //this.upvote();
     
   }
 

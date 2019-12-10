@@ -15,6 +15,7 @@ export class ExampleController {
     public final: string[];
     public TableNamesfinal: string[];
     public calls: number;
+    public StartTable: boolean = true;
     //public setuppedplayers: number;
 
     //setup (){
@@ -38,7 +39,8 @@ export class ExampleController {
             .post('/sendMessageToClients',(req: Request, res: Response)=>{ this.sendMessageToClients(req,res)})
             .post('/getNames',(req: Request, res: Response)=>{ this.getNames(req,res)})
             .get('/getMessage', this.getMessage)
-            .get('/getTableNames', (req: Request, res: Response)=>{ this.getTableNames(req,res)});
+            .get('/getTableNames', (req: Request, res: Response)=>{ this.getTableNames(req,res)})
+            .get('/getTableStartBool', (req: Request, res: Response)=>{ this.getTableStartBool(req,res)});
 
         return router;
     }
@@ -83,26 +85,26 @@ export class ExampleController {
       }
     }
 
-    public TablefileReader() {
+    public async TableFileReader() {
       if ( this.TableNamesfinal === undefined || this.TableNamesfinal.length < 15) {
         this.TableNamesfinal = [];
       }
 
       logger.info('FS');
-      fs.readFile(path.join(__dirname, '../example/test1.txt'), 'utf8', (error, Tabledata) => {
+      fs.readFile(path.join(__dirname, '../example/PlayerName-Images.txt'), 'utf8', (error, Tabledata) => {
         this.Tabledata = Tabledata;
       });
 
       this.retDataTable = this.Tabledata.split(/\n/g);
-      const i = 0;
+      
       for (const  row of this.retDataTable) {
-        const value = row.split(' ');
+        const Tablevalue = row.split(' ');
         if ( this.TableNamesfinal === undefined || this.TableNamesfinal.length === 0) {
-            this.TableNamesfinal = value;
+            this.TableNamesfinal = Tablevalue;
             continue;
         }
-        this.TableNamesfinal.push(value[0]);
-        this.TableNamesfinal.push(value[1]);
+        this.TableNamesfinal.push(Tablevalue[0]);
+        this.TableNamesfinal.push(Tablevalue[1]);
       }
     }
 
@@ -118,9 +120,17 @@ export class ExampleController {
     //get table names fro setup
     public getTableNames(req: Request, res: Response) {
       logger.info('e getTableNames request print message');
-      this.TablefileReader();
+      this.TableFileReader();
+      //this.fileReader('1');
+
       res.json({ message: this.TableNamesfinal });
-  }
+    }
+
+    public getTableStartBool(req: Request, res: Response){
+      logger.info('e getTableStartBool request print message');
+      res.json({ message: this.StartTable });
+    }
+
 
     /**
      * Broadcasts a received message to all connected clients

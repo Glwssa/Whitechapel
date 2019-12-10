@@ -14,10 +14,13 @@ export class TableService {
     this.hostURl = environment.host;
   }
 
-  public Table_functions(PlayerName , toUserID) {
+  public getTableNames(PlayerName , toUserID) {
     //  return this.http.post(`${this.hostURl}/api/example/sendMessageToClients`,
     //  return this.http.post(`http://192.168.99.100:8080/api/example/sendMessageToClients`
     //for windows 10 pro docker app
     return this.http.get(`${this.hostURl}/api/example/getTableNames`);
-    }
+  }
+  public getTableStartBool(){
+    return this.http.get(`${this.hostURl}/api/example/getTableStartBool`);
+  }
 }
