@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-//  host: 'http://localhost:8080',
-  host: 'http://147.52.147.48:8080',
+   host: 'http://localhost:8080',
+ // host: 'http://147.52.147.48:8080',
 
   //allazw to localhost me thn ip tou laptop apo to ipconfig
 };
