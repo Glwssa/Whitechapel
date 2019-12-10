@@ -118,7 +118,7 @@ export class ExampleController {
     //get table names fro setup
     public getTableNames(req: Request, res: Response) {
       logger.info('e getTableNames request print message');
-      //this.TablefileReader();
+      this.TablefileReader();
       res.json({ message: this.TableNamesfinal });
   }
 
