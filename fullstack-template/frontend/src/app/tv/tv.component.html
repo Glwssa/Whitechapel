@@ -1,4 +1,3 @@
-<ami-fullstack-virtual></ami-fullstack-virtual>
 
 <html>
     <body class="container">
@@ -27,11 +26,12 @@
         <p class="vote">VOTING {{round}}</p>
         <input type="image" (click)="deincrement()" class="butt" src="{{arrow}}" />
         <input type="image" (click)="increment()" class="butt2" src="{{arrow}}" />
-        <input type="image" (click)="satur()" src="{{image}}" [ngStyle]="{'filter': playerState && playerState[1] ? grey : norm}" />
+        <input type="image" (click)="xfactor()" src="{{image}}" />
     </body>
         <h1>{{socketEvents | json}}</h1>
         <h1>{{x}}</h1>
 
 
 </html>
+<ami-fullstack-virtual [size] = "150"></ami-fullstack-virtual>
 

@@ -49,6 +49,7 @@ export class VirtualComponent implements OnInit {
 
   ngOnInit() {
     this._leap.cursorRecognizer().subscribe((leapPos) => {
+      console.log(leapPos)
       this.cursorStyle.left = leapPos.xPos + 'px';
       this.cursorStyle.top = leapPos.yPos + 'px';
       this.cursorStyle.display = 'block';
@@ -59,6 +60,10 @@ export class VirtualComponent implements OnInit {
     });
 
     this.updateCursorLook();
+
+    this._leap.gestureRecognizer().subscribe((gesture) => {
+      console.log(gesture)
+    });
   }
 
   /*****************************/
@@ -83,7 +88,7 @@ export class VirtualComponent implements OnInit {
   /*****************************/
 
   private checkCursorHovering() {
-
+    //this.updateCursor();
     if (this.elements2Check.length == 0)
       return;
 

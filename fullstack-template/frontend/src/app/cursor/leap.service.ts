@@ -60,6 +60,8 @@ export class LeapService {
       });
 
     });
+
+    this.initialSubscription();
   }
 
   /*****************************/
@@ -192,6 +194,13 @@ export class LeapService {
     if (dotProduct > 0)
       return Gestures.CIRCLE_CLOCKWISE;
     return Gestures.CIRCLE_COUNTERCLOCKWISE;
+  }
+
+  /*****************************/
+
+  private initialSubscription() {
+    this.posObservable.subscribe(() => { });
+    this.gesturesObservable.subscribe(() => { });
   }
 
   /*****************************/
