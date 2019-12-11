@@ -32,7 +32,7 @@ export class TableComponent implements OnInit {
   titlevis: boolean;
   player_active: number;
   msg: any;
-  TablePlayerNamesAndImages: string[];
+  TablePlayerNamesImagesCharacters: string[][];
   public socketEvents: {event: string, message: any}[];
   startSetup: boolean;
 
@@ -46,7 +46,7 @@ export class TableComponent implements OnInit {
     this.game_title_vis = true;
     this.players = false;
     this.player_active = 0;
-    this.TablePlayerNamesAndImages = [];
+    //this.TablePlayerNamesImagesCharacters = [];
     this.chang_background_night();
     //this.reset_giblets();
     //this.reset_mayor();
@@ -66,7 +66,7 @@ export class TableComponent implements OnInit {
       this.socketEvents.push(this.msg);
 
     });
-    var _this = this
+    /*var _this = this
     setInterval(function(){ 
       console.log("Interval");
       //this.getTableStartBool();
@@ -75,7 +75,7 @@ export class TableComponent implements OnInit {
     setTimeout(function(){ 
       //this.getTableStartBool();
      }, 3000);
-
+    */
     
 
 
@@ -85,13 +85,15 @@ export class TableComponent implements OnInit {
     //upvote no parameter
     //change_player_name with parameter
     //change_player_image with parameter
+    //set_mayor
+    //reset_mayor
   }
 
 
   getDataforSetup(){
     this.tableService.getTableNames(this.msg, "").subscribe((data)=>{
       //console.log(data["message"]);
-      this.TablePlayerNamesAndImages = data["message"];
+      this.TablePlayerNamesImagesCharacters = data["message"];
       this.setup_table();
       //this.set_start_table();
     });
@@ -273,21 +275,21 @@ export class TableComponent implements OnInit {
     this.players = true;
     this.change_background_day();
     //needs to put data from jason to change names
-    this.child_event_function_player1("change_player_name", this.TablePlayerNamesAndImages[0]);
-    this.child_event_function_player2("change_player_name", this.TablePlayerNamesAndImages[2]);
-    this.child_event_function_player3("change_player_name", this.TablePlayerNamesAndImages[4]);
-    this.child_event_function_player4("change_player_name", this.TablePlayerNamesAndImages[6]);
-    this.child_event_function_player5("change_player_name", this.TablePlayerNamesAndImages[8]);
-    this.child_event_function_player6("change_player_name", this.TablePlayerNamesAndImages[10]);
-    this.child_event_function_player7("change_player_name", this.TablePlayerNamesAndImages[12]);
+    this.child_event_function_player1("change_player_name", this.TablePlayerNamesImagesCharacters[0][0]);
+    this.child_event_function_player2("change_player_name", this.TablePlayerNamesImagesCharacters[1][0]);
+    this.child_event_function_player3("change_player_name", this.TablePlayerNamesImagesCharacters[2][0]);
+    this.child_event_function_player4("change_player_name", this.TablePlayerNamesImagesCharacters[3][0]);
+    this.child_event_function_player5("change_player_name", this.TablePlayerNamesImagesCharacters[4][0]);
+    this.child_event_function_player6("change_player_name", this.TablePlayerNamesImagesCharacters[5][0]);
+    this.child_event_function_player7("change_player_name", this.TablePlayerNamesImagesCharacters[6][0]);
     //need to pull data from jason to change images
-    this.child_event_function_player1("change_player_image", this.TablePlayerNamesAndImages[1]);
-    this.child_event_function_player2("change_player_image", this.TablePlayerNamesAndImages[3]);
-    this.child_event_function_player3("change_player_image", this.TablePlayerNamesAndImages[5]);
-    this.child_event_function_player4("change_player_image", this.TablePlayerNamesAndImages[7]);
-    this.child_event_function_player5("change_player_image", this.TablePlayerNamesAndImages[9]);
-    this.child_event_function_player6("change_player_image", this.TablePlayerNamesAndImages[11]);
-    this.child_event_function_player7("change_player_image", this.TablePlayerNamesAndImages[13]);
+    this.child_event_function_player1("change_player_image", this.TablePlayerNamesImagesCharacters[0][1]);
+    this.child_event_function_player2("change_player_image", this.TablePlayerNamesImagesCharacters[1][1]);
+    this.child_event_function_player3("change_player_image", this.TablePlayerNamesImagesCharacters[2][1]);
+    this.child_event_function_player4("change_player_image", this.TablePlayerNamesImagesCharacters[3][1]);
+    this.child_event_function_player5("change_player_image", this.TablePlayerNamesImagesCharacters[4][1]);
+    this.child_event_function_player6("change_player_image", this.TablePlayerNamesImagesCharacters[5][1]);
+    this.child_event_function_player7("change_player_image", this.TablePlayerNamesImagesCharacters[6][1]);
     this.reset_giblets();
     this.reset_mayor();
     this.change_title_debate();
