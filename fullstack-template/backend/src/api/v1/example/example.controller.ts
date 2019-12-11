@@ -32,7 +32,7 @@ export class ExampleController {
     public final: string[];
     public TableNamesImagesCharactersfinal: string[][];
     public calls: number;
-    public StartTable: boolean = false;
+    public StartTable: boolean = true;
   NamesArray: string[];
   ReadyPlayersCounter: number;
   NamesRoles:string [];
