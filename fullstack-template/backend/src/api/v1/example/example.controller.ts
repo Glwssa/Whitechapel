@@ -16,7 +16,10 @@ export class ExampleController {
     public TableNamesfinal: string[];
     public calls: number;
     public StartTable: boolean = true;
-    //public setuppedplayers: number;
+    public NamesArray: string[];
+    public ReadyPlayersCounter: number;
+    public NamesRoles:string [];
+    public Roles:string[];
 
     //setup (){
      // kane this.setup. bale name bale image
@@ -37,7 +40,7 @@ export class ExampleController {
 
         router
             .post('/sendMessageToClients',(req: Request, res: Response)=>{ this.sendMessageToClients(req,res)})
-            .post('/getNames',(req: Request, res: Response)=>{ this.getNames(req,res)})
+            .post('/setNames',(req: Request, res: Response)=>{ this.setNames(req,res)})
             .get('/getMessage', this.getMessage)
             .get('/getTableNames', (req: Request, res: Response)=>{ this.getTableNames(req,res)})
             .get('/getTableStartBool', (req: Request, res: Response)=>{ this.getTableStartBool(req,res)});
@@ -45,21 +48,34 @@ export class ExampleController {
         return router;
     }
 
-    public getNames(req: Request, res: Response) {
+    public setNames(req: Request, res: Response) {
       const message: any = req.body.message;
       const event: any = req.body.event;
 
+      logger.info(message.scream);
+      logger.info(event);
+
       const socketService = DIContainer.get(SocketsService);
       socketService.broadcast(event, message);
+      this.writeNames(message);
 
       res.json({ message: 'lala'});
 
     }
 
-    public writeNames(name: String) {
-      fs.writeFile('/example/PlayerNames.txt', name+' 1\n', function (err: any) {
-        if (err) throw err;
-      }); 
+    public writeNames(name: string) {
+      logger.info(name);
+      this.NamesArray.push(name);
+      this.ReadyPlayersCounter++;
+    }
+
+    public getRandomInt(max: number) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    public AssignRoles(name: string){
+      const randomNum=this.getRandomInt(6);
+      this.NamesRoles.push(this.Roles[randomNum]);
     }
 
     public async fileReader(round: string) {

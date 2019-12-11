@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 
-export class GetNamesService {
+export class SetNamesService {
 
   private hostUrl: string;
 
@@ -15,16 +15,16 @@ export class GetNamesService {
   }
 
 
-  public getNames(msg , toUserID) {
-    //  return this.http.post(`${this.hostURl}/api/example/getNames`,
-    //  return this.http.post(`http://192.168.99.100:8080/api/example/getNames`
-    return this.http.post(`http://192.168.99.100:8080/api/example/getNames`,
+  public setNames(msg , toUserID) {
+    //  return this.http.post(`${this.hostURl}/api/example/setNames`,
+    //  return this.http.post(`http://192.168.99.100:8080/api/example/setNames`
+    return this.http.post(`http://192.168.99.100:8080/api/example/setNames`,
     {
       message: {
         scream: msg,
         userID: toUserID
       }
-      , event: 'getNames'
+      , event: 'setNames'
             }
         );
     }

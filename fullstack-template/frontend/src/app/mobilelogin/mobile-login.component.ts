@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketsService } from 'src/app/global/services';
-import { GetNamesService } from './../get-names.service';
+import { SetNamesService } from './../get-names.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,7 +20,7 @@ export class MobileLoginComponent implements OnInit {
   response: any;
 
 
-  constructor(private router: Router, private GetNamesService: GetNamesService, private socketService: SocketsService) { 
+  constructor(private router: Router, private SetNamesService: SetNamesService, private socketService: SocketsService) { 
 
     this.playerAvatar = "https://i.imgur.com/7Vown38.jpg";
     this.playerName = "Player Unknown";
@@ -48,7 +48,7 @@ export class MobileLoginComponent implements OnInit {
 
   setNames() {
     
-    this.GetNamesService.getNames(this.playerName, this.userIDToTreat).subscribe((data)=>{
+    this.SetNamesService.setNames(this.playerName, this.userIDToTreat).subscribe((data)=>{
       console.log(data);
       localStorage.setItem("user", JSON.stringify(data))
     });
@@ -58,12 +58,14 @@ export class MobileLoginComponent implements OnInit {
 
 
   localName(){
-    this.GetNamesService.getNames(this.playerName, this.userIDToTreat).subscribe((data)=>{
+
+    //this.playerName = document.getElementById('playerInputBox').value;
+    this.playerName = (<HTMLInputElement>document.getElementById('playerInputBox')).value;
+    
+    this.SetNamesService.setNames(this.playerName, this.userIDToTreat).subscribe((data)=>{
       console.log(data);
       localStorage.setItem("user", JSON.stringify(data))
     });
-    //this.playerName = document.getElementById('playerInputBox').value;
-    this.playerName = (<HTMLInputElement>document.getElementById('playerInputBox')).value;
     
     console.log("Welcome: "+this.playerName);
     this.router.navigate(['mobileMain'])

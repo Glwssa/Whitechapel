@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GetNamesService } from './get-names.service';
+import { SetNamesService } from './get-names.service';
 
-describe('GetNamesService', () => {
+describe('SetNamesService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: GetNamesService = TestBed.get(GetNamesService);
+    const service: SetNamesService = TestBed.get(SetNamesService);
     expect(service).toBeTruthy();
   });
 });
