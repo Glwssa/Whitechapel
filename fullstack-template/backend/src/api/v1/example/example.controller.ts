@@ -33,19 +33,16 @@ export class ExampleController {
     public TableNamesImagesCharactersfinal: string[][];
     public calls: number;
     public StartTable: boolean = true;
-    public NamesArray: string[];
-    public ReadyPlayersCounter: number;
-    public NamesRoles:string [];
-    public Roles:string[];
+  NamesArray: string[];
+  ReadyPlayersCounter: number;
+  NamesRoles:string [];
+  Roles:['https://i.imgur.com/9LzwD2L.png','https://i.imgur.com/Hl9HvHp.png','https://i.imgur.com/VZVnvpp.png','https://i.imgur.com/W3WK2IQ.png','https://i.imgur.com/vth8OLN.png','https://i.imgur.com/cIwiHJe.png','https://i.imgur.com/yb3YgnB.png'];
+  exist=false;
+  randomNum: number;
+  usednumber: number[];
+  NameAvatar: string[];
+  Avatar: ['https://i.imgur.com/yOxs9eW.png', 'https://i.imgur.com/6f6DPhk.png', 'https://i.imgur.com/lJ3ggBw.png', 'https://i.imgur.com/zaleAlv.png', 'https://i.imgur.com/dkszoEI.png', ' https://i.imgur.com/j5Haq2A.png', 'https://i.imgur.com/g2vt5Hk.png'];
 
-    //setup (){
-     // kane this.setup. bale name bale image
-      //setupppedplayers++;
-      //if(settuppedplayers==7){
-      //  res.json({ message: 'allready' });
-     // }
-    //}
-   // stant: any;
 
     /**
      * Apply all routes for example
@@ -84,6 +81,20 @@ export class ExampleController {
       logger.info(name);
       this.NamesArray.push(name);
       this.ReadyPlayersCounter++;
+    }
+
+    public AssignNames(){
+      while(!this.exist){
+        this.randomNum=this.getRandomInt(6);
+        this.usednumber.forEach((element: number) => {
+          if(this.randomNum==element){
+            this.exist=true;
+          }
+        });
+      }
+      this.NamesRoles.push(this.Roles[this.randomNum]);
+      this.NameAvatar.push(this.Avatar[this.randomNum]);
+      this.exist=false;
     }
 
     public getRandomInt(max: number) {
@@ -147,7 +158,17 @@ export class ExampleController {
     public getMessage(req: Request, res: Response) {
         logger.info('e getMessage request print message');
 
-        res.json({ message: 'hello' });
+        res.json({ message: [
+          
+            this.NamesArray
+          ,
+            this.NamesRoles
+          ,
+            this.NameAvatar
+        ]
+          
+          
+      });
     }
 
     //get table names fro setup
@@ -156,7 +177,15 @@ export class ExampleController {
       //this.TableFileReader();
       //this.fileReader('1');
 
-      res.json({ message: this.TableNamesImagesCharactersfinal });
+      res.json({ message: [
+          
+          this.NamesArray
+        ,
+          this.NamesRoles
+        ,
+          this.NameAvatar
+        ]
+       });
     }
 
     public getTableStartBool(req: Request, res: Response){
