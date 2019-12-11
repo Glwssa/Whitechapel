@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { LeapService, Gestures } from 'src/app/leap.service';
 import { SmartSpeakerService } from '../smart-speaker.service';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 
 @Component({
@@ -28,7 +29,9 @@ export class TvComponent implements OnInit {
   public playerStateURL;
   response: any;
   x: any;
-  playerState: string[];
+  playerState: string[]=[];
+  playerName: string[]=[];
+  playerAvatar: string[]=[];
 
   constructor(private tvService: TVService, private socketService: SocketsService, private _leapservice: LeapService, private _smartSpeaker: SmartSpeakerService, private _smartSpeaker2: SmartSpeakerService) {
     this.socketEvents = [];
@@ -46,6 +49,7 @@ export class TvComponent implements OnInit {
 
 
   ngOnInit() {
+    this.playerName=[];
     this.sendRound();
     this.myUserID = 'me';
     this.userIDToTreat = 'Stratos';
@@ -112,8 +116,20 @@ export class TvComponent implements OnInit {
   public sendRound() {
     this.msg = this.round.toString();
     this.tvService.sendMessageToClients(this.msg, this.userIDToTreat).subscribe((data)=>{
-      this.playerState = data["message"];
+    //  this.playerState = data[2];
+    console.log(data)
+      this.playerName = data["message"][0];
+      this.playerAvatar = data["message"][1];
+
+
+
+      console.log(this.playerAvatar);
+      console.log(this.playerName);
+
+
     });
+  //  console.log(this.playerState);
+
   }
 
   public xfactor(){

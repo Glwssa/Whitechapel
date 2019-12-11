@@ -24,26 +24,28 @@ export class ExampleController {
     // https://i.imgur.com/cIwiHJe.png -Killer
     // https://i.imgur.com/yb3YgnB.png -Doctor
 
-    public names = ['Stratos', 'Panos'];
     public data: any;
     public Tabledata: any;
     public retData: string[];
     public retDataTable: string[];
-    public final: string[];
+    public final: string[] = [];
     public TableNamesImagesCharactersfinal: string[][];
     public calls: number;
     public StartTable: boolean = false;
-  NamesArray: string[];
-  ReadyPlayersCounter: number;
-  NamesRoles:string [];
-  Roles:['https://i.imgur.com/9LzwD2L.png','https://i.imgur.com/Hl9HvHp.png','https://i.imgur.com/VZVnvpp.png','https://i.imgur.com/W3WK2IQ.png','https://i.imgur.com/vth8OLN.png','https://i.imgur.com/cIwiHJe.png','https://i.imgur.com/yb3YgnB.png'];
+  NamesArray: string[] = [];
+  ReadyPlayersCounter: number = 0;
+  NamesRoles:string [] = [];
+  Roles=['https://i.imgur.com/9LzwD2L.png','https://i.imgur.com/Hl9HvHp.png','https://i.imgur.com/VZVnvpp.png','https://i.imgur.com/W3WK2IQ.png','https://i.imgur.com/vth8OLN.png','https://i.imgur.com/cIwiHJe.png','https://i.imgur.com/yb3YgnB.png'];
   exist=false;
   randomNum: number;
-  usednumber: number[];
-  NameAvatar: string[];
-  Avatar: ['https://i.imgur.com/yOxs9eW.png', 'https://i.imgur.com/6f6DPhk.png', 'https://i.imgur.com/lJ3ggBw.png', 'https://i.imgur.com/zaleAlv.png', 'https://i.imgur.com/dkszoEI.png', ' https://i.imgur.com/j5Haq2A.png', 'https://i.imgur.com/g2vt5Hk.png'];
-  status: number[];
-
+  usednumber: number[] = [];
+  NameAvatar: string[] = [];
+  Avatar= ['https://i.imgur.com/yOxs9eW.png', 'https://i.imgur.com/6f6DPhk.png', 'https://i.imgur.com/lJ3ggBw.png', 'https://i.imgur.com/zaleAlv.png', 'https://i.imgur.com/dkszoEI.png', ' https://i.imgur.com/j5Haq2A.png', 'https://i.imgur.com/g2vt5Hk.png'];
+  status: number[]  = [];
+  currentRound: number;
+  i: number;
+  j: number;
+  end: number = 0;
     /**
      * Apply all routes for example
      *
@@ -71,7 +73,7 @@ export class ExampleController {
 
       const socketService = DIContainer.get(SocketsService);
       socketService.broadcast(event, message);
-      this.writeNames(message);
+      this.writeNames(message.scream);
 
       res.json({ message: 'lala'});
 
@@ -79,9 +81,11 @@ export class ExampleController {
 
     public writeNames(name: string) {
       logger.info(name);
-      this.NamesArray.push(name);
+      this.NamesArray.push(name);      
       this.status.push(1);
+
       this.ReadyPlayersCounter++;
+
       this.AssignNames();
       if(this.ReadyPlayersCounter==6){
         this.StartTable=true;
@@ -89,24 +93,33 @@ export class ExampleController {
     }
 
     public AssignNames(){
-      while(!this.exist){
-        this.randomNum=this.getRandomInt(6);
-        this.usednumber.forEach((element: number) => {
-          if(this.randomNum==element){
-            this.exist=true;
-          }
-        });
+
+      this.randomNum=this.getRandomInt(7);
+      while(this.usednumber.indexOf(this.randomNum) !== -1){
+        this.randomNum=this.getRandomInt(7);
       }
+      this.usednumber.push(this.randomNum); 
+
       this.NamesRoles.push(this.Roles[this.randomNum]);
+
+
       this.NameAvatar.push(this.Avatar[this.randomNum]);
+
       this.exist=false;
+
+      logger.info(this.NameAvatar+' 1');
+      logger.info(this.NamesArray+' 2');
+      logger.info(this.NamesRoles+' 3');
+
     }
 
     public getRandomInt(max: number) {
       return Math.floor(Math.random() * Math.floor(max));
     }
 
+    
 
+/*
     public async fileReader(round: string) {
       if ( this.final === undefined || this.final.length < 15) {
         this.final = [];
@@ -194,24 +207,40 @@ export class ExampleController {
       res.json({ message: this.StartTable });
     }
 
-
+    public history(){
+      this.i = (this.currentRound - 1) * 7;
+      this.j=0;
+      for (let index = this.i; index <= index+7; index++){
+         this.final[this.j] = JSON.stringify(this.status[index]);
+         this.j++;
+      }
+    }
     /**
      * Broadcasts a received message to all connected clients
      */
-    public async sendMessageToClients(req: Request, res: Response) {
+    public sendMessageToClients(req: Request, res: Response) {
         const message: any = req.body.message;
         const event: any = req.body.event;
         logger.info(message.scream);
-
         logger.info(message.userID);
+
+        this.currentRound=message.scream;
 
         // Sending a broadcast message to all clients
         const socketService = DIContainer.get(SocketsService);
         socketService.broadcast(event, message);
 
-        await this.fileReader(message.scream);
+       // await this.fileReader(message.scream);
+       logger.info('tv');
+     //   this.history();
+        logger.info(this.NameAvatar);
+        logger.info(this.NamesArray);
 
-        res.json({ message: this.final});
+       // logger.info(this.final);
+        logger.info(this.NamesRoles );
+
+      
+        res.json({ message: [this.NamesArray,this.NameAvatar]});
 
     }
 
