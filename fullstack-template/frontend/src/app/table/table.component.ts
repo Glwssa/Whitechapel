@@ -35,7 +35,8 @@ export class TableComponent implements OnInit {
   TablePlayerNamesImagesCharacters: string[][];
   public socketEvents: {event: string, message: any}[];
   startSetup: boolean;
-
+  interval;
+  
   
   constructor(private tableService: TableService, private socketService: SocketsService, private eventEmitterService: EventEmitterService ) { 
     this.socketEvents = [];
@@ -66,16 +67,15 @@ export class TableComponent implements OnInit {
       this.socketEvents.push(this.msg);
 
     });
-    /*var _this = this
-    setInterval(function(){ 
-      console.log("Interval");
-      //this.getTableStartBool();
-
-    }, 3000);
-    setTimeout(function(){ 
-      //this.getTableStartBool();
-     }, 3000);
-    */
+    var _this = this; 
+    this.interval = setInterval(function(){
+      _this.getTableStartBool()
+    },1000);
+    
+    /*setTimeout(function(){ 
+      _this.getTableStartBool();
+     }, 3000);*/
+    
     
 
 
@@ -88,6 +88,8 @@ export class TableComponent implements OnInit {
     //set_mayor
     //reset_mayor
   }
+  
+  
 
 
   getDataforSetup(){
@@ -100,9 +102,15 @@ export class TableComponent implements OnInit {
   }
 
   getTableStartBool(){
+    
     this.tableService.getTableStartBool().subscribe((data)=>{
-      //this.startSetup = data.message;
+      console.log("Interval");
+      this.startSetup = data["message"];
       console.log(data);
+      if(this.startSetup == true){
+        //this.getDataforSetup();
+        clearInterval(this.interval);
+      }
     });
   }
 
@@ -181,21 +189,21 @@ export class TableComponent implements OnInit {
     this.change_title_ability();
   }
 
-  set_player_mayor(){
+  set_player_mayor(PlayerName: string){
     //need to pul player number from jason
-    if(this.player_active == 1){
+    if(PlayerName == this.TablePlayerNamesImagesCharacters[0][0]){
       this.child_event_function_player1("set_mayor","");
-    }else if(this.player_active == 2){
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[1][0]){
       this.child_event_function_player2("set_mayor","");
-    }else if(this.player_active == 3){
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[2][0]){
       this.child_event_function_player3("set_mayor","");
-    }else if(this.player_active == 4){
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[3][0]){
       this.child_event_function_player4("set_mayor","");
-    }else if(this.player_active == 5){
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[4][0]){
       this.child_event_function_player5("set_mayor","");
-    }else if(this.player_active == 6){
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[5][0]){
       this.child_event_function_player6("set_mayor","");
-    }else if(this.player_active == 7){
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[6][0]){
       this.child_event_function_player7("set_mayor","");
     }
   }
@@ -210,61 +218,61 @@ export class TableComponent implements OnInit {
     this.child_event_function_player7("reset_mayor","");
   }
 
-  set_player_dead(){
+  set_player_dead(PlayerName: string){
     //need to pul player number from jason
-    if(this.player_active == 1){
+    if(PlayerName == this.TablePlayerNamesImagesCharacters[0][0]){
       this.child_event_function_player1("reset_giblet", "");
       this.child_event_function_player1("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player1("change_player_image", "");
-    }else if(this.player_active == 2){
+      this.child_event_function_player1("change_player_image", this.TablePlayerNamesImagesCharacters[0][2]);
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[1][0]){
       this.child_event_function_player2("reset_giblet", "");
       this.child_event_function_player2("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player2("change_player_image", "");
-    }else if(this.player_active == 3){
+      this.child_event_function_player2("change_player_image", this.TablePlayerNamesImagesCharacters[1][2]);
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[2][0]){
       this.child_event_function_player3("reset_giblet", "");
       this.child_event_function_player3("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player3("change_player_image", "");
-    }else if(this.player_active == 4){
+      this.child_event_function_player3("change_player_image", this.TablePlayerNamesImagesCharacters[2][2]);
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[3][0]){
       this.child_event_function_player4("reset_giblet", "");
       this.child_event_function_player4("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player4("change_player_image", "");
-    }else if(this.player_active == 5){
+      this.child_event_function_player4("change_player_image", this.TablePlayerNamesImagesCharacters[3][2]);
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[4][0]){
       this.child_event_function_player5("reset_giblet", "");
       this.child_event_function_player5("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player5("change_player_image", "");
-    }else if(this.player_active == 6){
+      this.child_event_function_player5("change_player_image", this.TablePlayerNamesImagesCharacters[4][2]);
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[5][0]){
       this.child_event_function_player6("reset_giblet", "");
       this.child_event_function_player6("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player6("change_player_image", "");
-    }else if(this.player_active == 7){
+      this.child_event_function_player6("change_player_image", this.TablePlayerNamesImagesCharacters[5][2]);
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[6][0]){
       this.child_event_function_player7("reset_giblet", "");
       this.child_event_function_player7("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player7("change_player_image", "");
+      this.child_event_function_player7("change_player_image", this.TablePlayerNamesImagesCharacters[6][2]);
     }
   }
 
-  upvote_player(){
+  upvote_player(PlayerName: string){
     //need to pull player number from jason
-    if(this.player_active == 1){
+    if(PlayerName == this.TablePlayerNamesImagesCharacters[0][0]){
       this.child_event_function_player1("upvote", "");
-    }else if(this.player_active == 2){
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[1][0]){
       this.child_event_function_player2("upvote", "");
-    }else if(this.player_active == 3){
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[2][0]){
       this.child_event_function_player3("upvote", "");
-    }else if(this.player_active == 4){
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[3][0]){
       this.child_event_function_player4("upvote", "");
-    }else if(this.player_active == 5){
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[4][0]){
       this.child_event_function_player5("upvote", "");
-    }else if(this.player_active == 6){
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[5][0]){
       this.child_event_function_player6("upvote", "");
-    }else if(this.player_active == 7){
+    }else if(PlayerName == this.TablePlayerNamesImagesCharacters[6][0]){
       this.child_event_function_player7("upvote", "");
     }
   }
