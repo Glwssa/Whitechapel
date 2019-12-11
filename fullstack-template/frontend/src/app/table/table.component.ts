@@ -33,9 +33,13 @@ export class TableComponent implements OnInit {
   player_active: number;
   msg: any;
   TablePlayerNamesImagesCharacters: string[][];
+  TableNames: string[];
+  TableImages: string[];
+  TableCharacters: string[];
   public socketEvents: {event: string, message: any}[];
   startSetup: boolean;
-
+  interval;
+  
   
   constructor(private tableService: TableService, private socketService: SocketsService, private eventEmitterService: EventEmitterService ) { 
     this.socketEvents = [];
@@ -66,16 +70,15 @@ export class TableComponent implements OnInit {
       this.socketEvents.push(this.msg);
 
     });
-    /*var _this = this
-    setInterval(function(){ 
-      console.log("Interval");
-      //this.getTableStartBool();
-
-    }, 3000);
-    setTimeout(function(){ 
-      //this.getTableStartBool();
-     }, 3000);
-    */
+    var _this = this; 
+    this.interval = setInterval(function(){
+      _this.getTableStartBool()
+    },2000);
+    
+    /*setTimeout(function(){ 
+      _this.getTableStartBool();
+     }, 3000);*/
+    
     
 
 
@@ -88,21 +91,32 @@ export class TableComponent implements OnInit {
     //set_mayor
     //reset_mayor
   }
+  
+  
 
 
   getDataforSetup(){
     this.tableService.getTableNames(this.msg, "").subscribe((data)=>{
       //console.log(data["message"]);
-      this.TablePlayerNamesImagesCharacters = data["message"];
-      this.setup_table();
+      this.TableNames = data[0];
+      this.TableImages = data[1];
+      this.TableCharacters = data[2];
+      console.log(data);
+      //this.setup_table();
       //this.set_start_table();
     });
   }
 
   getTableStartBool(){
+    
     this.tableService.getTableStartBool().subscribe((data)=>{
-      //this.startSetup = data.message;
+      console.log("Interval");
+      this.startSetup = data["message"];
       console.log(data);
+      if(this.startSetup == true){
+        this.getDataforSetup();
+        clearInterval(this.interval);
+      }
     });
   }
 
@@ -181,21 +195,21 @@ export class TableComponent implements OnInit {
     this.change_title_ability();
   }
 
-  set_player_mayor(){
+  set_player_mayor(PlayerName: string){
     //need to pul player number from jason
-    if(this.player_active == 1){
+    if(PlayerName == this.TableNames[0]){
       this.child_event_function_player1("set_mayor","");
-    }else if(this.player_active == 2){
+    }else if(PlayerName == this.TableNames[1]){
       this.child_event_function_player2("set_mayor","");
-    }else if(this.player_active == 3){
+    }else if(PlayerName == this.TableNames[2]){
       this.child_event_function_player3("set_mayor","");
-    }else if(this.player_active == 4){
+    }else if(PlayerName == this.TableNames[3]){
       this.child_event_function_player4("set_mayor","");
-    }else if(this.player_active == 5){
+    }else if(PlayerName == this.TableNames[4]){
       this.child_event_function_player5("set_mayor","");
-    }else if(this.player_active == 6){
+    }else if(PlayerName == this.TableNames[5]){
       this.child_event_function_player6("set_mayor","");
-    }else if(this.player_active == 7){
+    }else if(PlayerName == this.TableNames[6]){
       this.child_event_function_player7("set_mayor","");
     }
   }
@@ -210,61 +224,61 @@ export class TableComponent implements OnInit {
     this.child_event_function_player7("reset_mayor","");
   }
 
-  set_player_dead(){
+  set_player_dead(PlayerName: string){
     //need to pul player number from jason
-    if(this.player_active == 1){
+    if(PlayerName == this.TableNames[0]){
       this.child_event_function_player1("reset_giblet", "");
       this.child_event_function_player1("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player1("change_player_image", "");
-    }else if(this.player_active == 2){
+      this.child_event_function_player1("change_player_image", this.TableCharacters[0]);
+    }else if(PlayerName == this.TableNames[1]){
       this.child_event_function_player2("reset_giblet", "");
       this.child_event_function_player2("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player2("change_player_image", "");
-    }else if(this.player_active == 3){
+      this.child_event_function_player2("change_player_image", this.TableCharacters[1]);
+    }else if(PlayerName == this.TableNames[2]){
       this.child_event_function_player3("reset_giblet", "");
       this.child_event_function_player3("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player3("change_player_image", "");
-    }else if(this.player_active == 4){
+      this.child_event_function_player3("change_player_image", this.TableCharacters[2]);
+    }else if(PlayerName == this.TableNames[3]){
       this.child_event_function_player4("reset_giblet", "");
       this.child_event_function_player4("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player4("change_player_image", "");
-    }else if(this.player_active == 5){
+      this.child_event_function_player4("change_player_image", this.TableCharacters[3]);
+    }else if(PlayerName == this.TableNames[4]){
       this.child_event_function_player5("reset_giblet", "");
       this.child_event_function_player5("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player5("change_player_image", "");
-    }else if(this.player_active == 6){
+      this.child_event_function_player5("change_player_image", this.TableCharacters[4]);
+    }else if(PlayerName == this.TableNames[5]){
       this.child_event_function_player6("reset_giblet", "");
       this.child_event_function_player6("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player6("change_player_image", "");
-    }else if(this.player_active == 7){
+      this.child_event_function_player6("change_player_image", this.TableCharacters[5]);
+    }else if(PlayerName == this.TableNames[6]){
       this.child_event_function_player7("reset_giblet", "");
       this.child_event_function_player7("set_dead", "");
       //needs to pull player character image from jason
-      //this.child_event_function_player7("change_player_image", "");
+      this.child_event_function_player7("change_player_image", this.TableCharacters[6]);
     }
   }
 
-  upvote_player(){
+  upvote_player(PlayerName: string){
     //need to pull player number from jason
-    if(this.player_active == 1){
+    if(PlayerName == this.TableNames[0]){
       this.child_event_function_player1("upvote", "");
-    }else if(this.player_active == 2){
+    }else if(PlayerName == this.TableNames[1]){
       this.child_event_function_player2("upvote", "");
-    }else if(this.player_active == 3){
+    }else if(PlayerName == this.TableNames[2]){
       this.child_event_function_player3("upvote", "");
-    }else if(this.player_active == 4){
+    }else if(PlayerName == this.TableNames[3]){
       this.child_event_function_player4("upvote", "");
-    }else if(this.player_active == 5){
+    }else if(PlayerName == this.TableNames[4]){
       this.child_event_function_player5("upvote", "");
-    }else if(this.player_active == 6){
+    }else if(PlayerName == this.TableNames[5]){
       this.child_event_function_player6("upvote", "");
-    }else if(this.player_active == 7){
+    }else if(PlayerName == this.TableNames[6]){
       this.child_event_function_player7("upvote", "");
     }
   }
@@ -275,21 +289,21 @@ export class TableComponent implements OnInit {
     this.players = true;
     this.change_background_day();
     //needs to put data from jason to change names
-    this.child_event_function_player1("change_player_name", this.TablePlayerNamesImagesCharacters[0][0]);
-    this.child_event_function_player2("change_player_name", this.TablePlayerNamesImagesCharacters[1][0]);
-    this.child_event_function_player3("change_player_name", this.TablePlayerNamesImagesCharacters[2][0]);
-    this.child_event_function_player4("change_player_name", this.TablePlayerNamesImagesCharacters[3][0]);
-    this.child_event_function_player5("change_player_name", this.TablePlayerNamesImagesCharacters[4][0]);
-    this.child_event_function_player6("change_player_name", this.TablePlayerNamesImagesCharacters[5][0]);
-    this.child_event_function_player7("change_player_name", this.TablePlayerNamesImagesCharacters[6][0]);
+    this.child_event_function_player1("change_player_name", this.TableNames[0]);
+    this.child_event_function_player2("change_player_name", this.TableNames[1]);
+    this.child_event_function_player3("change_player_name", this.TableNames[2]);
+    this.child_event_function_player4("change_player_name", this.TableNames[3]);
+    this.child_event_function_player5("change_player_name", this.TableNames[4]);
+    this.child_event_function_player6("change_player_name", this.TableNames[5]);
+    this.child_event_function_player7("change_player_name", this.TableNames[6]);
     //need to pull data from jason to change images
-    this.child_event_function_player1("change_player_image", this.TablePlayerNamesImagesCharacters[0][1]);
-    this.child_event_function_player2("change_player_image", this.TablePlayerNamesImagesCharacters[1][1]);
-    this.child_event_function_player3("change_player_image", this.TablePlayerNamesImagesCharacters[2][1]);
-    this.child_event_function_player4("change_player_image", this.TablePlayerNamesImagesCharacters[3][1]);
-    this.child_event_function_player5("change_player_image", this.TablePlayerNamesImagesCharacters[4][1]);
-    this.child_event_function_player6("change_player_image", this.TablePlayerNamesImagesCharacters[5][1]);
-    this.child_event_function_player7("change_player_image", this.TablePlayerNamesImagesCharacters[6][1]);
+    this.child_event_function_player1("change_player_image", this.TableImages[0]);
+    this.child_event_function_player2("change_player_image", this.TableImages[1]);
+    this.child_event_function_player3("change_player_image", this.TableImages[2]);
+    this.child_event_function_player4("change_player_image", this.TableImages[3]);
+    this.child_event_function_player5("change_player_image", this.TableImages[4]);
+    this.child_event_function_player6("change_player_image", this.TableImages[5]);
+    this.child_event_function_player7("change_player_image", this.TableImages[6]);
     this.reset_giblets();
     this.reset_mayor();
     this.change_title_debate();

@@ -10,16 +10,17 @@
   .game_title_1{
     position: absolute;
     left: 32.86%;
-    right: 32.86%;
+    //right: 32.86%;
     top: 40.56%;
-    bottom: 47.78%;
+    //bottom: 47.78%;
     z-index: 1;
 
     font-family: SimSun;
     font-style: normal;
     font-weight: normal;
-    font-size: 118.44px;
-    line-height: 135px;
+    font-size: 90px;
+    line-height: 160px;
+    
     text-align: center;
 
     color: #FFFFFF;
@@ -28,9 +29,9 @@
   .game_title_2{
     position: absolute;
     left: 32.86%;
-    right: 32.81%;
+    //right: 32.81%;
     top: 52.22%;
-    bottom: 44.54%;
+    //bottom: 44.54%;
     z-index: 1;
     
     font-family: Roboto Condensed;
