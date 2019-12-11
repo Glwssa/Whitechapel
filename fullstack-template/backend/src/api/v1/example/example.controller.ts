@@ -7,13 +7,30 @@ import * as path from 'path';
 
 export class ExampleController {
 
+    //Avatars:
+    // https://i.imgur.com/yOxs9eW.png -monica
+    // https://i.imgur.com/6f6DPhk.png -Bin
+    // https://i.imgur.com/lJ3ggBw.png -Cirus
+    // https://i.imgur.com/zaleAlv.png -Ed
+    // https://i.imgur.com/dkszoEI.png -Seth
+    // https://i.imgur.com/j5Haq2A.png -Barack
+    // https://i.imgur.com/g2vt5Hk.png -Ariana
+    //Characters:
+    // https://i.imgur.com/9LzwD2L.png -Cotsable
+    // https://i.imgur.com/Hl9HvHp.png -Jocker
+    // https://i.imgur.com/VZVnvpp.png -Vigilante
+    // https://i.imgur.com/W3WK2IQ.png -Mayor
+    // https://i.imgur.com/vth8OLN.png -Medium
+    // https://i.imgur.com/cIwiHJe.png -Killer
+    // https://i.imgur.com/yb3YgnB.png -Doctor
+
     public names = ['Stratos', 'Panos'];
     public data: any;
     public Tabledata: any;
     public retData: string[];
     public retDataTable: string[];
     public final: string[];
-    public TableNamesfinal: string[];
+    public TableNamesImagesCharactersfinal: string[][];
     public calls: number;
     public StartTable: boolean = true;
     //public setuppedplayers: number;
@@ -85,7 +102,7 @@ export class ExampleController {
       }
     }
 
-    public async TableFileReader() {
+    /*public async TableFileReader() {
       if ( this.TableNamesfinal === undefined || this.TableNamesfinal.length < 15) {
         this.TableNamesfinal = [];
       }
@@ -107,7 +124,7 @@ export class ExampleController {
         this.TableNamesfinal.push(Tablevalue[1]);
       }
     }
-
+    */
     /**
      * Sents a message back as a response
      */
@@ -120,10 +137,10 @@ export class ExampleController {
     //get table names fro setup
     public getTableNames(req: Request, res: Response) {
       logger.info('e getTableNames request print message');
-      this.TableFileReader();
+      //this.TableFileReader();
       //this.fileReader('1');
 
-      res.json({ message: this.TableNamesfinal });
+      res.json({ message: this.TableNamesImagesCharactersfinal });
     }
 
     public getTableStartBool(req: Request, res: Response){
