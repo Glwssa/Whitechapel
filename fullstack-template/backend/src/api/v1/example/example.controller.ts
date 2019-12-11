@@ -32,7 +32,7 @@ export class ExampleController {
     public final: string[];
     public TableNamesImagesCharactersfinal: string[][];
     public calls: number;
-    public StartTable: boolean = true;
+    public StartTable: boolean = false;
   NamesArray: string[];
   ReadyPlayersCounter: number;
   NamesRoles:string [];
@@ -42,7 +42,7 @@ export class ExampleController {
   usednumber: number[];
   NameAvatar: string[];
   Avatar: ['https://i.imgur.com/yOxs9eW.png', 'https://i.imgur.com/6f6DPhk.png', 'https://i.imgur.com/lJ3ggBw.png', 'https://i.imgur.com/zaleAlv.png', 'https://i.imgur.com/dkszoEI.png', ' https://i.imgur.com/j5Haq2A.png', 'https://i.imgur.com/g2vt5Hk.png'];
-
+  status: number[];
 
     /**
      * Apply all routes for example
@@ -80,7 +80,12 @@ export class ExampleController {
     public writeNames(name: string) {
       logger.info(name);
       this.NamesArray.push(name);
+      this.status.push(1);
       this.ReadyPlayersCounter++;
+      this.AssignNames();
+      if(this.ReadyPlayersCounter==6){
+        this.StartTable=true;
+      }
     }
 
     public AssignNames(){
@@ -101,10 +106,6 @@ export class ExampleController {
       return Math.floor(Math.random() * Math.floor(max));
     }
 
-    public AssignRoles(name: string){
-      const randomNum=this.getRandomInt(6);
-      this.NamesRoles.push(this.Roles[randomNum]);
-    }
 
     public async fileReader(round: string) {
       if ( this.final === undefined || this.final.length < 15) {
