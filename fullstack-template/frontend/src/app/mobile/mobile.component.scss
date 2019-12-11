@@ -85,10 +85,36 @@ hr{
 }
 
 
+#popupMayor{
+
+	text-align: center;
+	position: absolute;
+
+	padding-top: 5%;
+	
+	
+	top: 81.5%;
+	
+	width: 375px;
+
+	background: rgba(0, 0, 0, 0.82);
+	z-index: 90;
+	visibility: visible;
+}
 
 
 
+#declareMayorshipText{
 
+	margin-right: 17%;
+
+}
+
+#cancelDeclarationText{
+
+	margin-right:11%;
+
+}
 
 
 
@@ -149,6 +175,60 @@ hr{
 	filter: blur(3px);
 	
 }
+
+.noblur {
+	filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
+	-webkit-filter: url(#blur-filter);
+	filter: url(#blur-filter);
+	-webkit-filter: blur(3px);
+	filter: blur(0px);
+	
+}
+
+
+
 .blur-svg {
 	display: none;
 }
+
+
+
+.inline {
+	
+	display:inline-block;
+	margin-right:5px;
+	
+ }
+
+ .marginLeft{
+
+	margin-left: 15%;
+ }
+
+
+.marginRight{
+
+	margin-right: 30%;
+}
+
+
+ .row{
+	float: left;
+	width: 50%;
+	padding: 5px;
+
+  
+ }
+
+ .column{
+	content: "";
+  display: table;
+  clear: both;
+ }
+
+
+ .circle{
+
+	border-radius: 50%;
+	width:25%;
+ }

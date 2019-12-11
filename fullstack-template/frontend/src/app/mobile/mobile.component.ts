@@ -14,19 +14,30 @@ export class MobileComponent implements OnInit {
   roles = ['JACK THE REAPER', 'CONSTABLE', 'PHYSICIAN', 'MEDIUM', 'JOKER', 'VIGILANTE', 'MAYOR'];
   role: string;
   currentRole: string;
-
+  mayorDeclaration: boolean;
+  playerSelectionAvailable: Boolean;
 
 
   constructor(public globals: Globals) {
     this.prevRow = '';
     this.player = this.names[2];
     this.role = this.roles[0];
+    this.mayorDeclaration = false;
+    this.playerSelectionAvailable = true;
   }
 
   ngOnInit() {
     document.getElementById('mySidebar').style.display = 'none';
     var retrievedObject = localStorage.getItem('user');
     console.log('retrievedObject: ', JSON.parse(retrievedObject));
+    this.closeMayorPanel();
+    
+    this.setPhase("DEBATE");
+
+    this.invokePopUp("I USE THIS", "TO SEND TOASTS");
+
+
+    
 
   }
 
@@ -38,8 +49,8 @@ export class MobileComponent implements OnInit {
 
   rowSelect(row: string) {
 
-
-    if (this.prevRow !== row) {
+    if (this.playerSelectionAvailable){
+      if (this.prevRow !== row) {
       console.log('row: ' + row);
       console.log('prevRow: ' + this.prevRow);
       if (!this.prevRow) {
@@ -52,7 +63,9 @@ export class MobileComponent implements OnInit {
       }
 
 
+      }
     }
+    else{console.log("Player Selection Unavailable");}
 
   }
 
@@ -69,8 +82,111 @@ export class MobileComponent implements OnInit {
 
 
 
+  enableMayorPanel(){
+
+    (<HTMLElement>document.getElementById('popupMayor')).style.visibility="visible";
+    (<HTMLElement>document.getElementById('popupSmall')).style.visibility="visible";
+    (<HTMLElement>document.getElementById('blurOverlay')).className="blur";
+    
+    console.log("Mayor Panel activated");
+
+  }
+
+  closeMayorPanel(){
+    
+    (<HTMLElement>document.getElementById('popupMayor')).style.visibility="hidden";
+    (<HTMLElement>document.getElementById('popupSmall')).style.visibility="hidden";
+    (<HTMLElement>document.getElementById('blurOverlay')).className="noblur";
+    
+    console.log("Mayor Panel deactivated");
+    
+  }
+
+  setMayorshipToTrue(){
+
+    this.mayorDeclaration = true;
+
+    console.log("Mayor Declared Role!");
+    this.closeMayorPanel();
+  }
 
 
+  setPlayerSelectionAvailable(v:boolean){
+
+    this.playerSelectionAvailable = v;
+
+  }
+
+
+
+  setPopUpTexts(Top:string, Bottom:string){
+    (<HTMLElement>document.getElementById('popupTopText')).innerHTML=Top;
+    (<HTMLElement>document.getElementById('popupBottomText')).innerHTML=Bottom;
+  }
+
+  setPhaseTexts(Top:string, Bottom:string){
+    (<HTMLElement>document.getElementById('phaseName')).innerHTML=Top;
+    (<HTMLElement>document.getElementById('phaseDescription')).innerHTML=Bottom;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  setPhase(phase:string){
+
+    if (phase == "DEBATE"){
+        this.setPhaseTexts("DEBATE", "DISCUSS WITH OTHER PLAYERS")
+        this.setPlayerSelectionAvailable(false);
+        //(<HTMLElement>document.getElementById('playerRow')).style.opacity="0.5";
+    }
+
+    if (phase == "VOTE"){
+      this.setPhaseTexts("VOTE", "SELECT PLAYERS FOR ELIMINATION")
+      this.setPlayerSelectionAvailable(true);
+      //(<HTMLElement>document.getElementById('playerRow')).style.opacity="1";
+      
+    }
+  }
+
+
+
+
+
+
+  invokePopUp(topText: string, bottomText:string){
+
+    this.setPopUpTexts(topText,bottomText);
+    (<HTMLElement>document.getElementById('blurOverlay')).className="blur";
+    (<HTMLElement>document.getElementById('popupSmall')).style.visibility="visible";
+    console.log("TOAST: "+topText+" "+bottomText);
+
+  }
+    
+      
+    
+  sendPlayerVotingInfo(){
+
+    
+
+  }  
+    
+    
+
+
+
+
+  
 
 
 
