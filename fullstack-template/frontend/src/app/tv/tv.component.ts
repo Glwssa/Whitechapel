@@ -2,8 +2,11 @@ import { TVService } from './../tv.service';
 import { SocketsService } from 'src/app/global/services';
 import { TasksService } from 'src/app/global/services';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, } from '@angular/core';
-import{LeapService, Gestures} from 'src/app/leap.service';
+import { Component, OnInit } from '@angular/core';
+import { LeapService, Gestures } from 'src/app/leap.service';
+import { SmartSpeakerService } from '../smart-speaker.service';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+
 
 @Component({
   selector: 'ami-fullstack-tv',
@@ -26,9 +29,11 @@ export class TvComponent implements OnInit {
   public playerStateURL;
   response: any;
   x: any;
-  playerState: string[];
+  playerState: string[]=[];
+  playerName: string[]=[];
+  playerAvatar: string[]=[];
 
-  constructor(private tvService: TVService, private socketService: SocketsService, private _leapservice: LeapService) {
+  constructor(private tvService: TVService, private socketService: SocketsService, private _leapservice: LeapService, private _smartSpeaker: SmartSpeakerService, private _smartSpeaker2: SmartSpeakerService) {
     this.socketEvents = [];
     this.image = 'https://i.imgur.com/TIk7nCa.png';
     this.arrow = 'https://i.imgur.com/LxivwLt.png';
@@ -44,6 +49,8 @@ export class TvComponent implements OnInit {
 
 
   ngOnInit() {
+    this.playerName=[];
+    this.sendRound();
     this.myUserID = 'me';
     this.userIDToTreat = 'Stratos';
     this.msg = 'whats up';
@@ -52,17 +59,29 @@ export class TvComponent implements OnInit {
 
     });
 
-    this.exmpl();
-    this.exmpl();
+    this._leapservice.cursorRecognizer().subscribe(cursor=>{
+      //console.log(cursor)
+    })
 
     //leap motion gesture contoller
-    this._leapservice.gestureRecognizer().subscribe((gesture) => {
-
-      if(gesture == Gestures.SWIPE_LEFT){
+    /*this._leapservice.gestureRecognizer().subscribe((gesture) => {
+      console.log(gesture)
+      if(gesture == Gestures.SWIPE_DOWN){
         console.log("Swipe left in tv compoment");
-      }else if (gesture == Gestures.SWIPE_RIGHT){
+        this.deincrement();
+      }else if (gesture == Gestures.SWIPE_UP){
         console.log("Swipe right in tv compoment");
+        this.increment();
       }
+    });*/
+    this._smartSpeaker.addCommand('next',()=>{
+      this.xfactor();
+      this.increment();
+    });
+
+    this._smartSpeaker2.addCommand('back',()=>{
+      this.xfactor();
+      this.deincrement();
     });
 
   }
@@ -85,8 +104,8 @@ export class TvComponent implements OnInit {
    exmpl() {
     this.tvService.sendMessageToClients(this.msg, this.userIDToTreat).subscribe((data)=>{
       console.log(data);
-      this.x = data.message;
-      this.playerState = data.message;
+      this.x = data["message"];
+      this.playerState = data["message"];
     });
   }
 
@@ -97,10 +116,25 @@ export class TvComponent implements OnInit {
   public sendRound() {
     this.msg = this.round.toString();
     this.tvService.sendMessageToClients(this.msg, this.userIDToTreat).subscribe((data)=>{
-      this.playerState = data.message;
+    //  this.playerState = data[2];
+    console.log(data)
+      this.playerName = data["message"][0];
+      this.playerAvatar = data["message"][1];
+
+
+
+      console.log(this.playerAvatar);
+      console.log(this.playerName);
+
+
     });
+  //  console.log(this.playerState);
+
+  }
+
+  public xfactor(){
+    this._smartSpeaker.speak('Hello mother fuckers');
   }
 
 }
-
 

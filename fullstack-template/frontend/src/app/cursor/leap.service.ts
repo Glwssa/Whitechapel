@@ -1,5 +1,5 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Observable, Subscriber } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import * as Leap from 'leapjs';
 
 /***********************************************/
@@ -35,43 +35,43 @@ export class LeapService {
 
   /*****************************/
 
-  private positionEvent: EventEmitter<CursorPos>;
-  private gestureEvent: EventEmitter<Gestures>;
+  private posObservable: Observable<CursorPos>;
+  private gesturesObservable: Observable<Gestures>;
 
   /*****************************/
-
-
 
   constructor() {
     var controllerOptions = { enableGestures: true };
 
-    this.initializeEmmiters();
+    this.posObservable = new Observable<CursorPos>((sub) => {
+      this.gesturesObservable = new Observable<Gestures>((sub2) => {
 
-    Leap.loop(controllerOptions, (frame) => {
-      let cursor = this.leapLoop(frame);
-      var gesture = this.findGesture(frame);
+        Leap.loop(controllerOptions, (frame) => {
+          let cursor = this.leapLoop(frame);
+          var gesture = this.findGesture(frame);
 
-      if (gesture != null)
-        this.gestureEvent.emit(gesture);
+          if (gesture != null)
+            sub2.next(gesture);
 
-      if (cursor)
-        this.positionEvent.emit(cursor);
+          if (cursor)
+            sub.next(cursor);
+        });
+
+      });
+
     });
 
-<<<<<<< HEAD
-=======
     this.initialSubscription();
->>>>>>> 88b6f6a48f1a1c716d43768026daae1876085e12
   }
 
   /*****************************/
 
   public cursorRecognizer(): Observable<CursorPos> {
-    return this.positionEvent;
+    return this.posObservable;
   }
 
   public gestureRecognizer(): Observable<Gestures> {
-    return this.gestureEvent;
+    return this.gesturesObservable;
   }
 
   /*****************************/
@@ -187,8 +187,6 @@ export class LeapService {
   /*****************************/
 
   private circleHander(frame, gesture): Gestures {
-    if (!gesture || !gesture.pointableIds)
-      return null;
     var pointableID = gesture.pointableIds[0];
     var direction = frame.pointable(pointableID).direction;
     var dotProduct = Leap.vec3.dot(direction, gesture.normal);
@@ -200,23 +198,11 @@ export class LeapService {
 
   /*****************************/
 
-<<<<<<< HEAD
-  //#region Initializing
-
-  private initializeEmmiters() {
-    this.positionEvent = new EventEmitter<CursorPos>();
-    this.gestureEvent = new EventEmitter<Gestures>();
-  }
-
-  //#endregion
-
-=======
   private initialSubscription() {
     this.posObservable.subscribe(() => { });
     this.gesturesObservable.subscribe(() => { });
   }
 
->>>>>>> 88b6f6a48f1a1c716d43768026daae1876085e12
   /*****************************/
 
 }

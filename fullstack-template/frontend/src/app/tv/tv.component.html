@@ -1,19 +1,20 @@
+
 <html>
     <body class="container">
-        <img class="img1" src={{image}} [ngStyle]="{'filter': playerState && convertInt(playerState[1]) ? norm : grey}">
-        <p class="names" style="left: 46.5%; top: 21.94%;">{{playerState && playerState[0]}}</p>
-        <img class="img1" style="left: 27.34%; top: 15.19%;" src="{{image}}" [ngStyle]="{'filter': playerState && convertInt(playerState[3]) ? norm : grey}">
-        <p class="names"style="left: 28.5%; top: 35.65%;">{{playerState && playerState[2]}}</p>
-        <img class="img1" style="left: 21.75%; top: 44.63%;" src="{{image}}" [ngStyle]="{'filter': playerState && convertInt(playerState[5]) ? norm : grey}">
-        <p class="names"style="left: 23.5%; top: 65%;">{{playerState && playerState[4]}}</p>
-        <img class="img1" style="left: 32.81%; top: 71.85%;" src="{{image}}" [ngStyle]="{'filter': playerState && convertInt(playerState[7]) ? norm : grey}">
-        <p class="names"style="left: 34.5%; top: 92%;">{{playerState && playerState[6]}}</p>
-        <img class="img1" style="left: 56.67%; top: 71.85%;" src="{{image}}" [ngStyle]="{'filter': playerState && convertInt(playerState[9]) ? norm : grey}">
-        <p class="names"style="left: 58.5%; top: 92%;">{{playerState && playerState[8]}}</p>
-        <img class="img1" style="left: 67.68%; top: 44.63%;" src="{{image}}" [ngStyle]="{'filter': playerState && convertInt(playerState[11]) ? norm : grey}">
-        <p class="names"style="left: 69.5%; top: 65%;" [ngStyle]="{'filter': flag ? grey : norm}">{{playerState && playerState[10]}}</p>
-        <img class="img1" style="left: 62.19%; top: 15.19%;" src="{{image}}" [ngStyle]="{'filter': playerState && convertInt(playerState[13]) ? norm : grey}">
-        <p class="names"style="left: 67.5%; top: 35%;">{{playerState && playerState[12]}}</p>
+        <img class="img1" src={{image}} [ngStyle]="{'filter': playerState && convertInt(playerState[0]) ? norm : grey}">
+        <p class="names" style="left: 46.5%; top: 21.94%;">{{playerName && playerName[0]}}</p>
+        <img class="img1" style="left: 27.34%; top: 15.19%;" src="{{image}}" [ngStyle]="{'filter': playerState && convertInt(playerState[1]) ? norm : grey}">
+        <p class="names"style="left: 28.5%; top: 35.65%;">{{playerName && playerName[1]}}</p>
+        <img class="img1" style="left: 21.75%; top: 44.63%;" src="{{image}}" [ngStyle]="{'filter': playerState && convertInt(playerState[2]) ? norm : grey}">
+        <p class="names"style="left: 23.5%; top: 65%;">{{playerName && playerName[2]}}</p>
+        <img class="img1" style="left: 32.81%; top: 71.85%;" src="{{image}}" [ngStyle]="{'filter': playerState && convertInt(playerState[3]) ? norm : grey}">
+        <p class="names"style="left: 34.5%; top: 92%;">{{playerName && playerName[3]}}</p>
+        <img class="img1" style="left: 56.67%; top: 71.85%;" src="{{image}}" [ngStyle]="{'filter': playerState && convertInt(playerState[4]) ? norm : grey}">
+        <p class="names"style="left: 58.5%; top: 92%;">{{playerName && playerName[4]}}</p>
+        <img class="img1" style="left: 67.68%; top: 44.63%;" src="{{image}}" [ngStyle]="{'filter': playerState && convertInt(playerState[5]) ? norm : grey}">
+        <p class="names"style="left: 69.5%; top: 65%;" [ngStyle]="{'filter': flag ? grey : norm}">{{playerName && playerName[5]}}</p>
+        <img class="img1" style="left: 62.19%; top: 15.19%;" src="{{image}}" [ngStyle]="{'filter': playerState && convertInt(playerState[6]) ? norm : grey}">
+        <p class="names"style="left: 67.5%; top: 35%;">{{playerName && playerName[6]}}</p>
         
         <img *ngIf="playerState && convertInt(playerState[1])" class="img2" src="{{image}}">
         <img *ngIf="playerState && convertInt(playerState[3])" class="img2" style="left: 34.3%; top: 25.95%;" src="{{image}}">
@@ -25,11 +26,12 @@
         <p class="vote">VOTING {{round}}</p>
         <input type="image" (click)="deincrement()" class="butt" src="{{arrow}}" />
         <input type="image" (click)="increment()" class="butt2" src="{{arrow}}" />
-        <input type="image" (click)="satur()" src="{{image}}" [ngStyle]="{'filter': playerState && playerState[1] ? grey : norm}" />
+        <input type="image" (click)="xfactor()" src="{{image}}" />
     </body>
         <h1>{{socketEvents | json}}</h1>
         <h1>{{x}}</h1>
 
 
 </html>
+<ami-fullstack-virtual [size] = "150"></ami-fullstack-virtual>
 
