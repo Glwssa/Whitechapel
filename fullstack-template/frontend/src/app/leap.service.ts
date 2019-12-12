@@ -58,10 +58,6 @@ export class LeapService {
         this.positionEvent.emit(cursor);
     });
 
-<<<<<<< HEAD
-=======
-    this.initialSubscription();
->>>>>>> 88b6f6a48f1a1c716d43768026daae1876085e12
   }
 
   /*****************************/
@@ -200,7 +196,6 @@ export class LeapService {
 
   /*****************************/
 
-<<<<<<< HEAD
   //#region Initializing
 
   private initializeEmmiters() {
@@ -210,13 +205,6 @@ export class LeapService {
 
   //#endregion
 
-=======
-  private initialSubscription() {
-    this.posObservable.subscribe(() => { });
-    this.gesturesObservable.subscribe(() => { });
-  }
-
->>>>>>> 88b6f6a48f1a1c716d43768026daae1876085e12
   /*****************************/
 
 }
