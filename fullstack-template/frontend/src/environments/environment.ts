@@ -6,6 +6,7 @@ export const environment = {
   production: false,
    host: 'http://localhost:8080',
  // host: 'http://147.52.147.48:8080',
+ //   host: 'http://192.168.1.100:8080', //Trelo-PC ethernet adapter 3  OXI STO DEFAULT
 
   //allazw to localhost me thn ip tou laptop apo to ipconfig
 };

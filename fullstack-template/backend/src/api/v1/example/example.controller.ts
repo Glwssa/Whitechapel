@@ -16,7 +16,7 @@ export class ExampleController {
     // https://i.imgur.com/j5Haq2A.png -Barack
     // https://i.imgur.com/g2vt5Hk.png -Ariana
     //Characters:
-    // https://i.imgur.com/9LzwD2L.png -Cotsable
+    // https://i.imgur.com/9LzwD2L.png -Constable
     // https://i.imgur.com/Hl9HvHp.png -Jocker
     // https://i.imgur.com/VZVnvpp.png -Vigilante
     // https://i.imgur.com/W3WK2IQ.png -Mayor
@@ -28,8 +28,8 @@ export class ExampleController {
     public Tabledata: any;
     public retData: string[];
     public retDataTable: string[];
-    public final: string[] = [];
-    public TableNamesImagesCharactersfinal: string[][];
+    public currentStatus: number[] = [];
+    public TableNamesImagesCharacterscurrentStatus: string[][];
     public calls: number;
     public StartTable: boolean = false;
   NamesArray: string[] = [];
@@ -40,12 +40,21 @@ export class ExampleController {
   randomNum: number;
   usednumber: number[] = [];
   NameAvatar: string[] = [];
-  Avatar= ['https://i.imgur.com/yOxs9eW.png', 'https://i.imgur.com/6f6DPhk.png', 'https://i.imgur.com/lJ3ggBw.png', 'https://i.imgur.com/zaleAlv.png', 'https://i.imgur.com/dkszoEI.png', ' https://i.imgur.com/j5Haq2A.png', 'https://i.imgur.com/g2vt5Hk.png'];
+  Avatar= ['https://i.imgur.com/yOxs9eW.png', 'https://i.imgur.com/6f6DPhk.png', 'https://i.imgur.com/lJ3ggBw.png', 'https://i.imgur.com/zaleAlv.png', 'https://i.imgur.com/dkszoEI.png', 'https://i.imgur.com/j5Haq2A.png', 'https://i.imgur.com/g2vt5Hk.png'];
   status: number[]  = [];
   currentRound: number;
   i: number;
   j: number;
   end: number = 0;
+  AllVotes: string [] = [];
+  CurrrentRoundVotes: string [] = [];
+  PlayerVote: number;
+  VoterIndex: any;
+  VotedAvatar: string;
+  totalVotes: number=0;
+  VoterAvatar: string;
+  tempVoteArray=['','','','','','',''];
+  countVotes=[0,0,0,0,0,0,0];
     /**
      * Apply all routes for example
      *
@@ -56,12 +65,17 @@ export class ExampleController {
 
         router
             .post('/sendMessageToClients',(req: Request, res: Response)=>{ this.sendMessageToClients(req,res)})
+            .post('/StoreVotes',(req: Request, res: Response)=>{ this.StoreVotes(req,res)})
             .post('/setNames',(req: Request, res: Response)=>{ this.setNames(req,res)})
             .get('/getMessage', this.getMessage)
             .get('/getTableNames', (req: Request, res: Response)=>{ this.getTableNames(req,res)})
+            .get('/getMobileNames', (req: Request, res: Response)=>{ this.getMobileNames(req,res)})
             .get('/getTableStartBool', (req: Request, res: Response)=>{ this.getTableStartBool(req,res)});
 
         return router;
+    }
+    public getMobileNames(req: any, res: any) {
+      res.json({ message: [this.NamesArray,this.NameAvatar]});
     }
 
     public setNames(req: Request, res: Response) {
@@ -81,13 +95,13 @@ export class ExampleController {
 
     public writeNames(name: string) {
       logger.info(name);
-      this.NamesArray.push(name);      
+      this.NamesArray.push(name);
       this.status.push(1);
 
       this.ReadyPlayersCounter++;
 
       this.AssignNames();
-      if(this.ReadyPlayersCounter==6){
+      if(this.ReadyPlayersCounter==7){
         this.StartTable=true;
       }
     }
@@ -121,8 +135,8 @@ export class ExampleController {
 
 /*
     public async fileReader(round: string) {
-      if ( this.final === undefined || this.final.length < 15) {
-        this.final = [];
+      if ( this.currentStatus === undefined || this.currentStatus.length < 15) {
+        this.currentStatus = [];
       }
 
       logger.info('FS');
@@ -134,18 +148,18 @@ export class ExampleController {
       const i = 0;
       for (const  row of this.retData) {
         const value = row.split(' ');
-        if ( this.final === undefined || this.final.length === 0) {
-            this.final = value;
+        if ( this.currentStatus === undefined || this.currentStatus.length === 0) {
+            this.currentStatus = value;
             continue;
         }
-        this.final.push(value[0]);
-        this.final.push(value[1]);
+        this.currentStatus.push(value[0]);
+        this.currentStatus.push(value[1]);
       }
     }
 
     /*public async TableFileReader() {
-      if ( this.TableNamesfinal === undefined || this.TableNamesfinal.length < 15) {
-        this.TableNamesfinal = [];
+      if ( this.TableNamescurrentStatus === undefined || this.TableNamescurrentStatus.length < 15) {
+        this.TableNamescurrentStatus = [];
       }
 
       logger.info('FS');
@@ -157,12 +171,12 @@ export class ExampleController {
       
       for (const  row of this.retDataTable) {
         const Tablevalue = row.split(' ');
-        if ( this.TableNamesfinal === undefined || this.TableNamesfinal.length === 0) {
-            this.TableNamesfinal = Tablevalue;
+        if ( this.TableNamescurrentStatus === undefined || this.TableNamescurrentStatus.length === 0) {
+            this.TableNamescurrentStatus = Tablevalue;
             continue;
         }
-        this.TableNamesfinal.push(Tablevalue[0]);
-        this.TableNamesfinal.push(Tablevalue[1]);
+        this.TableNamescurrentStatus.push(Tablevalue[0]);
+        this.TableNamescurrentStatus.push(Tablevalue[1]);
       }
     }
     */
@@ -208,13 +222,40 @@ export class ExampleController {
     }
 
     public history(){
+      this.currentStatus = [];
+      this.CurrrentRoundVotes = [];
       this.i = (this.currentRound - 1) * 7;
-      this.j=0;
       for (let index = this.i; index <= index+7; index++){
-         this.final[this.j] = JSON.stringify(this.status[index]);
-         this.j++;
+         this.currentStatus.push(this.status[index]);
+         this.CurrrentRoundVotes.push(this.AllVotes[index]);
       }
     }
+
+    public StoreVotes(req: Request, res: Response){
+        const message: any = req.body.message;
+        this.PlayerVote = message.scream;
+        this.VoterIndex = message.userID;
+        this.VotedAvatar = this.NameAvatar[this.PlayerVote];
+        this.countVotes[this.PlayerVote]++;
+        this.totalVotes++;
+        this.tempVoteArray[this.VoterIndex] = this.VotedAvatar;
+        if(this.totalVotes===7){
+          this.totalVotes=0;
+          this.AllVotes.push(this.tempVoteArray[0]);
+          this.AllVotes.push(this.tempVoteArray[1]);
+          this.AllVotes.push(this.tempVoteArray[2]);
+          this.AllVotes.push(this.tempVoteArray[3]);
+          this.AllVotes.push(this.tempVoteArray[4]);
+          this.AllVotes.push(this.tempVoteArray[5]);
+          this.AllVotes.push(this.tempVoteArray[6]);
+          var max = Math.max(...this.countVotes);
+        //  this.status[this.countVotes.indexOf(max)]=0; 
+          this.tempVoteArray=['','','','','','',''];
+          this.countVotes=[0,0,0,0,0,0,0];
+
+        }
+    }
+
     /**
      * Broadcasts a received message to all connected clients
      */
@@ -231,16 +272,16 @@ export class ExampleController {
         socketService.broadcast(event, message);
 
        // await this.fileReader(message.scream);
-       logger.info('tv');
-     //   this.history();
+        logger.info('tv');
+        //this.history();
         logger.info(this.NameAvatar);
         logger.info(this.NamesArray);
 
-       // logger.info(this.final);
+       // logger.info(this.currentStatus);
         logger.info(this.NamesRoles );
 
       
-        res.json({ message: [this.NamesArray,this.NameAvatar]});
+        res.json({ message: [this.NamesArray,this.NameAvatar,this.status,this.CurrrentRoundVotes]});
 
     }
 

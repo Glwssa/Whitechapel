@@ -1,9 +1,8 @@
+import { SocketsService } from './../global/services/core/sockets.service';
+import { SetNamesService } from './../get-names.service';
 import { Globals } from './../global/globl';
 import { Component, OnInit, HostBinding, Output } from '@angular/core';
-import { MobileLoginComponent } from '../mobilelogin/mobile-login.component';
-import { mcall } from 'q';
-
-
+import { findIndex } from 'rxjs/operators';
 
 @Component({
   selector: 'ami-fullstack-mobile',
@@ -13,13 +12,25 @@ import { mcall } from 'q';
 export class MobileComponent implements OnInit {
 
   prevRow: string;
-  names = ['Stratos', 'Kostas', 'Natasa', 'Andreas', 'Panos', 'Giannis', 'Ete'];
+  names = [];
+  avatars = [];
   player: string;
   roles = ['JACK THE REAPER', 'CONSTABLE', 'PHYSICIAN', 'MEDIUM', 'JESTER', 'VIGILANTE', 'MAYOR'];
   role: string;
   currentRole: string;
   mayorDeclaration: boolean;
   playerSelectionAvailable: Boolean;
+  SelectedPlayer: string;
+  public myUserID;
+  public userIDToTreat;
+  public msg;
+  public socketEvents: {event: string, message: any}[];
+  public playerStateURL;
+  response: any;
+  index: number;
+  myindex: number;
+
+
   timerCounter:number;
   
 
@@ -50,17 +61,21 @@ export class MobileComponent implements OnInit {
 
 
   }
-  
 
-  
 
-  constructor(public globals: Globals) {
+
+
+
+
+  constructor(public globals: Globals, private setNamesService : SetNamesService, private socketService: SocketsService) {
     this.prevRow = '';
     this.player = this.names[2];
     this.role = this.roles[0];
     this.mayorDeclaration = false;
     this.playerSelectionAvailable = true;
-    this.timerCounter = 30;
+    
+
+    
     
   }
 
@@ -78,6 +93,10 @@ export class MobileComponent implements OnInit {
    this.beginCountdown();
 
 
+    this.socketService.syncMessages('screaming').subscribe(msg => {
+      this.socketEvents.push(this.msg);
+
+    });
 
   }
 
@@ -123,6 +142,7 @@ export class MobileComponent implements OnInit {
       }
     }
     else{console.log("Player Selection Unavailable");}
+    this.SelectedPlayer = row;
 
   }
 
@@ -230,11 +250,19 @@ export class MobileComponent implements OnInit {
 
   }
     
-      
+  getNames(){
+    this.setNamesService.getNames().subscribe((data)=>{
+      this.names = data["message"][0];
+      this.avatars = data["message"][1];
+    });
+  }
     
-   sendPlayerVotingInfo(){
-
-    console.log("Countdown Complete");
+  sendPlayerVotingInfo(){
+    this.index = this.names.indexOf(this.SelectedPlayer);
+    this.myindex = this.names.indexOf(this.player);
+    this.setNamesService.StoreVotes(this.index, this.myindex).subscribe((data)=>{
+      console.log(data);
+    });
 
   }  
     
