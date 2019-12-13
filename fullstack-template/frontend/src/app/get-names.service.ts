@@ -44,7 +44,7 @@ export class SetNamesService {
       }
 
       public getNames(){
-        return this.http.get(`http://192.168.99.100:8080/api/example/getMobileNames`);
+        return this.http.get(`${this.hostURl}/api/example/getMobileNames`);
       }
 
 
