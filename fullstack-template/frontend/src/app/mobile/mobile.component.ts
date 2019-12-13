@@ -37,7 +37,7 @@ export class MobileComponent implements OnInit {
 
 
   timerClass = class Timer {
-    constructor(public counter = 30) {
+    constructor(public counter = 3) {
 
 
         
@@ -93,6 +93,11 @@ export class MobileComponent implements OnInit {
     
    this.beginCountdown();
 
+   var _this = this; 
+
+    var timeout = setTimeout(function(){ 
+      _this.getNames();
+     }, 500);
 
     this.socketService.syncMessages('screaming').subscribe(msg => {
       this.socketEvents.push(this.msg);
@@ -177,6 +182,7 @@ export class MobileComponent implements OnInit {
     (<HTMLElement>document.getElementById('popupMayor')).style.visibility="visible";
     (<HTMLElement>document.getElementById('popupSmall')).style.visibility="visible";
     (<HTMLElement>document.getElementById('blurOverlay')).className="blur";
+    this.setPopUpTexts("DECLARE YOU ARE THE MAYOR!","YOUR VOTE WILL COUNT AS 2 AFTER DECLARATION")
     
     console.log("Mayor Panel activated");
 
@@ -271,10 +277,13 @@ export class MobileComponent implements OnInit {
     this.setNamesService.getNames().subscribe((data)=>{
       this.names = data["message"][0];
       this.avatars = data["message"][1];
+      console.log(this.avatars);
     });
   }
     
   sendPlayerVotingInfo(){
+    console.log("hello");
+    console.log(this.player);
     this.index = this.names.indexOf(this.SelectedPlayer);
     this.myindex = this.names.indexOf(this.player);
     this.event_function_table("upvote_player",this.SelectedPlayer);
