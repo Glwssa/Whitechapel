@@ -53,7 +53,12 @@ export class MobileComponent implements OnInit {
       this.socketEvents.push(this.msg);
 
     });
+    var _this = this; 
 
+    this.getNames();
+    var timout = setTimeout(function(){ 
+      _this.getNames();
+     }, 1000);
   }
 
   openSidebar() {
@@ -193,6 +198,8 @@ export class MobileComponent implements OnInit {
     this.setNamesService.getNames().subscribe((data)=>{
       this.names = data["message"][0];
       this.avatars = data["message"][1];
+      console.log(this.names);
+      console.log(this.avatars);
     });
   }
     

@@ -96,7 +96,7 @@ export class TableComponent implements OnInit {
 
 
   getDataforSetup(){
-    this.tableService.getTableNames(this.msg, "").subscribe((data)=>{
+    this.tableService.getTableNames().subscribe((data)=>{
       //console.log(data["message"]);
       this.TableNames = data[0];
       this.TableImages = data[1];
