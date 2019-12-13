@@ -1,5 +1,9 @@
 import { Globals } from './../global/globl';
 import { Component, OnInit, HostBinding, Output } from '@angular/core';
+import { MobileLoginComponent } from '../mobilelogin/mobile-login.component';
+import { mcall } from 'q';
+
+
 
 @Component({
   selector: 'ami-fullstack-mobile',
@@ -11,12 +15,44 @@ export class MobileComponent implements OnInit {
   prevRow: string;
   names = ['Stratos', 'Kostas', 'Natasa', 'Andreas', 'Panos', 'Giannis', 'Ete'];
   player: string;
-  roles = ['JACK THE REAPER', 'CONSTABLE', 'PHYSICIAN', 'MEDIUM', 'JOKER', 'VIGILANTE', 'MAYOR'];
+  roles = ['JACK THE REAPER', 'CONSTABLE', 'PHYSICIAN', 'MEDIUM', 'JESTER', 'VIGILANTE', 'MAYOR'];
   role: string;
   currentRole: string;
   mayorDeclaration: boolean;
   playerSelectionAvailable: Boolean;
+  timerCounter:number;
+  
 
+
+  timerClass = class Timer {
+    constructor(public counter = 30) {
+
+
+        
+
+        let intervalId = setInterval(() => {
+            this.counter = this.counter - 1;
+            //console.log("timer: "+this.counter)
+            if(this.counter>=10){document.getElementById("countdown").innerHTML="00:"+this.counter.toString();}
+            if(this.counter<10){document.getElementById("countdown").innerHTML="00:0"+this.counter.toString();}
+
+            if(this.counter === 0){ 
+              clearInterval(intervalId);
+              MobileComponent.prototype.sendPlayerVotingInfo();
+              
+            
+            }
+        }, 1000);
+
+      }
+
+      
+
+
+  }
+  
+
+  
 
   constructor(public globals: Globals) {
     this.prevRow = '';
@@ -24,6 +60,8 @@ export class MobileComponent implements OnInit {
     this.role = this.roles[0];
     this.mayorDeclaration = false;
     this.playerSelectionAvailable = true;
+    this.timerCounter = 30;
+    
   }
 
   ngOnInit() {
@@ -34,12 +72,31 @@ export class MobileComponent implements OnInit {
     
     this.setPhase("DEBATE");
 
-    this.invokePopUp("I USE THIS", "TO SEND TOASTS");
-
-
+    //this.invokePopUp("I USE THIS", "TO SEND TOASTS");
+    //setTimeout(this.timerf,1000);
     
+   this.beginCountdown();
+
+
 
   }
+
+
+
+  beginCountdown(){
+
+    var timerCountDown = new this.timerClass();
+    
+  }
+
+  
+
+
+  
+  
+
+
+
 
   openSidebar() {
     document.getElementById('mySidebar').style.display = 'block';
@@ -175,9 +232,9 @@ export class MobileComponent implements OnInit {
     
       
     
-  sendPlayerVotingInfo(){
+   sendPlayerVotingInfo(){
 
-    
+    console.log("Countdown Complete");
 
   }  
     
