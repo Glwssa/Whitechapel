@@ -118,10 +118,10 @@ export class TableComponent implements OnInit {
     this.tableService.getTableNames().subscribe((data)=>{
       //console.log(data["message"]);
       this.TableNames = data[0];
-      this.TableImages = data[1];
-      this.TableCharacters = data[2];
+      this.TableImages = data[2];
+      this.TableCharacters = data[1];
       console.log(data);
-      //this.setup_table();
+      this.setup_table();
       //this.set_start_table();
     });
   }

@@ -239,12 +239,16 @@ export class MobileComponent implements OnInit {
         this.setPhaseTexts("DEBATE", "DISCUSS WITH OTHER PLAYERS")
         this.setPlayerSelectionAvailable(false);
         //(<HTMLElement>document.getElementById('playerRow')).style.opacity="0.5";
+        //call this to ubdate the table
+        //this.event_function_table("set_debate_table","");
     }
 
     if (phase == "VOTE"){
       this.setPhaseTexts("VOTE", "SELECT PLAYERS FOR ELIMINATION")
       this.setPlayerSelectionAvailable(true);
       //(<HTMLElement>document.getElementById('playerRow')).style.opacity="1";
+      //call this to ubdate the table
+      ////this.event_function_table("set_vote_table","");
       
     }
   }
@@ -273,6 +277,7 @@ export class MobileComponent implements OnInit {
   sendPlayerVotingInfo(){
     this.index = this.names.indexOf(this.SelectedPlayer);
     this.myindex = this.names.indexOf(this.player);
+    this.event_function_table("upvote_player",this.SelectedPlayer);
     this.setNamesService.StoreVotes(this.index, this.myindex).subscribe((data)=>{
       console.log(data);
     });
