@@ -43,7 +43,9 @@ export class TableComponent implements OnInit {
   
   constructor(private tableService: TableService, private socketService: SocketsService, private eventEmitterService: EventEmitterService ) { 
     this.socketEvents = [];
-    
+    this.TableImages = [];
+    this.TableNames = [];
+    this.TableCharacters = [];
     this.Background = 'https://i.imgur.com/UwNfp80.png';
     this.title = "DEBATE"
     this.titlevis = false;
@@ -117,9 +119,9 @@ export class TableComponent implements OnInit {
   getDataforSetup(){
     this.tableService.getTableNames().subscribe((data)=>{
       //console.log(data["message"]);
-      this.TableNames = data[0];
-      this.TableImages = data[2];
-      this.TableCharacters = data[1];
+      this.TableNames = data["message"][0];
+      this.TableImages = data["message"][2];
+      this.TableCharacters = data["message"][1];
       console.log(data);
       this.setup_table();
       //this.set_start_table();
