@@ -98,7 +98,12 @@ export class MobileComponent implements OnInit {
       this.socketEvents.push(this.msg);
 
     });
+    var _this = this; 
 
+    this.getNames();
+    var timout = setTimeout(function(){ 
+      _this.getNames();
+     }, 1000);
   }
   //call this if you want to call a function from table
   //function names:
@@ -267,6 +272,8 @@ export class MobileComponent implements OnInit {
     this.setNamesService.getNames().subscribe((data)=>{
       this.names = data["message"][0];
       this.avatars = data["message"][1];
+      console.log(this.names);
+      console.log(this.avatars);
     });
   }
     
