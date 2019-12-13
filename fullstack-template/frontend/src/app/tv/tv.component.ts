@@ -32,6 +32,8 @@ export class TvComponent implements OnInit {
   playerState: string[]=[];
   playerName: string[]=[];
   playerAvatar: string[]=[];
+  playerStatus: number[]=[];
+  playerVote: string[]=[];
 
   constructor(private tvService: TVService, private socketService: SocketsService, private _leapservice: LeapService, private _smartSpeaker: SmartSpeakerService, private _smartSpeaker2: SmartSpeakerService) {
     this.socketEvents = [];
@@ -120,6 +122,8 @@ export class TvComponent implements OnInit {
     console.log(data)
       this.playerName = data["message"][0];
       this.playerAvatar = data["message"][1];
+      this.playerState = data["message"][2];
+      this.playerVote = data["message"][3];
 
 
 

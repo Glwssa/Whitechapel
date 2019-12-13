@@ -14,7 +14,7 @@ export class TableService {
     this.hostURl = environment.host;
   }
 
-  public getTableNames(PlayerName , toUserID) {
+  public getTableNames() {
     //  return this.http.post(`${this.hostURl}/api/example/sendMessageToClients`,
     //  return this.http.post(`http://192.168.99.100:8080/api/example/sendMessageToClients`
     //for windows 10 pro docker app
