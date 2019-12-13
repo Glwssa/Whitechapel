@@ -93,6 +93,11 @@ export class MobileComponent implements OnInit {
     
    this.beginCountdown();
 
+   var _this = this; 
+
+    var timeout = setTimeout(function(){ 
+      _this.getNames();
+     }, 500);
 
     this.socketService.syncMessages('screaming').subscribe(msg => {
       this.socketEvents.push(this.msg);
@@ -267,6 +272,7 @@ export class MobileComponent implements OnInit {
     this.setNamesService.getNames().subscribe((data)=>{
       this.names = data["message"][0];
       this.avatars = data["message"][1];
+      console.log(this.avatars);
     });
   }
     
