@@ -249,7 +249,19 @@ export class ExampleController {
           this.AllVotes.push(this.tempVoteArray[5]);
           this.AllVotes.push(this.tempVoteArray[6]);
           var max = Math.max(...this.countVotes);
-        //  this.status[this.countVotes.indexOf(max)]=0; 
+          var maxIndex = this.countVotes.indexOf(max);
+          var statusLength = this.status.length;
+          var statusStart = statusLength-7;    //14l  0-6  7-13  
+          var k =0;
+          for ( k = 0; k < maxIndex; k++) {
+            this.status.push(this.status[statusStart+k]);
+          }
+          this.status.push(this.status[statusStart+maxIndex]);
+          var g;
+          for (g = k+1; g < 7; g++) { // 7 theseis. 5h thesh.  0-3, 4 , 5-6
+            this.status.push(this.status[statusStart+g]);
+            
+          }
           this.tempVoteArray=['','','','','','',''];
           this.countVotes=[0,0,0,0,0,0,0];
 
