@@ -63,21 +63,21 @@ export class TvComponent implements OnInit {
 
     });
 
-    this._leapservice.cursorRecognizer().subscribe(cursor=>{
+    //this._leapservice.cursorRecognizer().subscribe(cursor=>{
       //console.log(cursor)
-    })
+    //})
 
     //leap motion gesture contoller
-    /*this._leapservice.gestureRecognizer().subscribe((gesture) => {
+    this._leapservice.gestureRecognizer().subscribe((gesture) => {
       console.log(gesture)
-      if(gesture == Gestures.SWIPE_DOWN){
+      if(gesture == Gestures.SWIPE_LEFT){
         console.log("Swipe left in tv compoment");
         this.deincrement();
-      }else if (gesture == Gestures.SWIPE_UP){
+      }else if (gesture == Gestures.SWIPE_RIGHT){
         console.log("Swipe right in tv compoment");
         this.increment();
       }
-    });*/
+    });
     this._smartSpeaker.addCommand('next',()=>{
       this.increment();
     });
