@@ -18,7 +18,7 @@ export class SetNamesService {
   public setNames(msg , toUserID) {
     //  return this.http.post(`${this.hostURl}/api/example/setNames`,
     //  return this.http.post(`http://192.168.99.100:8080/api/example/setNames`
-    return this.http.post(`http://192.168.99.100:8080/api/example/setNames`,
+    return this.http.post(`${this.hostURl}/api/example/setNames`,
     {
       message: {
         scream: msg,
