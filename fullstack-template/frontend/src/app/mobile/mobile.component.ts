@@ -15,7 +15,7 @@ export class MobileComponent implements OnInit {
   names = [];
   avatars = [];
   player: string;
-  roles = ['JACK THE REAPER', 'CONSTABLE', 'PHYSICIAN', 'MEDIUM', 'JOKER', 'VIGILANTE', 'MAYOR'];
+  roles = ['JACK THE REAPER', 'CONSTABLE', 'PHYSICIAN', 'MEDIUM', 'JESTER', 'VIGILANTE', 'MAYOR'];
   role: string;
   currentRole: string;
   mayorDeclaration: boolean;
@@ -30,12 +30,53 @@ export class MobileComponent implements OnInit {
   index: number;
   myindex: number;
 
+
+  timerCounter:number;
+  
+
+
+  timerClass = class Timer {
+    constructor(public counter = 30) {
+
+
+        
+
+        let intervalId = setInterval(() => {
+            this.counter = this.counter - 1;
+            //console.log("timer: "+this.counter)
+            if(this.counter>=10){document.getElementById("countdown").innerHTML="00:"+this.counter.toString();}
+            if(this.counter<10){document.getElementById("countdown").innerHTML="00:0"+this.counter.toString();}
+
+            if(this.counter === 0){ 
+              clearInterval(intervalId);
+              MobileComponent.prototype.sendPlayerVotingInfo();
+              
+            
+            }
+        }, 1000);
+
+      }
+
+      
+
+
+  }
+
+
+
+
+
+
   constructor(public globals: Globals, private setNamesService : SetNamesService, private socketService: SocketsService) {
     this.prevRow = '';
     this.player = this.names[2];
     this.role = this.roles[0];
     this.mayorDeclaration = false;
     this.playerSelectionAvailable = true;
+    
+
+    
+    
   }
 
   ngOnInit() {
@@ -46,7 +87,10 @@ export class MobileComponent implements OnInit {
     
     this.setPhase("DEBATE");
 
-    this.invokePopUp("I USE THIS", "TO SEND TOASTS");
+    //this.invokePopUp("I USE THIS", "TO SEND TOASTS");
+    //setTimeout(this.timerf,1000);
+    
+   this.beginCountdown();
 
 
     this.socketService.syncMessages('screaming').subscribe(msg => {
@@ -60,6 +104,23 @@ export class MobileComponent implements OnInit {
       _this.getNames();
      }, 1000);
   }
+
+
+
+  beginCountdown(){
+
+    var timerCountDown = new this.timerClass();
+    
+  }
+
+  
+
+
+  
+  
+
+
+
 
   openSidebar() {
     document.getElementById('mySidebar').style.display = 'block';
