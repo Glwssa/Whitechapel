@@ -3,6 +3,7 @@ import { SetNamesService } from './../get-names.service';
 import { Globals } from './../global/globl';
 import { Component, OnInit, HostBinding, Output } from '@angular/core';
 import { findIndex } from 'rxjs/operators';
+import { EventEmitterService } from '../event-emitter.service';
 
 @Component({
   selector: 'ami-fullstack-mobile',
@@ -67,7 +68,7 @@ export class MobileComponent implements OnInit {
 
 
 
-  constructor(public globals: Globals, private setNamesService : SetNamesService, private socketService: SocketsService) {
+  constructor(public globals: Globals, private setNamesService : SetNamesService, private socketService: SocketsService,private eventEmitterService: EventEmitterService) {
     this.prevRow = '';
     this.player = this.names[2];
     this.role = this.roles[0];
@@ -99,6 +100,18 @@ export class MobileComponent implements OnInit {
     });
 
   }
+  //call this if you want to call a function from table
+  //function names:
+  //set_start_table "" parameter
+  //set_debate_table "" parameter
+  //set_vote_table "" parameter
+  //set_ability_table "" parameter
+  //set_player_mayor "name of player you want to make mayor" parameter
+  //set_player_dead "name of player you want to be dead" parameter
+  //upvote_player "name of player you want to upvote" parameter
+  event_function_table(function_name: string, parameter: string){    
+    this.eventEmitterService.Table_functions({function_name:function_name,parameter:parameter});    
+  } 
 
 
 

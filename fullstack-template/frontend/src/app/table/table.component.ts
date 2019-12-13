@@ -78,7 +78,26 @@ export class TableComponent implements OnInit {
     /*setTimeout(function(){ 
       _this.getTableStartBool();
      }, 3000);*/
-    
+     if (this.eventEmitterService.TablesubsVarpl1==undefined){
+      this.eventEmitterService.TablesubsVarpl1 = this.eventEmitterService.    
+      invokeTable_functions_player1.subscribe((data) => {
+        if(data.function_name == "set_start_table"){
+          this.set_start_table();
+        }else if(data.function_name == "set_debate_table"){
+          this.set_debate_table();
+        }else if(data.function_name == "set_vote_table"){
+          this.set_vote_table();
+        }else if(data.function_name == "set_ability_table"){
+          this.set_ability_table();
+        }else if(data.function_name == "set_player_mayor"){
+          this.set_player_mayor(data.parameter);
+        }else if(data.function_name == "set_player_dead"){
+          this.set_player_dead(data.parameter);
+        }else if(data.function_name == "upvote_player"){
+          this.upvote_player(data.parameter);
+        }
+      });
+    }
     
 
 
@@ -88,15 +107,15 @@ export class TableComponent implements OnInit {
     //upvote no parameter
     //change_player_name with parameter
     //change_player_image with parameter
-    //set_mayor
-    //reset_mayor
+    //set_mayor no parameter
+    //reset_mayor no parameter
   }
   
   
 
 
   getDataforSetup(){
-    this.tableService.getTableNames(this.msg, "").subscribe((data)=>{
+    this.tableService.getTableNames().subscribe((data)=>{
       //console.log(data["message"]);
       this.TableNames = data[0];
       this.TableImages = data[1];
