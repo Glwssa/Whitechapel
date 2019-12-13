@@ -257,8 +257,10 @@ export class ExampleController {
             this.status.push(this.status[statusStart+k]);
           }
           this.status.push(this.status[statusStart+maxIndex]);
+          this.status[statusStart+maxIndex] = 0;
+
           var g;
-          for (g = k+1; g < 7; g++) { // 7 theseis. 5h thesh.  0-3, 4 , 5-6
+          for (g = k+2; g < 7; g++) { // 7 theseis. 5h thesh.  0-3, 4 , 5-6
             this.status.push(this.status[statusStart+g]);
             
           }
