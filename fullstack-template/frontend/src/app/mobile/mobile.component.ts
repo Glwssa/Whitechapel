@@ -98,22 +98,17 @@ export class MobileComponent implements OnInit {
       this.socketEvents.push(this.msg);
 
     });
-    var _this = this; 
 
-    this.getNames();
-    var timout = setTimeout(function(){ 
-      _this.getNames();
-     }, 1000);
   }
   //call this if you want to call a function from table
   //function names:
-  //set_start_table "" parameter
-  //set_debate_table "" parameter
-  //set_vote_table "" parameter
-  //set_ability_table "" parameter
-  //set_player_mayor "name of player you want to make mayor" parameter
-  //set_player_dead "name of player you want to be dead" parameter
-  //upvote_player "name of player you want to upvote" parameter
+  //"set_start_table" / "" parameter
+  //"set_debate_table" / "" parameter
+  //"set_vote_table" / "" parameter
+  //"set_ability_table" / "" parameter
+  //"set_player_mayor" / "name of player you want to make mayor" parameter
+  //"set_player_dead" / "name of player you want to be dead" parameter
+  //"upvote_player" / "name of player you want to upvote" parameter
   event_function_table(function_name: string, parameter: string){    
     this.eventEmitterService.Table_functions({function_name:function_name,parameter:parameter});    
   } 
@@ -272,8 +267,6 @@ export class MobileComponent implements OnInit {
     this.setNamesService.getNames().subscribe((data)=>{
       this.names = data["message"][0];
       this.avatars = data["message"][1];
-      console.log(this.names);
-      console.log(this.avatars);
     });
   }
     
