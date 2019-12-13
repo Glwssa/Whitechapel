@@ -37,7 +37,7 @@ export class MobileComponent implements OnInit {
 
 
   timerClass = class Timer {
-    constructor(public counter = 30) {
+    constructor(public counter = 3) {
 
 
         
@@ -182,6 +182,7 @@ export class MobileComponent implements OnInit {
     (<HTMLElement>document.getElementById('popupMayor')).style.visibility="visible";
     (<HTMLElement>document.getElementById('popupSmall')).style.visibility="visible";
     (<HTMLElement>document.getElementById('blurOverlay')).className="blur";
+    this.setPopUpTexts("DECLARE YOU ARE THE MAYOR!","YOUR VOTE WILL COUNT AS 2 AFTER DECLARATION")
     
     console.log("Mayor Panel activated");
 
@@ -277,6 +278,8 @@ export class MobileComponent implements OnInit {
   }
     
   sendPlayerVotingInfo(){
+    console.log("hello");
+    console.log(this.player);
     this.index = this.names.indexOf(this.SelectedPlayer);
     this.myindex = this.names.indexOf(this.player);
     this.setNamesService.StoreVotes(this.index, this.myindex).subscribe((data)=>{
