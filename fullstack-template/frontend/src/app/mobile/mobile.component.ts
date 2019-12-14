@@ -22,6 +22,7 @@ export class MobileComponent implements OnInit {
   mayorDeclaration: boolean;
   playerSelectionAvailable: Boolean;
   timerInitAvailable: Boolean;
+  isDayTime: Boolean;
   SelectedPlayer: string;
   public myUserID;
   public userIDToTreat;
@@ -79,7 +80,7 @@ export class MobileComponent implements OnInit {
     this.mayorDeclaration = false;
     this.playerSelectionAvailable = true;
     this.timerInitAvailable = false;
-    
+    this.isDayTime = true;
 
     
     
@@ -142,6 +143,8 @@ export class MobileComponent implements OnInit {
         //this.timeLeft = 60;
         this.sendPlayerVotingInfo();
         this.pauseTimer();
+        if (this.isDayTime){this.setPhase("NIGHT");}
+        else{this.setPhase("DEBATE");}
       }
       if(this.timeLeft>=10){document.getElementById("countdown").innerHTML="00:"+this.timeLeft.toString();}
       if(this.timeLeft<10){document.getElementById("countdown").innerHTML="00:0"+this.timeLeft.toString();}
@@ -153,6 +156,11 @@ export class MobileComponent implements OnInit {
     clearInterval(this.interval);
   }
 
+  resetTimer(){
+
+      this.timeLeft = 2;
+
+  }
   
   
 
@@ -260,7 +268,12 @@ export class MobileComponent implements OnInit {
 
 
 
+  procceedToVote(){
 
+    this.setPhase("VOTE");
+
+
+  }
 
 
 
@@ -276,6 +289,8 @@ export class MobileComponent implements OnInit {
         this.setPhaseTexts("DEBATE", "DISCUSS WITH OTHER PLAYERS")
         this.setPlayerSelectionAvailable(false);
         this.setTimerInitAvailable(false);
+        (<HTMLElement>document.getElementById("countdown")).style.visibility = "hidden";
+        (<HTMLElement>document.getElementById("masterPlayerContinueButton")).style.visibility = "visible";
         //(<HTMLElement>document.getElementById('playerRow')).style.opacity="0.5";
         //call this to ubdate the table
         //this.event_function_table("set_debate_table","");
@@ -285,11 +300,24 @@ export class MobileComponent implements OnInit {
       this.setPhaseTexts("VOTE", "SELECT PLAYERS FOR ELIMINATION")
       this.setPlayerSelectionAvailable(true);
       this.setTimerInitAvailable(true);
+      (<HTMLElement>document.getElementById("countdown")).style.visibility = "visible";
+      (<HTMLElement>document.getElementById("masterPlayerContinueButton")).style.visibility = "hidden";
+      this.startTimer();
       //(<HTMLElement>document.getElementById('playerRow')).style.opacity="1";
       //call this to ubdate the table
       ////this.event_function_table("set_vote_table","");
       
     }
+
+    if (phase == "NIGHT"){
+
+      this.isDayTime = false;
+      this.setPhaseTexts("ABILITY NAME", "SELECT A PLAYER TO INVOKE YOUR ABILITY");
+      this.resetTimer();
+      this.startTimer();
+
+    }
+
   }
 
 

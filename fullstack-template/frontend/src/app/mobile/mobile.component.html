@@ -24,7 +24,7 @@
   <div *ngFor="let role of roles">
   <div id = "{{role}}" class="w3-cell-row" routerLink="/role-info" (click)="setCurrentRole(role)">
     <div class="w3-cell" style="width:30%">
-      <img class="w3-circle" src="https://i.imgur.com/7Vown38.jpg" style="width:100%;">
+      <img  class="w3-circle" src="https://i.imgur.com/7Vown38.jpg" style="width:100%;">
     </div>
     <div class="w3-cell w3-container">
       <h3>{{role}}</h3>
@@ -97,11 +97,14 @@
 
     <div class="w3-cell-row" >
       <div class="w3-cell" style="width:30%">
-        <img class="w3-circle" src="https://i.imgur.com/7Vown38.jpg" style="width:100%">
+        <img id="PlayerRoleIcon" class="w3-circle" src="https://i.imgur.com/7Vown38.jpg" >
       </div>
       <div class="w3-cell w3-container">
         <h3>{{player}}</h3>
-        <p class="yellowLetters">{{role}}</p>
+        <p id="PlayerRoleTitle" class="yellowLetters">{{role}}</p>
+      </div>
+      <div class="w3-cell w3-container">
+        <input (click) = procceedToVote() type="image" src="https://i.imgur.com/7Vown38.jpg" class="inline circle" id="masterPlayerContinueButton" >
       </div>
     </div>  
 
