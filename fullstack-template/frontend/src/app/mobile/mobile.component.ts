@@ -144,7 +144,7 @@ export class MobileComponent implements OnInit {
         this.sendPlayerVotingInfo();
         this.pauseTimer();
         if (this.isDayTime){this.setPhase("NIGHT");}
-        else{this.setPhase("DEBATE");}
+        else{this.setPhase("DEBATE"); }
       }
       if(this.timeLeft>=10){document.getElementById("countdown").innerHTML="00:"+this.timeLeft.toString();}
       if(this.timeLeft<10){document.getElementById("countdown").innerHTML="00:0"+this.timeLeft.toString();}
@@ -286,6 +286,7 @@ export class MobileComponent implements OnInit {
   setPhase(phase:string){
 
     if (phase == "DEBATE"){
+        this.isDayTime = true;
         this.setPhaseTexts("DEBATE", "DISCUSS WITH OTHER PLAYERS")
         this.setPlayerSelectionAvailable(false);
         this.setTimerInitAvailable(false);
@@ -295,6 +296,8 @@ export class MobileComponent implements OnInit {
         //call this to ubdate the table
         //this.event_function_table("set_debate_table","");
     }
+
+    this.resetTimer();
 
     if (phase == "VOTE"){
       this.setPhaseTexts("VOTE", "SELECT PLAYERS FOR ELIMINATION")
@@ -313,7 +316,6 @@ export class MobileComponent implements OnInit {
 
       this.isDayTime = false;
       this.setPhaseTexts("ABILITY NAME", "SELECT A PLAYER TO INVOKE YOUR ABILITY");
-      this.resetTimer();
       this.startTimer();
 
     }
