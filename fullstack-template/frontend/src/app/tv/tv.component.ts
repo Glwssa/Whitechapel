@@ -22,6 +22,7 @@ export class TvComponent implements OnInit {
   arrow: string;
   dead: boolean;
   name: string;
+  game_title_vis: boolean;
   public myUserID;
   public userIDToTreat;
   public msg;
@@ -45,6 +46,7 @@ export class TvComponent implements OnInit {
     this.grey = 'saturate(0)';
     this.dead = true;
     this.name = 'Strataras';
+    this.game_title_vis=true;
    }
 
 
@@ -61,28 +63,26 @@ export class TvComponent implements OnInit {
 
     });
 
-    this._leapservice.cursorRecognizer().subscribe(cursor=>{
+    //this._leapservice.cursorRecognizer().subscribe(cursor=>{
       //console.log(cursor)
-    })
+    //})
 
     //leap motion gesture contoller
-    /*this._leapservice.gestureRecognizer().subscribe((gesture) => {
+    this._leapservice.gestureRecognizer().subscribe((gesture) => {
       console.log(gesture)
-      if(gesture == Gestures.SWIPE_DOWN){
+      if(gesture == Gestures.SWIPE_LEFT){
         console.log("Swipe left in tv compoment");
         this.deincrement();
-      }else if (gesture == Gestures.SWIPE_UP){
+      }else if (gesture == Gestures.SWIPE_RIGHT){
         console.log("Swipe right in tv compoment");
         this.increment();
       }
-    });*/
+    });
     this._smartSpeaker.addCommand('next',()=>{
-      this.xfactor();
       this.increment();
     });
 
     this._smartSpeaker2.addCommand('back',()=>{
-      this.xfactor();
       this.deincrement();
     });
 
@@ -97,18 +97,8 @@ export class TvComponent implements OnInit {
     this.sendRound();
   }
 
-  satur() {
-    this.flag = true;
-    this.dead = false;
-    this.exmpl();
-  }
-
-   exmpl() {
-    this.tvService.sendMessageToClients(this.msg, this.userIDToTreat).subscribe((data)=>{
-      console.log(data);
-      this.x = data["message"];
-      this.playerState = data["message"];
-    });
+  continue(){
+    this.game_title_vis=false;
   }
 
   public convertInt( str: string) {
@@ -136,9 +126,6 @@ export class TvComponent implements OnInit {
 
   }
 
-  public xfactor(){
-    this._smartSpeaker.speak('Hello mother fuckers');
-  }
 
 }
 

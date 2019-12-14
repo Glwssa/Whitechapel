@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 export class EventEmitterService {    
     
   invokeTable_functions = new EventEmitter<{function_name: string, parameter: string}>();
-  TableSubsVar: Subscription;
+  TablesubsVar: Subscription;
   invokeTable_functions_player1 = new EventEmitter<{function_name: string, parameter: string}>();    
   TablesubsVarpl1: Subscription;    
   invokeTable_functions_player2 = new EventEmitter<{function_name: string, parameter: string}>();    
@@ -22,8 +22,14 @@ export class EventEmitterService {
   TablesubsVarpl6: Subscription; 
   invokeTable_functions_player7 = new EventEmitter<{function_name: string, parameter: string}>();    
   TablesubsVarpl7: Subscription; 
-    
-  constructor() { }    
+
+
+
+  constructor() { 
+    this.invokeTable_functions_player1.subscribe(data=>{
+      console.log('1',data);
+    })
+  }    
 
   Table_functions({function_name,parameter}){
     this.invokeTable_functions.emit({function_name,parameter});
