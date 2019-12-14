@@ -32,36 +32,39 @@ export class MobileComponent implements OnInit {
   myindex: number;
 
 
-  timerCounter:number;
+  timeLeft: number = 3;
+  interval;
+
+  //timerCounter:number;
   
 
 
-  timerClass = class Timer {
-    constructor(public counter = 3) {
+  // timerClass = class Timer {
+  //   constructor(public counter = 3) {
 
 
         
 
-        let intervalId = setInterval(() => {
-            this.counter = this.counter - 1;
-            //console.log("timer: "+this.counter)
-            if(this.counter>=10){document.getElementById("countdown").innerHTML="00:"+this.counter.toString();}
-            if(this.counter<10){document.getElementById("countdown").innerHTML="00:0"+this.counter.toString();}
+  //       let intervalId = setInterval(() => {
+  //           this.counter = this.counter - 1;
+  //           //console.log("timer: "+this.counter)
+  //           if(this.counter>=10){document.getElementById("countdown").innerHTML="00:"+this.counter.toString();}
+  //           if(this.counter<10){document.getElementById("countdown").innerHTML="00:0"+this.counter.toString();}
 
-            if(this.counter === 0){ 
-              clearInterval(intervalId);
-              MobileComponent.prototype.sendPlayerVotingInfo();
+  //           if(this.counter === 0){ 
+  //             clearInterval(intervalId);
+  //             MobileComponent.prototype.sendPlayerVotingInfo();
               
             
-            }
-        }, 1000);
+  //           }
+  //       }, 1000);
 
-      }
+  //     }
 
       
 
 
-  }
+  // }
 
 
 
@@ -91,7 +94,8 @@ export class MobileComponent implements OnInit {
     //this.invokePopUp("I USE THIS", "TO SEND TOASTS");
     //setTimeout(this.timerf,1000);
     
-   this.beginCountdown();
+  // this.beginCountdown();
+  this.startTimer();
 
    var _this = this; 
 
@@ -120,14 +124,30 @@ export class MobileComponent implements OnInit {
 
 
 
-  beginCountdown(){
+  // beginCountdown(){
 
-    var timerCountDown = new this.timerClass();
+  //   var timerCountDown = new this.timerClass();
     
-  }
+  // }
 
   
+  startTimer() {
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        //this.timeLeft = 60;
+        this.sendPlayerVotingInfo();
+        this.pauseTimer();
+      }
+      if(this.timeLeft>=10){document.getElementById("countdown").innerHTML="00:"+this.timeLeft.toString();}
+      if(this.timeLeft<10){document.getElementById("countdown").innerHTML="00:0"+this.timeLeft.toString();}
+    },1000)
+  }
 
+  pauseTimer() {
+    clearInterval(this.interval);
+  }
 
   
   
