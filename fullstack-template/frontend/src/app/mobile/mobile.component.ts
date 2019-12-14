@@ -21,6 +21,7 @@ export class MobileComponent implements OnInit {
   currentRole: string;
   mayorDeclaration: boolean;
   playerSelectionAvailable: Boolean;
+  timerInitAvailable: Boolean;
   SelectedPlayer: string;
   public myUserID;
   public userIDToTreat;
@@ -77,6 +78,7 @@ export class MobileComponent implements OnInit {
     this.role = this.roles[0];
     this.mayorDeclaration = false;
     this.playerSelectionAvailable = true;
+    this.timerInitAvailable = false;
     
 
     
@@ -132,7 +134,8 @@ export class MobileComponent implements OnInit {
 
   
   startTimer() {
-    this.interval = setInterval(() => {
+    if(this.timerInitAvailable){
+     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
       } else {
@@ -142,7 +145,8 @@ export class MobileComponent implements OnInit {
       }
       if(this.timeLeft>=10){document.getElementById("countdown").innerHTML="00:"+this.timeLeft.toString();}
       if(this.timeLeft<10){document.getElementById("countdown").innerHTML="00:0"+this.timeLeft.toString();}
-    },1000)
+      },1000)
+    }
   }
 
   pauseTimer() {
@@ -156,9 +160,12 @@ export class MobileComponent implements OnInit {
 
 
   openSidebar() {
-    document.getElementById('mySidebar').style.display = 'block';
-    document.getElementById('mySidebar').style.width = '100%';
-    document.getElementById('mySidebar').style.backgroundColor = 'black';
+    if(this.timerInitAvailable){console.log("Drawer Unavailable during countdown")}
+    else{
+      document.getElementById('mySidebar').style.display = 'block';
+      document.getElementById('mySidebar').style.width = '100%';
+      document.getElementById('mySidebar').style.backgroundColor = 'black';
+    }
   }
 
   rowSelect(row: string) {
@@ -232,6 +239,10 @@ export class MobileComponent implements OnInit {
     this.playerSelectionAvailable = v;
 
   }
+  
+  setTimerInitAvailable(v:boolean){
+    this.timerInitAvailable = v;
+  }
 
 
 
@@ -264,6 +275,7 @@ export class MobileComponent implements OnInit {
     if (phase == "DEBATE"){
         this.setPhaseTexts("DEBATE", "DISCUSS WITH OTHER PLAYERS")
         this.setPlayerSelectionAvailable(false);
+        this.setTimerInitAvailable(false);
         //(<HTMLElement>document.getElementById('playerRow')).style.opacity="0.5";
         //call this to ubdate the table
         //this.event_function_table("set_debate_table","");
@@ -272,6 +284,7 @@ export class MobileComponent implements OnInit {
     if (phase == "VOTE"){
       this.setPhaseTexts("VOTE", "SELECT PLAYERS FOR ELIMINATION")
       this.setPlayerSelectionAvailable(true);
+      this.setTimerInitAvailable(true);
       //(<HTMLElement>document.getElementById('playerRow')).style.opacity="1";
       //call this to ubdate the table
       ////this.event_function_table("set_vote_table","");
