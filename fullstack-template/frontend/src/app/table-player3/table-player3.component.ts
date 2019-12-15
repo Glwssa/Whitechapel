@@ -51,7 +51,7 @@ export class TablePlayer3Component implements OnInit {
    }
 
   ngOnInit() {
-    if (this.eventEmitterService.TablesubsVarpl3==undefined){
+  
       this.eventEmitterService.TablesubsVarpl3 = this.eventEmitterService.    
       invokeTable_functions_player3.subscribe((data) => {
         if(data.function_name == "set_dead"){
@@ -70,7 +70,7 @@ export class TablePlayer3Component implements OnInit {
           this.reset_mayor();
         }
       });
-    }
+
   }
 
   set_visible_giblet(){

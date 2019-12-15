@@ -80,7 +80,7 @@ export class TableComponent implements OnInit {
     /*setTimeout(function(){ 
       _this.getTableStartBool();
      }, 3000);*/
-     if (this.eventEmitterService.TablesubsVarpl1==undefined){
+     
       this.eventEmitterService.TablesubsVarpl1 = this.eventEmitterService.    
       invokeTable_functions_player1.subscribe((data) => {
         if(data.function_name == "set_start_table"){
@@ -99,7 +99,7 @@ export class TableComponent implements OnInit {
           this.upvote_player(data.parameter);
         }
       });
-    }
+    
     
 
 

@@ -53,8 +53,7 @@ export class TablePlayerComponent implements OnInit {
   ngOnInit() {
     console.log('hee12312');
 
-    //if (this.eventEmitterService.TablesubsVarpl1==undefined){
-     // console.log('hee');
+    
       this.eventEmitterService.TablesubsVarpl1 = this.eventEmitterService.    
       invokeTable_functions_player1.subscribe((data) => {
         console.log('2',data);
@@ -74,7 +73,7 @@ export class TablePlayerComponent implements OnInit {
           this.reset_mayor();
         }
       });
-   // }
+
   }
 
   set_visible_giblet(){
