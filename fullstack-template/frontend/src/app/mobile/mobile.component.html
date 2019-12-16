@@ -100,7 +100,7 @@
         <img id="PlayerRoleIcon" class="w3-circle" src="https://i.imgur.com/7Vown38.jpg" >
       </div>
       <div class="w3-cell w3-container">
-        <h3>{{player}}</h3>
+        <h3>{{this.globals.myName}}</h3>
         <p id="PlayerRoleTitle" class="yellowLetters">{{role}}</p>
       </div>
       <div class="w3-cell w3-container">
@@ -133,18 +133,18 @@
     <br>
 
    
-  <div  *ngFor="let name of names; let i = index">
-    <div id = "{{name}}" class="w3-cell-row" (click)="rowSelect(name)">
+  <div  *ngFor="let name of names; let i = index" >
+    <div  id = "{{name}}" *ngIf="i != this.skipIndex" class="w3-cell-row" (click)="rowSelect(name)">
       <div class="w3-cell" style="width:30%" >
         <img class="w3-circle" src="{{avatars[i]}}" style="width:100%">
       </div>
       <div  class="w3-cell w3-container">
         <h3>{{name}}</h3>
-       
+      
       </div>
-    </div>  
+  </div> 
+  <hr>
 
-    <hr>
  
 </div>
   <br>

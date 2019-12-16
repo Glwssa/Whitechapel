@@ -1,3 +1,4 @@
+import { CookieService } from 'ngx-cookie-service';
 import { SocketsService } from './../global/services/core/sockets.service';
 import { SetNamesService } from './../get-names.service';
 import { Globals } from './../global/globl';
@@ -33,6 +34,9 @@ export class MobileComponent implements OnInit {
   index: number;
   myindex: number;
 
+  monNamae: string;
+  skipIndex: number;
+  cookieWithName: string;
 
   timeLeft: number = 3;
   interval;
@@ -73,7 +77,7 @@ export class MobileComponent implements OnInit {
 
 
 
-  constructor(public globals: Globals, private setNamesService : SetNamesService, private socketService: SocketsService,private eventEmitterService: EventEmitterService) {
+  constructor(private cookieService: CookieService, public globals: Globals, private setNamesService : SetNamesService, private socketService: SocketsService,private eventEmitterService: EventEmitterService) {
     this.prevRow = '';
     this.player = this.names[2];
     this.role = this.roles[0];
@@ -110,7 +114,12 @@ export class MobileComponent implements OnInit {
       this.socketEvents.push(this.msg);
 
     });
-
+ 
+    /*
+    this.cookieService.set('MyNameCookie',this.globals.myName);
+    this.cookieWithName = this.cookieService.get('MyNameCookie');
+    this.monNamae = this.cookieWithName;
+    */
   }
   //call this if you want to call a function from table
   //function names:
@@ -340,7 +349,7 @@ export class MobileComponent implements OnInit {
     this.setNamesService.getNames().subscribe((data)=>{
       this.names = data["message"][0];
       this.avatars = data["message"][1];
-      console.log(this.avatars);
+      this.myName();
     });
   }
     
@@ -354,7 +363,16 @@ export class MobileComponent implements OnInit {
       console.log(data);
     });
 
+
   }  
+
+  myName(){
+    this.globals.myName = JSON.parse(localStorage.getItem('user'));
+    this.monNamae=this.globals.myName;
+    this.skipIndex = this.names.indexOf(this.monNamae);
+    console.log("monnamae "+this.monNamae);
+    console.log("skipindex "+this.skipIndex);
+  }
     
     
 

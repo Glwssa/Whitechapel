@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SocketsService } from 'src/app/global/services';
 import { SetNamesService } from './../get-names.service';
 import { Router } from '@angular/router';
+import { Globals } from './../global/globl';
+
 
 @Component({
   selector: 'mobilelogin',
@@ -20,7 +22,7 @@ export class MobileLoginComponent implements OnInit {
   response: any;
 
 
-  constructor(private router: Router, private SetNamesService: SetNamesService, private socketService: SocketsService) { 
+  constructor(public globals: Globals, private router: Router, private SetNamesService: SetNamesService, private socketService: SocketsService) { 
 
     this.playerAvatar = "https://i.imgur.com/7Vown38.jpg";
     this.playerName = "Player Unknown";
@@ -64,10 +66,15 @@ export class MobileLoginComponent implements OnInit {
     
     this.SetNamesService.setNames(this.playerName, this.userIDToTreat).subscribe((data)=>{
       console.log(data);
-      localStorage.setItem("user", JSON.stringify(data))
+      localStorage.setItem("user", JSON.stringify(this.playerName))
     });
     
     console.log("Welcome: "+this.playerName);
-    this.router.navigate(['mobileMain'])
+    this.setMyName(this.playerName);
+    this.router.navigate(['mobileMain']);
+  }
+
+  setMyName(myName: string){
+    this.globals.myName = myName;
   }
 }
