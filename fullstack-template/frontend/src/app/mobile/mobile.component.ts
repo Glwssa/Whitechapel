@@ -17,7 +17,8 @@ export class MobileComponent implements OnInit {
   names = [];
   avatars = [];
   player: string;
-  roles = ['JACK THE REAPER', 'CONSTABLE', 'PHYSICIAN', 'MEDIUM', 'JESTER', 'VIGILANTE', 'MAYOR'];
+  roles = ['CONSTABLE', 'JESTER', 'VIGILANTE', 'MAYOR', 'MEDIUM', 'JACK THE REAPER', 'PHYSICIAN'];
+  
   role: string;
   currentRole: string;
   mayorDeclaration: boolean;
@@ -34,6 +35,7 @@ export class MobileComponent implements OnInit {
   response: any;
   index: number;
   myindex: number;
+  public playersRole: string[];
 
   monNamae: string;
   skipIndex: number;
@@ -361,6 +363,7 @@ export class MobileComponent implements OnInit {
     this.setNamesService.getNames().subscribe((data)=>{
       this.names = data["message"][0];
       this.avatars = data["message"][1];
+      this.playersRole = data["message"][2];
       this.myName();
     });
   }
