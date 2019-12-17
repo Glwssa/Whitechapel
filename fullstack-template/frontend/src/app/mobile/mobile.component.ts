@@ -24,6 +24,7 @@ export class MobileComponent implements OnInit {
   playerSelectionAvailable: Boolean;
   timerInitAvailable: Boolean;
   isDayTime: Boolean;
+  isFirstDay: Boolean;
   SelectedPlayer: string;
   public myUserID;
   public userIDToTreat;
@@ -79,12 +80,13 @@ export class MobileComponent implements OnInit {
 
   constructor(private cookieService: CookieService, public globals: Globals, private setNamesService : SetNamesService, private socketService: SocketsService,private eventEmitterService: EventEmitterService) {
     this.prevRow = '';
-    this.player = this.names[2];
+    this.player = "lala";
     this.role = this.roles[0];
     this.mayorDeclaration = false;
     this.playerSelectionAvailable = true;
     this.timerInitAvailable = false;
     this.isDayTime = true;
+    this.isFirstDay = true;
 
     
     
@@ -167,7 +169,7 @@ export class MobileComponent implements OnInit {
 
   resetTimer(){
 
-      this.timeLeft = 2;
+      this.timeLeft = 6;
 
   }
   
@@ -194,6 +196,7 @@ export class MobileComponent implements OnInit {
       if (!this.prevRow) {
         this.prevRow = row;
         document.getElementById(row).style.backgroundColor = 'black';
+        this.player = row;
       } else {
         document.getElementById(row).style.backgroundColor = 'black';
         document.getElementById(this.prevRow).style.backgroundColor = 'transparent';
@@ -278,8 +281,8 @@ export class MobileComponent implements OnInit {
 
 
   procceedToVote(){
-
-    this.setPhase("VOTE");
+    if(this.isFirstDay){this.timerInitAvailable=true; this.setPlayerSelectionAvailable(true); this.setPhase("NIGHT");}
+    else{this.setPhase("VOTE");}
 
 
   }
@@ -324,7 +327,11 @@ export class MobileComponent implements OnInit {
     if (phase == "NIGHT"){
 
       this.isDayTime = false;
+      this.isFirstDay = false;
+      (<HTMLElement>document.getElementById("countdown")).style.visibility = "visible";
+      (<HTMLElement>document.getElementById("masterPlayerContinueButton")).style.visibility = "hidden";
       this.setPhaseTexts("ABILITY NAME", "SELECT A PLAYER TO INVOKE YOUR ABILITY");
+      console.log("y0");
       this.startTimer();
 
     }
@@ -354,7 +361,7 @@ export class MobileComponent implements OnInit {
   }
     
   sendPlayerVotingInfo(){
-    console.log("hello");
+    console.log("helloEIMAI SEXY");
     console.log(this.player);
     this.index = this.names.indexOf(this.SelectedPlayer);
     this.myindex = this.names.indexOf(this.player);

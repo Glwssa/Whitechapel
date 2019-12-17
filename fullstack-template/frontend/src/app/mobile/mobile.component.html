@@ -132,7 +132,7 @@
 
     <br>
 
-   <div *ngFor="let name of names; let i = index" >
+   <div *ngFor="let name of names; let i = index">
   <div *ngIf="i != this.skipIndex"  >
     <div  id = "{{name}}"  class="w3-cell-row" (click)="rowSelect(name)">
       <div class="w3-cell" style="width:30%" >
