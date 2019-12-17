@@ -32,6 +32,7 @@ export class ExampleController {
     public TableNamesImagesCharacterscurrentStatus: string[][];
     public calls: number;
     public StartTable: boolean = false;
+    public countdead: number = 0;
   NamesArray: string[] = [];
   ReadyPlayersCounter: number = 0;
   NamesRoles:string [] = [];
@@ -239,7 +240,8 @@ export class ExampleController {
         this.countVotes[this.PlayerVote]++;
         this.totalVotes++;
         this.tempVoteArray[this.VoterIndex] = this.VotedAvatar;
-        if(this.totalVotes===7){
+        if(this.totalVotes===7-this.countdead){
+          this.countdead++;
           this.totalVotes=0;
           this.AllVotes.push(this.tempVoteArray[0]);
           this.AllVotes.push(this.tempVoteArray[1]);
