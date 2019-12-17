@@ -152,7 +152,7 @@ export class MobileComponent implements OnInit {
         this.timeLeft--;
       } else {
         //this.timeLeft = 60;
-        this.sendPlayerVotingInfo();
+        if(this.isDayTime){this.sendPlayerVotingInfo();}
         this.pauseTimer();
         if (this.isDayTime){this.setPhase("NIGHT");}
         else{this.setPhase("DEBATE"); }
@@ -199,6 +199,7 @@ export class MobileComponent implements OnInit {
         this.player = row;
       } else {
         document.getElementById(row).style.backgroundColor = 'black';
+        this.player = row;
         document.getElementById(this.prevRow).style.backgroundColor = 'transparent';
         this.prevRow = row;
       }
@@ -331,7 +332,6 @@ export class MobileComponent implements OnInit {
       (<HTMLElement>document.getElementById("countdown")).style.visibility = "visible";
       (<HTMLElement>document.getElementById("masterPlayerContinueButton")).style.visibility = "hidden";
       this.setPhaseTexts("ABILITY NAME", "SELECT A PLAYER TO INVOKE YOUR ABILITY");
-      console.log("y0");
       this.startTimer();
 
     }
@@ -362,9 +362,13 @@ export class MobileComponent implements OnInit {
     
   sendPlayerVotingInfo(){
     console.log("helloEIMAI SEXY");
-    console.log(this.player);
+    console.log(this.player + " psofos");
     this.index = this.names.indexOf(this.SelectedPlayer);
+    console.log(this.index + " psofos");
+
     this.myindex = this.names.indexOf(this.player);
+    console.log(this.myindex + " votarei");
+
     this.event_function_table("upvote_player",this.SelectedPlayer);
     this.setNamesService.StoreVotes(this.index, this.myindex).subscribe((data)=>{
       console.log(data);
