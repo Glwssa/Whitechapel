@@ -76,7 +76,7 @@ export class ExampleController {
         return router;
     }
     public getMobileNames(req: any, res: any) {
-      res.json({ message: [this.NamesArray,this.NameAvatar]});
+      res.json({ message: [this.NamesArray,this.NameAvatar,this.Roles]});
     }
 
     public setNames(req: Request, res: Response) {
@@ -227,7 +227,7 @@ export class ExampleController {
       this.CurrrentRoundVotes = [];
       this.i = (this.currentRound - 1) * 7;
       for (let index = this.i; index <= index+7; index++){
-         this.currentStatus.push(this.status[index]);
+         this.currentStatus.push(this.status[index+7]);
          this.CurrrentRoundVotes.push(this.AllVotes[index]);
       }
     }
@@ -240,7 +240,7 @@ export class ExampleController {
         this.countVotes[this.PlayerVote]++;
         this.totalVotes++;
         this.tempVoteArray[this.VoterIndex] = this.VotedAvatar;
-        if(this.totalVotes===7-this.countdead){
+        if(this.totalVotes===1-this.countdead){
           this.countdead++;
           this.totalVotes=0;
           this.AllVotes.push(this.tempVoteArray[0]);
@@ -290,7 +290,7 @@ export class ExampleController {
 
        // await this.fileReader(message.scream);
         logger.info('tv');
-        //this.history();
+        this.history();
         logger.info(this.NameAvatar);
         logger.info(this.NamesArray);
 
@@ -298,7 +298,7 @@ export class ExampleController {
         logger.info(this.NamesRoles );
 
       
-        res.json({ message: [this.NamesArray,this.NameAvatar,this.status,this.CurrrentRoundVotes]});
+        res.json({ message: [this.NamesArray,this.NameAvatar,this.currentStatus,this.CurrrentRoundVotes]});
 
     }
 
