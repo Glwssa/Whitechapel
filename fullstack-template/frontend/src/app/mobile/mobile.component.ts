@@ -304,9 +304,10 @@ export class MobileComponent implements OnInit {
         this.setTimerInitAvailable(false);
         (<HTMLElement>document.getElementById("countdown")).style.visibility = "hidden";
         (<HTMLElement>document.getElementById("masterPlayerContinueButton")).style.visibility = "visible";
+        this.event_function_table("set_debate_table","");
         //(<HTMLElement>document.getElementById('playerRow')).style.opacity="0.5";
         //call this to ubdate the table
-        //this.event_function_table("set_debate_table","");
+        this.event_function_table("set_debate_table","");
     }
 
     this.resetTimer();
@@ -317,10 +318,11 @@ export class MobileComponent implements OnInit {
       this.setTimerInitAvailable(true);
       (<HTMLElement>document.getElementById("countdown")).style.visibility = "visible";
       (<HTMLElement>document.getElementById("masterPlayerContinueButton")).style.visibility = "hidden";
+      this.event_function_table("set_vote_table","");
       this.startTimer();
       //(<HTMLElement>document.getElementById('playerRow')).style.opacity="1";
       //call this to ubdate the table
-      ////this.event_function_table("set_vote_table","");
+      
       
     }
 
@@ -331,8 +333,10 @@ export class MobileComponent implements OnInit {
       (<HTMLElement>document.getElementById("countdown")).style.visibility = "visible";
       (<HTMLElement>document.getElementById("masterPlayerContinueButton")).style.visibility = "hidden";
       this.setPhaseTexts("ABILITY NAME", "SELECT A PLAYER TO INVOKE YOUR ABILITY");
+      this.event_function_table("set_ability_table","");
       console.log("y0");
       this.startTimer();
+
 
     }
 
