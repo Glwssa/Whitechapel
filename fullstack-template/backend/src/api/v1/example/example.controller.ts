@@ -6,6 +6,7 @@ import * as  fs from 'fs';
 import * as path from 'path';
 
 export class ExampleController {
+  testStatus=[1,1,1,1,1,1,1,1,1,0,1,1,0,1];
 
     //Avatars:
     // https://i.imgur.com/yOxs9eW.png -monica
@@ -228,14 +229,16 @@ export class ExampleController {
     public history(){
       this.currentStatus = [];
       this.CurrrentRoundVotes = [];
-      this.i = (this.currentRound - 1) * 7;
-      for (let index = this.i; index <= index+7; index++){
-         this.currentStatus.push(this.status[index+7]);
-         this.CurrrentRoundVotes.push(this.AllVotes[index]);
+      this.i = (this.currentRound) * 7; // 7 
+      logger.info(this.status);
+      for (let index = this.i; index < this.i+7; index++){ 
+         this.currentStatus.push(this.status[index]);
+         this.CurrrentRoundVotes.push(this.AllVotes[index-7]);
       }
     }
 
     public StoreVotes(req: Request, res: Response){
+      logger.info('ebala vote');
         const message: any = req.body.message;
         this.PlayerVote = message.scream;
         this.VoterIndex = message.userID;
@@ -244,6 +247,7 @@ export class ExampleController {
         this.totalVotes++;
         this.tempVoteArray[this.VoterIndex] = this.VotedAvatar;
         if(this.totalVotes===1-this.countdead){
+          logger.info('mphka sta votes');
           this.countdead++;
           this.totalVotes=0;
           this.AllVotes.push(this.tempVoteArray[0]);
@@ -258,14 +262,14 @@ export class ExampleController {
           var statusLength = this.status.length;
           var statusStart = statusLength-7;    //14l  0-6  7-13  
           var k =0;
-          for ( k = 0; k < maxIndex; k++) {
+          for ( k = statusStart; k < statusStart+maxIndex-1; k++) {
             this.status.push(this.status[statusStart+k]);
           }
           this.status.push(this.status[statusStart+maxIndex]);
-          this.status[statusStart+maxIndex] = 0;
+          this.status[statusStart+maxIndex+statusLength] = 0;
 
           var g;
-          for (g = k+2; g < 7; g++) { // 7 theseis. 5h thesh.  0-3, 4 , 5-6
+          for (g = statusStart+maxIndex+1; g < statusLength; g++) { // 7 theseis. 5h thesh.  0-3, 4 , 5-6
             this.status.push(this.status[statusStart+g]);
             
           }
@@ -297,11 +301,12 @@ export class ExampleController {
         logger.info(this.NameAvatar);
         logger.info(this.NamesArray);
 
-       // logger.info(this.currentStatus);
+        logger.info(this.currentStatus);
         logger.info(this.NamesRoles );
 
-      
+        logger.info(this.status.length);
         res.json({ message: [this.NamesArray,this.NameAvatar,this.currentStatus,this.CurrrentRoundVotes]});
+
 
     }
 
