@@ -366,7 +366,7 @@ export class MobileComponent implements OnInit {
     this.index = this.names.indexOf(this.SelectedPlayer);
     console.log(this.index + " psofos");
 
-    this.myindex = this.names.indexOf(this.player);
+    this.myindex = this.names.indexOf(this.monNamae);
     console.log(this.myindex + " votarei");
 
     this.event_function_table("upvote_player",this.SelectedPlayer);

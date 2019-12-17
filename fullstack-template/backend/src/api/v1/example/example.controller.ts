@@ -266,6 +266,7 @@ export class ExampleController {
           }
           this.tempVoteArray=['','','','','','',''];
           this.countVotes=[0,0,0,0,0,0,0];
+          res.json({ message: statusStart+maxIndex});
 
         }
     }
