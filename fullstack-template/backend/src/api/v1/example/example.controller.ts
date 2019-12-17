@@ -16,13 +16,13 @@ export class ExampleController {
     // https://i.imgur.com/j5Haq2A.png -Barack
     // https://i.imgur.com/g2vt5Hk.png -Ariana
     //Characters:
-    // https://i.imgur.com/9LzwD2L.png -Constable
-    // https://i.imgur.com/Hl9HvHp.png -Jocker
-    // https://i.imgur.com/VZVnvpp.png -Vigilante
-    // https://i.imgur.com/W3WK2IQ.png -Mayor
-    // https://i.imgur.com/vth8OLN.png -Medium
-    // https://i.imgur.com/cIwiHJe.png -Killer
-    // https://i.imgur.com/yb3YgnB.png -Doctor
+    // https://i.imgur.com/9LzwD2L.png -CONSTABLE
+    // https://i.imgur.com/Hl9HvHp.png -JESTER
+    // https://i.imgur.com/VZVnvpp.png -VIGILANTE
+    // https://i.imgur.com/W3WK2IQ.png -MAYOR
+    // https://i.imgur.com/vth8OLN.png -MEDIUM
+    // https://i.imgur.com/cIwiHJe.png -JACK THE REAPER
+    // https://i.imgur.com/yb3YgnB.png -PHYSICIAN
 
     public data: any;
     public Tabledata: any;
