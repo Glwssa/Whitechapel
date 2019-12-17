@@ -1,4 +1,4 @@
-import { CookieService } from 'ngx-cookie-service';
+//import { CookieService } from 'ngx-cookie-service';
 import { SocketsService } from './../global/services/core/sockets.service';
 import { SetNamesService } from './../get-names.service';
 import { Globals } from './../global/globl';
@@ -366,6 +366,7 @@ export class MobileComponent implements OnInit {
   }
     
   sendPlayerVotingInfo(){
+    this.event_function_table("upvote", this.SelectedPlayer);
     console.log("helloEIMAI SEXY");
     this.index = this.names.indexOf(this.SelectedPlayer);
 
@@ -374,6 +375,7 @@ export class MobileComponent implements OnInit {
     this.event_function_table("upvote_player",this.SelectedPlayer);
     this.setNamesService.StoreVotes(this.index, this.myindex).subscribe((data)=>{
       console.log(data);
+      this.event_function_table("set_dead_player", this.names[data["message"]]);
     });
 
 
