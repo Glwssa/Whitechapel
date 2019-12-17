@@ -76,7 +76,7 @@ export class ExampleController {
         return router;
     }
     public getMobileNames(req: any, res: any) {
-      res.json({ message: [this.NamesArray,this.NameAvatar,this.Roles]});
+      res.json({ message: [this.NamesArray,this.NameAvatar,this.NamesRoles]});
     }
 
     public setNames(req: Request, res: Response) {
