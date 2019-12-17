@@ -40,7 +40,7 @@ export class TvComponent implements OnInit {
     this.socketEvents = [];
     this.image = 'https://i.imgur.com/TIk7nCa.png';
     this.arrow = 'https://i.imgur.com/LxivwLt.png';
-    this.round = 1;
+    this.round = 0;
     this.flag = false;
     this.norm = 'saturate(1)';
     this.grey = 'saturate(0)';
@@ -54,7 +54,6 @@ export class TvComponent implements OnInit {
 
   ngOnInit() {
     this.playerName=[];
-    this.sendRound();
     this.myUserID = 'me';
     this.userIDToTreat = 'Stratos';
     this.msg = 'whats up';
@@ -113,6 +112,7 @@ export class TvComponent implements OnInit {
       this.playerName = data["message"][0];
       this.playerAvatar = data["message"][1];
       this.playerState = data["message"][2];
+      console.log(this.playerState+" ta states");
       this.playerVote = data["message"][3];
 
 
