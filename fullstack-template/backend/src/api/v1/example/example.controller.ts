@@ -36,9 +36,11 @@ export class ExampleController {
   NamesArray: string[] = [];
   ReadyPlayersCounter: number = 0;
   NamesRoles:string [] = [];
+  Rolakia = ['Constable','Jocker','Vigilante','Mayor','Medium','Killer','Docktor'];
   Roles=['https://i.imgur.com/9LzwD2L.png','https://i.imgur.com/Hl9HvHp.png','https://i.imgur.com/VZVnvpp.png','https://i.imgur.com/W3WK2IQ.png','https://i.imgur.com/vth8OLN.png','https://i.imgur.com/cIwiHJe.png','https://i.imgur.com/yb3YgnB.png'];
   exist=false;
   randomNum: number;
+  RolesByName:string[] = [];
   usednumber: number[] = [];
   NameAvatar: string[] = [];
   Avatar= ['https://i.imgur.com/yOxs9eW.png', 'https://i.imgur.com/6f6DPhk.png', 'https://i.imgur.com/lJ3ggBw.png', 'https://i.imgur.com/zaleAlv.png', 'https://i.imgur.com/dkszoEI.png', 'https://i.imgur.com/j5Haq2A.png', 'https://i.imgur.com/g2vt5Hk.png'];
@@ -76,7 +78,7 @@ export class ExampleController {
         return router;
     }
     public getMobileNames(req: any, res: any) {
-      res.json({ message: [this.NamesArray,this.NameAvatar,this.NamesRoles]});
+      res.json({ message: [this.NamesArray,this.NameAvatar,this.RolesByName]});
     }
 
     public setNames(req: Request, res: Response) {
@@ -119,6 +121,7 @@ export class ExampleController {
 
 
       this.NameAvatar.push(this.Avatar[this.randomNum]);
+      this.RolesByName.push(this.Rolakia[this.randomNum]);
 
       this.exist=false;
 
