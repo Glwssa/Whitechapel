@@ -366,6 +366,7 @@ export class MobileComponent implements OnInit {
   }
     
   sendPlayerVotingInfo(){
+    this.event_function_table("upvote", this.SelectedPlayer);
     console.log("helloEIMAI SEXY");
     console.log(this.player + " psofos");
     this.index = this.names.indexOf(this.SelectedPlayer);
