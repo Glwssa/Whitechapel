@@ -78,7 +78,7 @@ export class MobileComponent implements OnInit {
 
 
 
-  constructor(private cookieService: CookieService, public globals: Globals, private setNamesService : SetNamesService, private socketService: SocketsService,private eventEmitterService: EventEmitterService) {
+  constructor( public globals: Globals, private setNamesService : SetNamesService, private socketService: SocketsService,private eventEmitterService: EventEmitterService) {
     this.prevRow = '';
     this.player = "lala";
     this.role = this.roles[0];
