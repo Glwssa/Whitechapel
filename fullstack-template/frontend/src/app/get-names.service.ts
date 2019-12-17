@@ -18,7 +18,7 @@ export class SetNamesService {
   public setNames(msg , toUserID) {
     //  return this.http.post(`${this.hostURl}/api/example/setNames`,
     //  return this.http.post(`http://192.168.99.100:8080/api/example/setNames`
-    return this.http.post(`http://192.168.99.100:8080/api/example/setNames`,
+    return this.http.post(`${this.hostURl}/api/example/setNames`,
     {
       message: {
         scream: msg,
@@ -32,7 +32,7 @@ export class SetNamesService {
     public StoreVotes(msg , toUserID) {
       //  return this.http.post(`${this.hostURl}/api/example/setNames`,
       //  return this.http.post(`http://192.168.99.100:8080/api/example/setNames`
-      return this.http.post(`http://192.168.99.100:8080/api/example/StoreVotes`,
+      return this.http.post(`${this.hostURl}/api/example/StoreVotes`,
       {
         message: {
           scream: msg,
@@ -44,7 +44,7 @@ export class SetNamesService {
       }
 
       public getNames(){
-        return this.http.get(`http://192.168.99.100:8080/api/example/getMobileNames`);
+        return this.http.get(`${this.hostURl}/api/example/getMobileNames`);
       }
 
 

@@ -20,6 +20,8 @@ export class MobileComponent implements OnInit {
   roles = ['CONSTABLE', 'JESTER', 'VIGILANTE', 'MAYOR', 'MEDIUM', 'JACK THE REAPER', 'PHYSICIAN'];
   
   role: string;
+  public PlayerRole: string = "lol";
+  public index_of_player: number = 0;
   currentRole: string;
   mayorDeclaration: boolean;
   playerSelectionAvailable: Boolean;
@@ -360,12 +362,36 @@ export class MobileComponent implements OnInit {
   }
     
   getNames(){
+    
     this.setNamesService.getNames().subscribe((data)=>{
+      
       this.names = data["message"][0];
       this.avatars = data["message"][1];
       this.playersRole = data["message"][2];
+      //console.log(this.names);
+      this.find_player_role_by_name();
+      //console.log(this.names);
+      //console.log(this.PlayerRole);
+      //this.PlayerRole = localStorage.getItem("PlayerRole");
       this.myName();
+      
     });
+  }
+  //should find index of player inside names and give PlayerRole the correct role but indexof is fucked!!!!!!!!
+  find_player_role_by_name(){
+    var pl_name = localStorage.getItem("user");
+    //console.log(typeof pl_name);
+    //console.log(pl_name);
+    //console.log(this.names);
+    //console.log(typeof this.names.lastIndexOf(pl_name));
+    //this.index_of_player = this.names.lastIndexOf(pl_name);
+    
+    this.skipIndex = this.names.indexOf(pl_name);
+    //console.log(this.skipIndex);
+    this.PlayerRole = this.playersRole[this.skipIndex];
+    
+    
+   // localStorage.setItem("PlayerRole", this.playersRole[index]);
   }
     
   sendPlayerVotingInfo(){
