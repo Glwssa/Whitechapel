@@ -132,9 +132,9 @@
 
     <br>
 
-   
-  <div  *ngFor="let name of names; let i = index" >
-    <div  id = "{{name}}" *ngIf="i != this.skipIndex" class="w3-cell-row" (click)="rowSelect(name)">
+   <div *ngFor="let name of names; let i = index" >
+  <div *ngIf="i != this.skipIndex"  >
+    <div  id = "{{name}}"  class="w3-cell-row" (click)="rowSelect(name)">
       <div class="w3-cell" style="width:30%" >
         <img class="w3-circle" src="{{avatars[i]}}" style="width:100%">
       </div>
@@ -146,6 +146,7 @@
   <hr>
 
  
+</div>
 </div>
   <br>
   </div>
