@@ -1,3 +1,4 @@
+//import { CookieService } from 'ngx-cookie-service';
 import { SocketsService } from './../global/services/core/sockets.service';
 import { SetNamesService } from './../get-names.service';
 import { Globals } from './../global/globl';
@@ -16,13 +17,17 @@ export class MobileComponent implements OnInit {
   names = [];
   avatars = [];
   player: string;
-  roles = ['JACK THE REAPER', 'CONSTABLE', 'PHYSICIAN', 'MEDIUM', 'JESTER', 'VIGILANTE', 'MAYOR'];
+  roles = ['CONSTABLE', 'JESTER', 'VIGILANTE', 'MAYOR', 'MEDIUM', 'JACK THE REAPER', 'PHYSICIAN'];
+  
   role: string;
+  public PlayerRole: string = "lol";
+  public index_of_player: number = 0;
   currentRole: string;
   mayorDeclaration: boolean;
   playerSelectionAvailable: Boolean;
   timerInitAvailable: Boolean;
   isDayTime: Boolean;
+  isFirstDay: Boolean;
   SelectedPlayer: string;
   public myUserID;
   public userIDToTreat;
@@ -32,8 +37,12 @@ export class MobileComponent implements OnInit {
   response: any;
   index: number;
   myindex: number;
+  public playersRole: string[];
 
   buttonHalt:boolean;
+  monNamae: string;
+  skipIndex: number;
+  cookieWithName: string;
 
   timeLeft: number = 3;
   interval;
@@ -74,15 +83,17 @@ export class MobileComponent implements OnInit {
 
 
 
-  constructor(public globals: Globals, private setNamesService : SetNamesService, private socketService: SocketsService,private eventEmitterService: EventEmitterService) {
+  constructor( public globals: Globals, private setNamesService : SetNamesService, private socketService: SocketsService,private eventEmitterService: EventEmitterService) {
     this.prevRow = '';
-    this.player = this.names[2];
+    this.player = "lala";
     this.role = this.roles[0];
     this.mayorDeclaration = false;
     this.playerSelectionAvailable = true;
     this.timerInitAvailable = false;
     this.isDayTime = true;
     this.buttonHalt = false;
+    this.isFirstDay = true;
+
     
     
   }
@@ -111,7 +122,12 @@ export class MobileComponent implements OnInit {
       this.socketEvents.push(this.msg);
 
     });
-
+ 
+    /*
+    this.cookieService.set('MyNameCookie',this.globals.myName);
+    this.cookieWithName = this.cookieService.get('MyNameCookie');
+    this.monNamae = this.cookieWithName;
+    */
   }
   //call this if you want to call a function from table
   //function names:
@@ -142,7 +158,7 @@ export class MobileComponent implements OnInit {
         this.timeLeft--;
       } else {
         //this.timeLeft = 60;
-        this.sendPlayerVotingInfo();
+        if(this.isDayTime){this.sendPlayerVotingInfo();}
         this.pauseTimer();
         if (this.isDayTime){this.setPhase("NIGHT");}
         else{this.setPhase("DEBATE"); }
@@ -159,7 +175,7 @@ export class MobileComponent implements OnInit {
 
   resetTimer(){
 
-      this.timeLeft = 2;
+      this.timeLeft = 6;
 
   }
   
@@ -186,8 +202,10 @@ export class MobileComponent implements OnInit {
       if (!this.prevRow) {
         this.prevRow = row;
         document.getElementById(row).style.backgroundColor = 'black';
+        this.player = row;
       } else {
         document.getElementById(row).style.backgroundColor = 'black';
+        this.player = row;
         document.getElementById(this.prevRow).style.backgroundColor = 'transparent';
         this.prevRow = row;
       }
@@ -274,9 +292,8 @@ export class MobileComponent implements OnInit {
 
 
   procceedToVote(){
-    if (!this.buttonHalt){
-      this.setPhase("VOTE");
-    }
+    if(this.isFirstDay){this.timerInitAvailable=true; this.setPlayerSelectionAvailable(true); this.setPhase("NIGHT");}
+    else{ if(!this.buttonHalt){this.setPhase("VOTE");}}
 
 
   }
@@ -298,9 +315,10 @@ export class MobileComponent implements OnInit {
         this.setTimerInitAvailable(false);
         (<HTMLElement>document.getElementById("countdown")).style.visibility = "hidden";
         (<HTMLElement>document.getElementById("masterPlayerContinueButton")).style.visibility = "visible";
+        this.event_function_table("set_debate_table","");
         //(<HTMLElement>document.getElementById('playerRow')).style.opacity="0.5";
         //call this to ubdate the table
-        //this.event_function_table("set_debate_table","");
+        this.event_function_table("set_debate_table","");
     }
 
     this.resetTimer();
@@ -311,18 +329,26 @@ export class MobileComponent implements OnInit {
       this.setTimerInitAvailable(true);
       (<HTMLElement>document.getElementById("countdown")).style.visibility = "visible";
       (<HTMLElement>document.getElementById("masterPlayerContinueButton")).style.visibility = "hidden";
+      this.event_function_table("set_vote_table","");
       this.startTimer();
       //(<HTMLElement>document.getElementById('playerRow')).style.opacity="1";
       //call this to ubdate the table
       //this.event_function_table("set_vote_table","");
+      
       
     }
 
     if (phase == "NIGHT"){
 
       this.isDayTime = false;
+      this.isFirstDay = false;
+      (<HTMLElement>document.getElementById("countdown")).style.visibility = "visible";
+      (<HTMLElement>document.getElementById("masterPlayerContinueButton")).style.visibility = "hidden";
       this.setPhaseTexts("ABILITY NAME", "SELECT A PLAYER TO INVOKE YOUR ABILITY");
+      this.event_function_table("set_ability_table","");
+      console.log("y0");
       this.startTimer();
+
 
     }
 
@@ -343,24 +369,61 @@ export class MobileComponent implements OnInit {
   }
     
   getNames(){
+    
     this.setNamesService.getNames().subscribe((data)=>{
+      
       this.names = data["message"][0];
       this.avatars = data["message"][1];
-      console.log(this.avatars);
+      this.playersRole = data["message"][2];
+      //console.log(this.names);
+      this.find_player_role_by_name();
+      //console.log(this.names);
+      //console.log(this.PlayerRole);
+      //this.PlayerRole = localStorage.getItem("PlayerRole");
+      this.myName();
+      
     });
+  }
+  //should find index of player inside names and give PlayerRole the correct role but indexof is fucked!!!!!!!!
+  find_player_role_by_name(){
+    var pl_name = localStorage.getItem("user");
+    //console.log(typeof pl_name);
+    //console.log(pl_name);
+    //console.log(this.names);
+    //console.log(typeof this.names.lastIndexOf(pl_name));
+    //this.index_of_player = this.names.lastIndexOf(pl_name);
+    
+    this.skipIndex = this.names.indexOf(pl_name);
+    //console.log(this.skipIndex);
+    this.PlayerRole = this.playersRole[this.skipIndex];
+    
+    
+   // localStorage.setItem("PlayerRole", this.playersRole[index]);
   }
     
   sendPlayerVotingInfo(){
-    console.log("hello");
-    console.log(this.player);
+    this.event_function_table("upvote", this.SelectedPlayer);
+    console.log("helloEIMAI SEXY");
     this.index = this.names.indexOf(this.SelectedPlayer);
-    this.myindex = this.names.indexOf(this.player);
+
+    this.myindex = this.names.indexOf(this.monNamae);
+
     this.event_function_table("upvote_player",this.SelectedPlayer);
     this.setNamesService.StoreVotes(this.index, this.myindex).subscribe((data)=>{
       console.log(data);
+      this.event_function_table("set_dead_player", this.names[data["message"]]);
     });
 
+
   }  
+
+  myName(){
+    this.globals.myName = JSON.parse(localStorage.getItem('user'));
+    this.monNamae=this.globals.myName;
+    this.skipIndex = this.names.indexOf(this.monNamae);
+    console.log("monnamae "+this.monNamae);
+    console.log("skipindex "+this.skipIndex);
+  }
     
     
 

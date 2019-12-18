@@ -6,6 +6,7 @@ import * as  fs from 'fs';
 import * as path from 'path';
 
 export class ExampleController {
+  testStatus=[1,1,1,1,1,1,1,1,1,0,1,1,0,1];
 
     //Avatars:
     // https://i.imgur.com/yOxs9eW.png -monica
@@ -16,13 +17,13 @@ export class ExampleController {
     // https://i.imgur.com/j5Haq2A.png -Barack
     // https://i.imgur.com/g2vt5Hk.png -Ariana
     //Characters:
-    // https://i.imgur.com/9LzwD2L.png -Constable
-    // https://i.imgur.com/Hl9HvHp.png -Jocker
-    // https://i.imgur.com/VZVnvpp.png -Vigilante
-    // https://i.imgur.com/W3WK2IQ.png -Mayor
-    // https://i.imgur.com/vth8OLN.png -Medium
-    // https://i.imgur.com/cIwiHJe.png -Killer
-    // https://i.imgur.com/yb3YgnB.png -Doctor
+    // https://i.imgur.com/9LzwD2L.png -CONSTABLE
+    // https://i.imgur.com/Hl9HvHp.png -JESTER
+    // https://i.imgur.com/VZVnvpp.png -VIGILANTE
+    // https://i.imgur.com/W3WK2IQ.png -MAYOR
+    // https://i.imgur.com/vth8OLN.png -MEDIUM
+    // https://i.imgur.com/cIwiHJe.png -JACK THE REAPER
+    // https://i.imgur.com/yb3YgnB.png -PHYSICIAN
 
     public data: any;
     public Tabledata: any;
@@ -32,12 +33,15 @@ export class ExampleController {
     public TableNamesImagesCharacterscurrentStatus: string[][];
     public calls: number;
     public StartTable: boolean = false;
+    public countdead: number = 0;
   NamesArray: string[] = [];
   ReadyPlayersCounter: number = 0;
   NamesRoles:string [] = [];
+  Rolakia = ['Constable','Jocker','Vigilante','Mayor','Medium','Killer','Docktor'];
   Roles=['https://i.imgur.com/9LzwD2L.png','https://i.imgur.com/Hl9HvHp.png','https://i.imgur.com/VZVnvpp.png','https://i.imgur.com/W3WK2IQ.png','https://i.imgur.com/vth8OLN.png','https://i.imgur.com/cIwiHJe.png','https://i.imgur.com/yb3YgnB.png'];
   exist=false;
   randomNum: number;
+  RolesByName:string[] = [];
   usednumber: number[] = [];
   NameAvatar: string[] = [];
   Avatar= ['https://i.imgur.com/yOxs9eW.png', 'https://i.imgur.com/6f6DPhk.png', 'https://i.imgur.com/lJ3ggBw.png', 'https://i.imgur.com/zaleAlv.png', 'https://i.imgur.com/dkszoEI.png', 'https://i.imgur.com/j5Haq2A.png', 'https://i.imgur.com/g2vt5Hk.png'];
@@ -75,7 +79,7 @@ export class ExampleController {
         return router;
     }
     public getMobileNames(req: any, res: any) {
-      res.json({ message: [this.NamesArray,this.NameAvatar]});
+      res.json({ message: [this.NamesArray,this.NameAvatar,this.RolesByName]});
     }
 
     public setNames(req: Request, res: Response) {
@@ -118,6 +122,7 @@ export class ExampleController {
 
 
       this.NameAvatar.push(this.Avatar[this.randomNum]);
+      this.RolesByName.push(this.Rolakia[this.randomNum]);
 
       this.exist=false;
 
@@ -224,14 +229,16 @@ export class ExampleController {
     public history(){
       this.currentStatus = [];
       this.CurrrentRoundVotes = [];
-      this.i = (this.currentRound - 1) * 7;
-      for (let index = this.i; index <= index+7; index++){
+      this.i = (this.currentRound) * 7; // 7 
+      logger.info(this.status);
+      for (let index = this.i; index < this.i+7; index++){ 
          this.currentStatus.push(this.status[index]);
-         this.CurrrentRoundVotes.push(this.AllVotes[index]);
+         this.CurrrentRoundVotes.push(this.AllVotes[index-7]);
       }
     }
 
     public StoreVotes(req: Request, res: Response){
+      logger.info('ebala vote');
         const message: any = req.body.message;
         this.PlayerVote = message.scream;
         this.VoterIndex = message.userID;
@@ -239,7 +246,9 @@ export class ExampleController {
         this.countVotes[this.PlayerVote]++;
         this.totalVotes++;
         this.tempVoteArray[this.VoterIndex] = this.VotedAvatar;
-        if(this.totalVotes===7){
+        if(this.totalVotes===1-this.countdead){
+          logger.info('mphka sta votes');
+          this.countdead++;
           this.totalVotes=0;
           this.AllVotes.push(this.tempVoteArray[0]);
           this.AllVotes.push(this.tempVoteArray[1]);
@@ -253,19 +262,20 @@ export class ExampleController {
           var statusLength = this.status.length;
           var statusStart = statusLength-7;    //14l  0-6  7-13  
           var k =0;
-          for ( k = 0; k < maxIndex; k++) {
+          for ( k = statusStart; k < statusStart+maxIndex-1; k++) {
             this.status.push(this.status[statusStart+k]);
           }
           this.status.push(this.status[statusStart+maxIndex]);
-          this.status[statusStart+maxIndex] = 0;
+          this.status[statusStart+maxIndex+statusLength] = 0;
 
           var g;
-          for (g = k+2; g < 7; g++) { // 7 theseis. 5h thesh.  0-3, 4 , 5-6
+          for (g = statusStart+maxIndex+1; g < statusLength; g++) { // 7 theseis. 5h thesh.  0-3, 4 , 5-6
             this.status.push(this.status[statusStart+g]);
             
           }
           this.tempVoteArray=['','','','','','',''];
           this.countVotes=[0,0,0,0,0,0,0];
+          res.json({ message: statusStart+maxIndex});
 
         }
     }
@@ -287,15 +297,16 @@ export class ExampleController {
 
        // await this.fileReader(message.scream);
         logger.info('tv');
-        //this.history();
+        this.history();
         logger.info(this.NameAvatar);
         logger.info(this.NamesArray);
 
-       // logger.info(this.currentStatus);
+        logger.info(this.currentStatus);
         logger.info(this.NamesRoles );
 
-      
-        res.json({ message: [this.NamesArray,this.NameAvatar,this.status,this.CurrrentRoundVotes]});
+        logger.info(this.status.length);
+        res.json({ message: [this.NamesArray,this.NameAvatar,this.currentStatus,this.CurrrentRoundVotes]});
+
 
     }
 
