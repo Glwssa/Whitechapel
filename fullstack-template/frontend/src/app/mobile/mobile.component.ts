@@ -47,6 +47,21 @@ export class MobileComponent implements OnInit {
   timeLeft: number = 3;
   interval;
 
+
+
+  roleIcons = ["https://i.imgur.com/9LzwD2L.png",
+    "https://i.imgur.com/Hl9HvHp.png",
+    "https://i.imgur.com/VZVnvpp.png",
+    "https://i.imgur.com/W3WK2IQ.png",
+    "https://i.imgur.com/vth8OLN.png",
+    "https://i.imgur.com/cIwiHJe.png",
+    "https://i.imgur.com/yb3YgnB.png"]
+
+  roleIconsCores = ["Constable","Jester","Vigilante","Mayor","Medium","Jack the Reaper", "Physician"]
+  roleAbilitiesCors = ["INVESTIGATION", "NIGHTWALK","EXECUTE","NO NIGHT TIME ABILITY", "KILL", "HEAL"]
+  myRole: string;
+  bg: string;
+
   //timerCounter:number;
   
 
@@ -104,9 +119,12 @@ export class MobileComponent implements OnInit {
     console.log('retrievedObject: ', JSON.parse(retrievedObject));
     this.closeMayorPanel();
     
+    
+
+
     this.setPhase("DEBATE");
 
-    this.invokePopUp("I USE THIS", "TO SEND TOASTS");
+   // this.invokePopUp("I USE THIS", "TO SEND TOASTS");
     //setTimeout(this.timerf,1000);
     
   // this.beginCountdown();
@@ -292,7 +310,7 @@ export class MobileComponent implements OnInit {
 
 
   procceedToVote(){
-    if(this.isFirstDay){this.timerInitAvailable=true; this.setPlayerSelectionAvailable(true); this.setPhase("NIGHT");}
+    if(this.isFirstDay && !this.buttonHalt){this.timerInitAvailable=true; this.setPlayerSelectionAvailable(true); this.setPhase("NIGHT");}
     else{ if(!this.buttonHalt){this.setPhase("VOTE");}}
 
 
@@ -308,8 +326,18 @@ export class MobileComponent implements OnInit {
 
   setPhase(phase:string){
 
+    //background-attachment: fixed;
+  
+  //	background-repeat: no-repeat;
+
+
+    (<HTMLElement>document.body).style.backgroundRepeat="no-repeat";
+
     if (phase == "DEBATE"){
+      this.bg = 'url(https://i.imgur.com/hlt0zgH.png)';
         this.isDayTime = true;
+      //  (<HTMLElement>document.body).style.backgroundImage = "https://i.imgur.com/DpTwcFZ.jpg";
+
         this.setPhaseTexts("DEBATE", "DISCUSS WITH OTHER PLAYERS")
         this.setPlayerSelectionAvailable(false);
         this.setTimerInitAvailable(false);
@@ -342,9 +370,25 @@ export class MobileComponent implements OnInit {
 
       this.isDayTime = false;
       this.isFirstDay = false;
+      
+      this.bg = 'url(https://i.imgur.com/YAj9ddJ.png)';
+
       (<HTMLElement>document.getElementById("countdown")).style.visibility = "visible";
       (<HTMLElement>document.getElementById("masterPlayerContinueButton")).style.visibility = "hidden";
-      this.setPhaseTexts("ABILITY NAME", "SELECT A PLAYER TO INVOKE YOUR ABILITY");
+
+      var ab = this.roleIconsCores.indexOf(this.playersRole[this.skipIndex]);
+
+      if(this.roleIconsCores[ab]!="Mayor"){
+        if(this.roleIconsCores[ab]!="Medium"){
+          this.setPhaseTexts(this.roleAbilitiesCors[ab], "SELECT A PLAYER TO INVOKE YOUR ABILITY");
+        }
+        else{
+          this.setPhaseTexts(this.roleAbilitiesCors[ab], "DECEASED PLAYERS MAY INVOKE YOUR ABILITY");
+        }
+      }
+      else{
+        this.setPhaseTexts(this.roleAbilitiesCors[ab], "DECLARE ROLE DURING DEBATE");
+      }
       this.event_function_table("set_ability_table","");
       console.log("y0");
       this.startTimer();
@@ -375,10 +419,11 @@ export class MobileComponent implements OnInit {
       this.names = data["message"][0];
       this.avatars = data["message"][1];
       this.playersRole = data["message"][2];
+      console.log(this.playersRole);
+
       //console.log(this.names);
-      this.find_player_role_by_name();
+      //this.find_player_role_by_name();
       //console.log(this.names);
-      //console.log(this.PlayerRole);
       //this.PlayerRole = localStorage.getItem("PlayerRole");
       this.myName();
       
@@ -421,6 +466,13 @@ export class MobileComponent implements OnInit {
     this.globals.myName = JSON.parse(localStorage.getItem('user'));
     this.monNamae=this.globals.myName;
     this.skipIndex = this.names.indexOf(this.monNamae);
+    var gamw = this.roleIconsCores.indexOf(this.playersRole[this.skipIndex]);
+    this.myRole = this.roleIcons[gamw];
+
+    
+    if(this.roleIconsCores[gamw]!="Mayor"){(<HTMLElement>document.getElementById('fab')).style.visibility="hidden";}
+
+
     console.log("monnamae "+this.monNamae);
     console.log("skipindex "+this.skipIndex);
   }

@@ -9,7 +9,7 @@
 
 
 
-<body >
+<body [style.background]="bg" [style.background]="{'background': 'no-repeat;'}">
 
  
 
@@ -21,13 +21,13 @@
   </div>
 
   <br>
-  <div *ngFor="let role of roles">
+  <div *ngFor="let role of roleIconsCores; let i = index">
   <div id = "{{role}}" class="w3-cell-row" routerLink="/role-info" (click)="setCurrentRole(role)">
     <div class="w3-cell" style="width:30%">
-      <img  class="w3-circle" src="https://i.imgur.com/7Vown38.jpg" style="width:100%;">
+      <img  class="w3-circle" src="{{roleIcons[i]}}" style="width:100%;">
     </div>
     <div class="w3-cell w3-container">
-      <h3>{{role}}</h3>
+      <h3 id = "drawerRoleNameText">{{role}}</h3>
   
     </div>
   </div>   
@@ -67,8 +67,8 @@
   <div id="popupMayor">
 
     <div>
-      <input (click) = setMayorshipToTrue() type="image" src="https://i.imgur.com/7Vown38.jpg" class="inline circle" id="declareMayorship" >
-      <input (click) = closeMayorPanel() type="image" src="https://i.imgur.com/7Vown38.jpg" class="inline marginLeft circle" id="cancelDeclaration"  >
+      <input (click) = setMayorshipToTrue() type="image" src="https://i.imgur.com/cgNIGHx.png" class="inline circle" id="declareMayorship" >
+      <input (click) = closeMayorPanel() type="image" src="https://i.imgur.com/hSWYA9U.png" class="inline marginLeft circle" id="cancelDeclaration"  >
     </div>
 
     <div>
@@ -97,14 +97,14 @@
 
     <div class="w3-cell-row" >
       <div class="w3-cell" style="width:30%">
-        <img id="PlayerRoleIcon" class="w3-circle" src="https://i.imgur.com/7Vown38.jpg" >
+        <img id="PlayerRoleIcon" class="w3-circle" src="{{myRole}}" >
       </div>
       <div class="w3-cell w3-container">
-        <h3>{{this.globals.myName}}</h3>
-        <p id="PlayerRoleTitle" class="yellowLetters">FUCK INDEX OF</p>
+        <h3 id="PlayerNameTitle">{{this.globals.myName}}</h3>
+        <p id="PlayerRoleTitle" class="yellowLetters"></p>
       </div>
       <div class="w3-cell w3-container">
-        <input (click) = procceedToVote() type="image" src="https://i.imgur.com/7Vown38.jpg" class="inline circle" id="masterPlayerContinueButton" >
+        <input (click) = procceedToVote() type="image" src="https://i.imgur.com/0eEOgZH.png" class="inline" id="masterPlayerContinueButton" >
       </div>
     </div>  
 
@@ -132,7 +132,7 @@
 
     <br>
 
-   <div *ngFor="let name of names; let i = index">
+   <div *ngFor="let name of names; let i = index" id = "bigDiv">
   <div *ngIf="i != this.skipIndex"  >
     <div  id = "{{name}}"  class="w3-cell-row" (click)="rowSelect(name)">
       <div class="w3-cell" style="width:30%" >
@@ -153,7 +153,7 @@
 
   </div>
 
-  <button (click)="enableMayorPanel()" id="fab"><img class = "fab" src="https://i.imgur.com/7Vown38.jpg"></button>
+  <button (click)="enableMayorPanel()" id="fab"><img class = "fab" src="https://i.imgur.com/bDfLoyf.png"></button>
 
 
 

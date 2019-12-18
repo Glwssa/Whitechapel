@@ -7,7 +7,7 @@ body{
 	background-attachment: fixed;
   
   	background-repeat: no-repeat;
-	background-image: url("https://i.imgur.com/DpTwcFZ.jpg");
+	//background-image: url("https://i.imgur.com/DpTwcFZ.jpg");
 	background-position: -800px -125px;
 
 
@@ -141,6 +141,22 @@ margin-bottom: -5%;
 }
 
 #PlayerRoleTitle{
+	margin-left: -10%;
+}
+
+
+#bigDiv{
+	max-height: 1000px;
+}
+
+
+
+#drawerRoleNameText{
+	margin-top: 15%;
+}
+
+
+#PlayerNameTitle{
 	margin-left: -10%;
 }
 

@@ -37,7 +37,7 @@ export class ExampleController {
   NamesArray: string[] = [];
   ReadyPlayersCounter: number = 0;
   NamesRoles:string [] = [];
-  Rolakia = ['Constable','Jocker','Vigilante','Mayor','Medium','Killer','Docktor'];
+  Rolakia = ['Constable','Jester','Vigilante','Mayor','Medium','Jack the Reaper','Physician'];
   Roles=['https://i.imgur.com/9LzwD2L.png','https://i.imgur.com/Hl9HvHp.png','https://i.imgur.com/VZVnvpp.png','https://i.imgur.com/W3WK2IQ.png','https://i.imgur.com/vth8OLN.png','https://i.imgur.com/cIwiHJe.png','https://i.imgur.com/yb3YgnB.png'];
   exist=false;
   randomNum: number;
@@ -304,7 +304,7 @@ export class ExampleController {
         logger.info(this.currentStatus);
         logger.info(this.NamesRoles );
 
-        logger.info(this.status.length);
+        
         res.json({ message: [this.NamesArray,this.NameAvatar,this.currentStatus,this.CurrrentRoundVotes]});
 
 
