@@ -33,6 +33,7 @@ export class MobileComponent implements OnInit {
   index: number;
   myindex: number;
 
+  buttonHalt:boolean;
 
   timeLeft: number = 3;
   interval;
@@ -81,7 +82,7 @@ export class MobileComponent implements OnInit {
     this.playerSelectionAvailable = true;
     this.timerInitAvailable = false;
     this.isDayTime = true;
-
+    this.buttonHalt = false;
     
     
   }
@@ -94,7 +95,7 @@ export class MobileComponent implements OnInit {
     
     this.setPhase("DEBATE");
 
-    //this.invokePopUp("I USE THIS", "TO SEND TOASTS");
+    this.invokePopUp("I USE THIS", "TO SEND TOASTS");
     //setTimeout(this.timerf,1000);
     
   // this.beginCountdown();
@@ -168,7 +169,7 @@ export class MobileComponent implements OnInit {
 
 
   openSidebar() {
-    if(this.timerInitAvailable){console.log("Drawer Unavailable during countdown")}
+    if(this.timerInitAvailable || this.buttonHalt){console.log("Drawer Unavailable")}
     else{
       document.getElementById('mySidebar').style.display = 'block';
       document.getElementById('mySidebar').style.width = '100%';
@@ -213,13 +214,15 @@ export class MobileComponent implements OnInit {
 
 
   enableMayorPanel(){
-
-    (<HTMLElement>document.getElementById('popupMayor')).style.visibility="visible";
-    (<HTMLElement>document.getElementById('popupSmall')).style.visibility="visible";
-    (<HTMLElement>document.getElementById('blurOverlay')).className="blur";
-    this.setPopUpTexts("DECLARE YOU ARE THE MAYOR!","YOUR VOTE WILL COUNT AS 2 AFTER DECLARATION")
+    if (!this.buttonHalt){
+     this.buttonHalt = true;
+      (<HTMLElement>document.getElementById('popupMayor')).style.visibility="visible";
+      (<HTMLElement>document.getElementById('popupSmall')).style.visibility="visible";
+      (<HTMLElement>document.getElementById('blurOverlay')).className="blur";
+      this.setPopUpTexts("DECLARE YOU ARE THE MAYOR!","YOUR VOTE WILL COUNT AS 2 AFTER DECLARATION")
     
-    console.log("Mayor Panel activated");
+     console.log("Mayor Panel activated");
+    }
 
   }
 
@@ -228,8 +231,10 @@ export class MobileComponent implements OnInit {
     (<HTMLElement>document.getElementById('popupMayor')).style.visibility="hidden";
     (<HTMLElement>document.getElementById('popupSmall')).style.visibility="hidden";
     (<HTMLElement>document.getElementById('blurOverlay')).className="noblur";
-    
+  
+    this.buttonHalt = false;
     console.log("Mayor Panel deactivated");
+  
     
   }
 
@@ -269,8 +274,9 @@ export class MobileComponent implements OnInit {
 
 
   procceedToVote(){
-
-    this.setPhase("VOTE");
+    if (!this.buttonHalt){
+      this.setPhase("VOTE");
+    }
 
 
   }
@@ -308,7 +314,7 @@ export class MobileComponent implements OnInit {
       this.startTimer();
       //(<HTMLElement>document.getElementById('playerRow')).style.opacity="1";
       //call this to ubdate the table
-      ////this.event_function_table("set_vote_table","");
+      //this.event_function_table("set_vote_table","");
       
     }
 
@@ -328,7 +334,7 @@ export class MobileComponent implements OnInit {
 
 
   invokePopUp(topText: string, bottomText:string){
-
+    this.buttonHalt = true;
     this.setPopUpTexts(topText,bottomText);
     (<HTMLElement>document.getElementById('blurOverlay')).className="blur";
     (<HTMLElement>document.getElementById('popupSmall')).style.visibility="visible";
