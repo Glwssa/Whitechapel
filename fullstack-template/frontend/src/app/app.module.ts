@@ -20,7 +20,8 @@ import { TablePlayer7Component } from './table-player7/table-player7.component';
 import { EventEmitterService } from './event-emitter.service';
 import { MobileLoginComponent } from './mobilelogin/mobile-login.component';
 import { VirtualComponent } from './cursor/virtual/virtual.component';
-import { CookieService } from 'ngx-cookie-service';
+//import { CookieService } from 'ngx-cookie-service';
+import { VideoWallComponent } from './video-wall/video-wall.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CookieService } from 'ngx-cookie-service';
     TablePlayer6Component,
     TablePlayer7Component,
     MobileLoginComponent,
-    VirtualComponent
+    VirtualComponent,
+    VideoWallComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,7 @@ import { CookieService } from 'ngx-cookie-service';
     AppRoutingModule,
    // BrowserAnimationsModule
   ],
-  providers: [ Globals,EventEmitterService,CookieService],
+  providers: [ Globals,EventEmitterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

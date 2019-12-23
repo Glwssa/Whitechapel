@@ -13,6 +13,7 @@ import { TablePlayer5Component } from './table-player5/table-player5.component';
 import { TablePlayer6Component } from './table-player6/table-player6.component';
 import { TablePlayer7Component } from './table-player7/table-player7.component';
 import { VirtualComponent } from './cursor/virtual/virtual.component';
+import { VideoWallComponent } from './video-wall/video-wall.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'mobileMain', component: MobileComponent},
   { path: 'role-info', component: RoleInfoComponent},
   { path: 'backToRoleInfoList', component: RoleInfoComponent},
+  { path: 'videowall', component: VideoWallComponent},
   
   { path: 'socket-events', loadChildren: () => import('./pages/socket-events/socket-events.module').then(m => m.SocketEventsModule) },
   { path: 'tasks', loadChildren: () => import('./pages/tasks/tasks.module').then(m => m.TasksModule) },
